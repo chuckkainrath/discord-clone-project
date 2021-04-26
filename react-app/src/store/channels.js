@@ -21,11 +21,11 @@ const deleteChannelAction = (channel) => ({
 export const getChannels = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels`)
 
-    const channels = await response.json();
-    if (channels.errors) {
+    const data = await response.json();
+    if (data.errors) {
         return;
     }
-    dispatch(getChannelsAction(channels))
+    dispatch(getChannelsAction(data.channels))
 }
 
 export const createChannel = (name, serverId) => async (dispatch) => {
@@ -37,11 +37,11 @@ export const createChannel = (name, serverId) => async (dispatch) => {
         body: JSON.stringify({ name })
     })
 
-    const channel = await response.json();
-    if (channel.errors) {
+    const data = await response.json();
+    if (data.errors) {
         return;
     }
-    dispatch(createChannelAction(channel))
+    dispatch(createChannelAction(data.channel))
 }
 
 
