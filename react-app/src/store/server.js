@@ -21,27 +21,28 @@ const deleteServerAction = (server) => ({
 export const getServers = () => async (dispatch) => {
     const response = await fetch('/api/servers')
 
-    const servers = await response.json();
-    if (servers.errors) {
+    const data = await response.json();
+    if (data.errors) {
         return;
     }
-    dispatch(getServersAction(servers))
+    dispatch(getServersAction(data.servers))
 }
 
-export const createServer = (name) => async (dispatch) => {
+export const createServer = (name, description) => async (dispatch) => {
     const response = await fetch('/api/servers', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name })
+        body: JSON.stringify({name, description})
     })
 
-    const server = await response.json();
-    if (server.errors) {
+
+    const data = await response.json();
+    if (data.errors) {
         return;
     }
-    dispatch(createServerAction(server))
+    dispatch(createServerAction(data.server))
 }
 
 
