@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Channel
-from flask_login import current_user
+from app.models import db, Channel, Server
+from flask_login import current_user, login_required
 
 
 channel_routes = Blueprint('channels', __name__)
