@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import './LandingPage.css'
 
 const LandingPage = props => {
     return (
@@ -7,7 +8,11 @@ const LandingPage = props => {
           <div className="landing-home">
             <div className="landing-content">
               <header>
-                <img className="discord-logo" src={window.discordLogo} alt=""/>
+                <img className="discord-logo" src="" alt=""/>
+                <div className="signup-button">
+                    <Link className="linksize-small" to="/sign-up">Sign Up</Link>
+
+                </div>
               </header>
               <div className="landing-textbody">
                 <h1>Your place to talk</h1>
