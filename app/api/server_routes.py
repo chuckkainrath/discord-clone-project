@@ -1,4 +1,4 @@
-from flask import Bluepring, jsonify, request
+from flask import Blueprint, jsonify, request
 from app.models import db, Server
 from flask_login import current_user
 
@@ -36,6 +36,6 @@ def delete_server(server_id):
     server = Server.query.get(server_id)
     if server.owner_id != user_id:
         return {'errors': 'User is not server owner'}, 401
-    server.session.delete(server)
-    server.commit()
+    db.session.delete(server)
+    db.commit()
     return {'message': 'Server successfully deleted'}
