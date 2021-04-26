@@ -3,6 +3,7 @@ import cloneDeep from 'clone-deep'
 const GET_ALL_SERVERS = "server/GET_ALL_SERVERS"
 const GET_SERVER = "server/GET_SERVER"
 const CREATE_SERVER = "server/CREATE_SERVER"
+const DELETE_SERVER = "server/DELETE_SERVER_ACTION"
 
 const getServersAction = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -11,6 +12,11 @@ const getServersAction = (servers) => ({
 
 const createServerAction = (server) => ({
     type: CREATE_SERVER,
+    payload: server
+})
+
+const deleteServerAction = (server) => ({
+    type: DELETE_SERVER,
     payload: server
 })
 
@@ -40,6 +46,19 @@ export const createServer = (name) => async (dispatch) => {
     dispatch(createServerAction(server))
 }
 
+
+export const deleteServer = (serverId) => async(dispatch) => {
+    const response = await fetch (`api/server/${serverId}`, {
+        method: 'DELETE'
+    }),
+
+    const data = await response.json();
+    if (data.errors) {
+        return;
+    }
+    dispatch(deleteServerAction(serverId))
+}
+
 const flatServers = (servers) => {
     const fServer = {}
     for (server in servers) {
@@ -51,12 +70,17 @@ const flatServers = (servers) => {
 const initialState = {servers:{}}
 
 export default function reducer(state=initialState, action) {
+    let newState
     switch(action.type) {
         case GET_ALL_SERVERS:
             return {servers: flatServers(action.payload)}
         case CREATE_SERVER:
-            const newState = {servers: ...state.servers}
+            newState = {servers: {...state.servers}}
             newState.servers[action.payload.id] = action.payload
+            return newState
+        case DELETE_SERVER:
+            newState = {servers: {...state.servers}}
+            delete newState.servers[action.payload]
             return newState
         default:
             return state;
