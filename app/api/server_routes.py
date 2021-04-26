@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Server
-from flask_login import current_user
+from app.models import db, Server, User
+from flask_login import current_user, login_required
 
 server_routes = Blueprint('servers', __name__)
 
@@ -21,7 +21,7 @@ def create_server():
     description = request.json.description
     server = Server(
         name=server_name,
-        ownerId=int(current_user.id)
+        ownerId=int(current_user.id),
         description=description
     )
     db.session.add(server)
@@ -32,7 +32,7 @@ def create_server():
 @server_routes.route('/<int:server_id>', methods=['DELETE'])
 @login_required
 def delete_server(server_id):
-    const user_id = int(current_user.id)
+    user_id = int(current_user.id)
     server = Server.query.get(server_id)
     if server.owner_id != user_id:
         return {'errors': 'User is not server owner'}, 401
