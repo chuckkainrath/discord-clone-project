@@ -5,17 +5,17 @@ const DELETE_CHANNEL = "channel/DELETE_CHANNEL"
 
 const getChannelsAction = (channel) => ({
     type: GET_ALL_CHANNELS,
-    payload: CHANNELS
+    payload: channel
 })
 
 const createChannelAction = (channel) => ({
     type: CREATE_CHANNEL,
-    payload: CHANNEL
+    payload: channel
 })
 
 const deleteChannelAction = (channel) => ({
     type: DELETE_CHANNEL,
-    payload: CHANNEL
+    payload: channel
 })
 
 export const getChannels = (serverId) => async (dispatch) => {
@@ -34,7 +34,7 @@ export const createChannel = (name, serverId) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name})
+        body: JSON.stringify({ name })
     })
 
     const channel = await response.json();
@@ -45,10 +45,10 @@ export const createChannel = (name, serverId) => async (dispatch) => {
 }
 
 
-export const deleteChannel = (channelId, serverId) => async(dispatch) => {
-    const response = await fetch (`/api/servers/${serverId}/channel/${channelId}`, {
+export const deleteChannel = (channelId, serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}/channels/${channelId}`, {
         method: 'DELETE'
-    }),
+    });
 
     const data = await response.json();
     if (data.errors) {
@@ -65,19 +65,19 @@ const flatChannels = (channels) => {
     return fChannel
 }
 
-const initialState = {channels:{}}
+const initialState = { channels: {} }
 
-export default function reducer(state=initialState, action) {
+export default function reducer(state = initialState, action) {
     let newState
-    switch(action.type) {
+    switch (action.type) {
         case GET_ALL_CHANNELS:
-            return {channels: flatChannels(action.payload)}
+            return { channels: flatChannels(action.payload) }
         case CREATE_CHANNEL:
-            newState = {channels: {...state.channels}}
+            newState = { channels: { ...state.channels } }
             newState.channels[action.payload.id] = action.payload
             return newState
         case DELETE_CHANNEL:
-            newState = {channels: {...state.channels}}
+            newState = { channels: { ...state.channels } }
             delete newState.channels[action.payload]
             return newState
         default:
