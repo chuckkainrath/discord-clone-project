@@ -34,7 +34,7 @@ export const createServer = (name) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name})
+        body: JSON.stringify({ name })
     })
 
     const server = await response.json();
@@ -45,10 +45,10 @@ export const createServer = (name) => async (dispatch) => {
 }
 
 
-export const deleteServer = (serverId) => async(dispatch) => {
-    const response = await fetch (`api/server/${serverId}`, {
+export const deleteServer = (serverId) => async (dispatch) => {
+    const response = await fetch(`api/server/${serverId}`, {
         method: 'DELETE'
-    }),
+    });
 
     const data = await response.json();
     if (data.errors) {
@@ -59,25 +59,25 @@ export const deleteServer = (serverId) => async(dispatch) => {
 
 const flatServers = (servers) => {
     const fServer = {}
-    for (server in servers) {
+    for (let server in servers) {
         fServer[server.id] = server
     }
     return fServer
 }
 
-const initialState = {servers:{}}
+const initialState = { servers: {} }
 
-export default function reducer(state=initialState, action) {
+export default function reducer(state = initialState, action) {
     let newState
-    switch(action.type) {
+    switch (action.type) {
         case GET_ALL_SERVERS:
-            return {servers: flatServers(action.payload)}
+            return { servers: flatServers(action.payload) }
         case CREATE_SERVER:
-            newState = {servers: {...state.servers}}
+            newState = { servers: { ...state.servers } }
             newState.servers[action.payload.id] = action.payload
             return newState
         case DELETE_SERVER:
-            newState = {servers: {...state.servers}}
+            newState = { servers: { ...state.servers } }
             delete newState.servers[action.payload]
             return newState
         default:

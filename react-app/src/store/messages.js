@@ -80,7 +80,7 @@ export const deleteMessage = (channelId, serverId, messageId) => async (dispatch
 
 const flatMessages = (messages) => {
     const fMessage = {}
-    for (message in messages) {
+    for (let message in messages) {
         fMessage[message.id] = message
     }
     return fMessage
