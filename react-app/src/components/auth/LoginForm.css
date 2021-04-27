@@ -1,0 +1,65 @@
+/* * {
+
+} */
+
+.background-image {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-container {
+    position: relative;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    position: absolute;
+    display: flex;
+    height: 350px;
+    width: 720px;
+    top: 200px;
+    left: 200px;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.email-contaner {
+    margin-bottom: 20px;
+}
+
+.email-label {
+ font-size: 28px;
+}
+
+
+.email-input {
+    display: flex;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 16px;
+    border: non
+}
+
+.pw-label {
+ font-size: 28px;
+}
+
+.pw-input {
+    display: flex;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 16px;
+    border: non
+}

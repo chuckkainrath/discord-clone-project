@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import  { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
+import background from './login-background.jpg'
+import './LoginForm.css'
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,14 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    if (data.errors) {
+      setErrors(data.errors);
+    }
+  };
+
+  const DemoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
     if (data.errors) {
       setErrors(data.errors);
     }
@@ -31,34 +41,40 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type="submit">Login</button>
-      </div>
-    </form>
+    <div className="login-container">
+      <img className="background-image" src={background} />
+      <div className="form-container">
+        <form className="login-form" onSubmit={onLogin}>
+          <div className="errors">
+            {errors.map((error) => (
+              <div>{error}</div>
+            ))}
+          </div>
+          <div className="email-container">
+            <label className="email-label" htmlFor="email">Email</label>
+            <input className="email-input"
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className="pw-container">
+            <label className="pw-label" htmlFor="password">Password</label>
+            <input className="pw-input"
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={updatePassword}
+            />
+            <button type="submit">Login</button>
+            <button type="submit" onClick={DemoLogin}>Demo User</button>
+          </div>
+        </form>
+     </div>
+   </div>
   );
 };
 
