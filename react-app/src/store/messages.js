@@ -42,7 +42,7 @@ export const createMessage = (body, serverId, channelId) => async (dispatch) => 
         body: JSON.stringify({ body })
     })
 
-    const message = await response.json();
+    const message = await response.json();   // message.message or w/e the key is
     if (message.errors) {
         return;
     }
@@ -80,10 +80,10 @@ export const deleteMessage = (channelId, serverId, messageId) => async (dispatch
 
 const flatMessages = (messages) => {
     const fMessage = {}
-    for (let message in messages) {
-        fMessage[message.id] = message
-    }
-    return fMessage
+    messages.forEach(message => {
+        fMessage[message.id] = message;
+    });
+    return fMessage;
 }
 
 const initialState = { messages: {} }

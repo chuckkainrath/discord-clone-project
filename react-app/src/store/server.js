@@ -60,9 +60,9 @@ export const deleteServer = (serverId) => async (dispatch) => {
 
 const flatServers = (servers) => {
     const fServer = {}
-    for (let server in servers) {
+    servers.forEach(server => {
         fServer[server.id] = server
-    }
+    })
     return fServer
 }
 
