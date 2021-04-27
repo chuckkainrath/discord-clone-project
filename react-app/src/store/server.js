@@ -44,6 +44,7 @@ export const createServer = (name, description) => async (dispatch) => {
     if (data.errors) {
         return;
     }
+    console.log('Data', data)
     dispatch(createServerAction(data.server))
     dispatch(createChannelAction(data.channel))
 }
