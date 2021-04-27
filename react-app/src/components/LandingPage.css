@@ -1,3 +1,7 @@
+* {
+    background-color: #32373b;
+}
+
 .landing {
     display: flex;
     flex-direction: column;
@@ -7,6 +11,20 @@
 .landing-links {
     display: flex;
     justify-content: center;
+    background: transparent;
+}
+
+.landing-background {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+.text-container {
+    position: absolute;
+    top: 300px;
+    background: transparent;
+    left: 200px;
 }
 
 .landing-textheader {
@@ -14,15 +32,22 @@
     text-align: center;
     margin: auto;
     font-size: 56px;
+    color: #dfe0e2;
+    font-family: 'Righteous', cursive;
+    background: transparent;
 }
 
 .landing-textbody {
     text-align: center;
     width: 50%;
     margin: auto;
+    background: transparent;
 }
 .landing-description {
     font-size: 20px;
+    color: #dfe0e2;
+    font-family: 'Mukta', sans-serif;
+    background: transparent;
 }
 
 .login-button {
@@ -38,8 +63,9 @@
     text-decoration: none;
     padding: 6px 15px;
     font-size: 20px;
-    color: #feffff;
-    background-color: #17252a
+    color: #dfe0e2;
+    background-color: #17252a;
+    font-family: 'Righteous', cursive;
 }
 
 .signup-button {
@@ -55,6 +81,7 @@
     text-decoration: none;
     padding: 6px 15px;
     font-size: 20px;
-    color: #feffff;
-    background-color: #17252a
+    color: #dfe0e2;
+    background-color: #17252a;
+    font-family: 'Righteous', cursive;
 }
