@@ -2,29 +2,31 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './LandingPage.css'
 
-const LandingPage = props => {
+function LandingPage () {
     return (
         <div className="landing">
           <div className="landing-home">
             <div className="landing-content">
               <header>
                 <img className="discord-logo" src="" alt=""/>
-                <div className="signup-button">
-                    <Link className="linksize-small" to="/sign-up">Sign Up</Link>
+                {/* <div className="signup-button"> */}
+                    {/* <Link className="linksize-small" to="/sign-up">Sign Up</Link> */}
 
-                </div>
+                {/* </div> */}
               </header>
-              <div className="landing-textbody">
-                <h1>Your place to talk</h1>
-                <h3>
+              <div>
+                <h1 className="landing-textheader">Your place to talk</h1>
+                <div className="landing-textbody">
+                  <h3 className="landing-description">
                     Whether you’re part of a school club, gaming group, worldwide art community,
-                    or just a handful of friends that want to spend time together, Discord makes
+                    or just a handful of friends that want to spend time together, Racket makes
                     it easy to talk every day and hang out more often.
-                </h3>
+                  </h3>
+                </div>
                 <div className="landing-links">
 
-                  <Link to ="/login" className="linksize-big">Login</Link>
-                  <a className="linksize-big">Try Demo</a>
+                  <Link to ="/login" className="login-button">Login</Link>
+                  <Link to ="/sign-up" className="signup-button">Sign Up</Link>
                 </div>
               </div>
             </div>
