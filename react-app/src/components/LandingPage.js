@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './LandingPage.css'
+import landing from './landing.jpg'
 
 function LandingPage () {
     return (
@@ -14,7 +15,8 @@ function LandingPage () {
 
                 {/* </div> */}
               </header>
-              <div>
+              <img className="landing-background" src={landing} />
+              <div className="text-container">
                 <h1 className="landing-textheader">Your place to talk</h1>
                 <div className="landing-textbody">
                   <h3 className="landing-description">
