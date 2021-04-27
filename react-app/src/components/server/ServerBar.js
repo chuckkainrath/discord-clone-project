@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getServers } from '../../store/server';
 import ServerCreate from './ServerCreate'
+import styles from './ServerBar.module.css';
+
+function shortenServer(name) {
+    const splitName = name.split(' ');
+    let initals = '';
+    splitName.forEach(word => {
+        initals += word[0].toUpperCase();
+    });
+    return initals;
+}
 
 function ServerBar() {
     const dispatch = useDispatch();
@@ -18,15 +28,17 @@ function ServerBar() {
     //     const servers = await dispatch(getServers())
     // }, [])
     return (
-        <div>
+        <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
-                    <div>
-                        {server.name}
+                    <div className={styles.server_icon}>
+                        {shortenServer(server.name)}
                     </div>
                 )
             })}
-            <div onClick={() => toggleCreate(!create)}>+</div>
+            <div
+                className={styles.server_create}
+                onClick={() => toggleCreate(!create)}>+</div>
             {create && <ServerCreate toggleCreate={toggleCreate} />}
         </div>
     )
