@@ -8,7 +8,7 @@ const getChannelsAction = (channel) => ({
     payload: channel
 })
 
-const createChannelAction = (channel) => ({
+export const createChannelAction = (channel) => ({
     type: CREATE_CHANNEL,
     payload: channel
 })
