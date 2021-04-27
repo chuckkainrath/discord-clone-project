@@ -19,7 +19,7 @@ const deleteServerAction = (server) => ({
 })
 
 export const getServers = () => async (dispatch) => {
-    const response = await fetch('/api/servers')
+    const response = await fetch('/api/servers/')
 
     const data = await response.json();
     if (data.errors) {
@@ -29,7 +29,7 @@ export const getServers = () => async (dispatch) => {
 }
 
 export const createServer = (name, description) => async (dispatch) => {
-    const response = await fetch('/api/servers', {
+    const response = await fetch('/api/servers/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

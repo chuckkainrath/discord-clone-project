@@ -17,11 +17,11 @@ def get_servers():
 @server_routes.route('/', methods=['POST'])
 @login_required
 def create_server():
-    server_name = request.json.name
-    description = request.json.description
+    server_name = request.json['name']
+    description = request.json['description']
     server = Server(
         name=server_name,
-        ownerId=int(current_user.id),
+        owner_id=int(current_user.id),
         description=description
     )
     db.session.add(server)
