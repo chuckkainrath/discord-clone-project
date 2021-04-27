@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { createServer } from '../../store/server'
 
 function ServerCreate({ toggleCreate }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [valid, toggleValid] = useState(true)
@@ -19,9 +19,7 @@ function ServerCreate({ toggleCreate }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("I'M HERE!!!!!!!!!!!!!!!!!!!!!!!")
-        await dispatch(createServer(name, desc))
-        console.log("I'M AFTER!!!!!!!!!!!!!!!!!!!!!!!")
+        await dispatch(createServer(name, desc));
         setName('')
         setDesc('')
         setErrs([])

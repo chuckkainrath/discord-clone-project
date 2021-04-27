@@ -19,7 +19,7 @@ const deleteServerAction = (server) => ({
 })
 
 export const getServers = () => async (dispatch) => {
-    const response = await fetch('/api/servers')
+    const response = await fetch('/api/servers/')
 
     const data = await response.json();
     if (data.errors) {
