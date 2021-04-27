@@ -3,3 +3,58 @@
     flex-direction: column;
     width: auto
 }
+
+.landing-links {
+    display: flex;
+    justify-content: center;
+}
+
+.landing-textheader {
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    font-size: 56px;
+}
+
+.landing-textbody {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.landing-description {
+    font-size: 20px;
+}
+
+.login-button {
+    box-sizing: border-box;
+    margin: 4px 24px;
+    /* height: 56px;
+    width: 294px; */
+    border-radius: 16px;
+    text-align: center;
+    align-items: center;
+    line-height: 24px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 15px;
+    font-size: 20px;
+    color: #feffff;
+    background-color: #17252a
+}
+
+.signup-button {
+    box-sizing: border-box;
+    margin: 4px 2px;
+    /* height: 56px;
+    width: 294px; */
+    border-radius: 16px;
+    text-align: center;
+    align-items: center;
+    line-height: 24px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 15px;
+    font-size: 20px;
+    color: #feffff;
+    background-color: #17252a
+}
