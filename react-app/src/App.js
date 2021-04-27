@@ -11,6 +11,7 @@ import Server from "./components/server/Server"
 import ServerBar from "./components/server/ServerBar"
 // import { authenticate } from "./services/auth";
 import { authenticate } from "./store/session";
+import { getServers } from "./store/server";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -19,7 +20,10 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(authenticate())
+      const authenticated = await dispatch(authenticate());
+      if (authenticated) {
+        await dispatch(getServers());
+      }
       setLoaded(true);
     })();
   }, [dispatch]);

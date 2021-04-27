@@ -59,9 +59,9 @@ export const deleteChannel = (channelId, serverId) => async (dispatch) => {
 
 const flatChannels = (channels) => {
     const fChannel = {}
-    for (let channel in channels) {
+    channels.forEach(channel => {
         fChannel[channel.id] = channel
-    }
+    })
     return fChannel
 }
 
