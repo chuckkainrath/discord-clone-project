@@ -17,7 +17,7 @@ def get_channels(server_id):
 @channel_routes.route('/', methods=['POST'])
 @login_required
 def create_channel(server_id):
-    channel_name = request.json.name
+    channel_name = request.json['name']
     channel = Channel(
         name=channel_name,
         server_id=server_id
