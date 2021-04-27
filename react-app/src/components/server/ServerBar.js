@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import ServerCreate from './ServerCreate'
@@ -18,12 +18,17 @@ function ServerBar() {
 
     const [create, toggleCreate] = useState(false)
     const { setServerId } = useServer();
+    // serverId
 
     const serversArr = [];
 
     for (const key in servers) {
         serversArr.push(servers[key])
     }
+
+    // useEffect(() => {
+    //     console.log('NEW SERVER CONTEXT!!!', serverId)
+    // }, [serverId])
     return (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Server, User
+from app.models import db, Server, User, Channel
 from flask_login import current_user, login_required
 
 server_routes = Blueprint('servers', __name__)
@@ -26,7 +26,15 @@ def create_server():
     )
     db.session.add(server)
     db.session.commit()
-    return {'server': server.to_dict()}
+    channel = Channel(
+        name='General',
+        server_id=server.id
+    )
+    db.session.add(channel)
+    db.session.commit()
+    server_dict = server.to_dict()
+    channel_dict = channel.to_dict()
+    return {'server': server_dict, 'channel': channel_dict}
 
 
 @server_routes.route('/<int:server_id>', methods=['DELETE'])

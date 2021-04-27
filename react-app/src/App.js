@@ -36,6 +36,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path="/" exact={true}>
+          <h1>My Home Page</h1>
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -43,17 +46,16 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path="/servers" exact={true}>
-          <ServerBar />
-          <Server />
+          <div className='server_top_grid'>
+            <ServerBar />
+            <Server />
+          </div>
         </Route>
         <ProtectedRoute path="/users" exact={true} >
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

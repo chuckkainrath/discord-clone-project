@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
 }
 
 .server_icon, .server_create {
