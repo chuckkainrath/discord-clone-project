@@ -51,7 +51,7 @@ export const createServer = (name, description) => async (dispatch) => {
 
 
 export const deleteServer = (serverId) => async (dispatch) => {
-    const response = await fetch(`api/server/${serverId}`, {
+    const response = await fetch(`api/servers/${serverId}`, {
         method: 'DELETE'
     });
 
@@ -60,6 +60,7 @@ export const deleteServer = (serverId) => async (dispatch) => {
         return;
     }
     dispatch(deleteServerAction(serverId))
+    //dispatch(deleteChannelsInServer(serverId))
 }
 
 const flatServers = (servers) => {
