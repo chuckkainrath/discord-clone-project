@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getServers } from '../../store/server';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useServer } from '../../context/ServerContext'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
 
@@ -14,24 +14,25 @@ function shortenServer(name) {
 }
 
 function ServerBar() {
-    const dispatch = useDispatch();
     const servers = useSelector(state => state.servers.servers)
 
     const [create, toggleCreate] = useState(false)
+    const { setServerId } = useServer();
 
     const serversArr = [];
 
     for (const key in servers) {
         serversArr.push(servers[key])
     }
-    // useEffect(async () => {
-    //     const servers = await dispatch(getServers())
-    // }, [])
     return (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
-                    <div className={styles.server_icon}>
+                    <div
+                        className={styles.server_icon}
+                        onClick={() => setServerId(server.id)}
+                        key={server.id}
+                    >
                         {shortenServer(server.name)}
                     </div>
                 )
@@ -42,9 +43,6 @@ function ServerBar() {
             {create && <ServerCreate toggleCreate={toggleCreate} />}
         </div>
     )
-    // return (
-    //     <div>yes</div>
-    // )
 }
 
 export default ServerBar
