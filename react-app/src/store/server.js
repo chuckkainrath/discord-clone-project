@@ -1,3 +1,5 @@
+import { createChannelAction } from './channels'
+
 const GET_ALL_SERVERS = "server/GET_ALL_SERVERS"
 // const GET_SERVER = "server/GET_SERVER"
 const CREATE_SERVER = "server/CREATE_SERVER"
@@ -43,6 +45,7 @@ export const createServer = (name, description) => async (dispatch) => {
         return;
     }
     dispatch(createServerAction(data.server))
+    dispatch(createChannelAction(data.channel))
 }
 
 
