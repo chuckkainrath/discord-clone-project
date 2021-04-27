@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Server, User, Channel
+from app.models import db, Server, User, Channel, Message
 from flask_login import current_user, login_required
 
 server_routes = Blueprint('servers', __name__)
@@ -44,6 +44,19 @@ def delete_server(server_id):
     server = Server.query.get(server_id)
     if server.owner_id != user_id:
         return {'errors': 'User is not server owner'}, 401
+    # Get all channels/messages
+    channels = Channel.query.filter(Channel.server_id == server_id).all()
+    channelIds = [channel.id for channel in channels]
+    messages = Message.query.filter(Message.channel_id.in_(channelIds)).all()
+    for message in messages:
+        db.session.delete(message)
+    db.session.commit()
+    for channel in channels:
+        db.session.delete(channel)
+    db.session.commit()
     db.session.delete(server)
-    db.commit()
+    db.session.commit()
     return {'message': 'Server successfully deleted'}
+
+
+# Need to delete all channels/messages in server as well
