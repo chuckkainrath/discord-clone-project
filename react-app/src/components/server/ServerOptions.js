@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useServer } from '../../context/ServerContext';
 import { deleteServer } from '../../store/server';
+import { deleteChannelsInServer } from '../../store/channels';
 
 function ServerOptions() {
     const [options, toggleOptions] = useState(false)
     const dispatch = useDispatch();
-    const { serverId } = useServer();
+    const { serverId, setServerId } = useServer();
+    const channels = useSelector(state => state.channels.channels);
     console.log('ServerId', serverId);
     const deleteAServer = async () => {
         await dispatch(deleteServer(serverId))
+        const channelIds = [];
+        for (const channelId in channels) {
+            if (channels[channelId].server_id === serverId) {
+                channelIds.push(channelId);
+            }
+        }
+        dispatch(deleteChannelsInServer(serverId))
+        
+        // Delete channels data in store and messages
+
+        // Change server context to another server if there is another
+        // Otherwise display something
     }
     return (
         <>
