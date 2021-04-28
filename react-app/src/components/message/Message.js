@@ -13,15 +13,27 @@ function Message() {
     const { channelId } = useChannel();
 
     const user = useSelector(state => state.session.user)
+    const stateMessages = useSelector(state => state.messages.messages)
     const {serverId} = useServer()
 
     useEffect(() => {
         socket.on("chat", (chat) => {
             const chat_obj = JSON.parse(chat);
-            setMessages(messages => [...messages, chat_obj])
+            // setMessages(messages => [...messages, chat_obj])
             dispatch(createMessageAction(chat_obj));
         })
     }, [])
+
+    useEffect (() => {
+        const channelMsgs = []
+        for (let key in stateMessages) {
+            const currMsg = stateMessages[key]
+            if (currMsg.channel_id == channelId) {
+                channelMsgs.push(currMsg)
+            }
+        }
+        setMessages(channelMsgs)
+    }, [stateMessages])
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value)
