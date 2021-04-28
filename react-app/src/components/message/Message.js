@@ -15,9 +15,8 @@ function Message() {
     useEffect(() => {
         // socket = io()
         // console.log('connecting')
-        
-        // socket.emit("join", {serverId})
 
+        // socket.emit("join", {serverId})
         socket.on("chat", (chat) => {
             setMessages(messages => [...messages, chat])
         })
@@ -34,6 +33,7 @@ function Message() {
 
     const sendChat = (e) => {
         e.preventDefault()
+        console.log('serverIdSendingMessage: ', serverId);
         socket.emit("new_message", { user: user.username, msg: chatInput, serverId });
         setChatInput("")
     }
