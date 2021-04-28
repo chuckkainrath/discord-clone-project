@@ -1,7 +1,10 @@
 /* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
 
 .server_top_grid{
     display: grid;
     grid-template-columns: 85px 1fr;
     background-color: aqua;
 }
+
