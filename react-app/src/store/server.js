@@ -60,7 +60,6 @@ export const deleteServer = (serverId) => async (dispatch) => {
         return;
     }
     dispatch(deleteServerAction(serverId))
-    //dispatch(deleteChannelsInServer(serverId))
 }
 
 const flatServers = (servers) => {
