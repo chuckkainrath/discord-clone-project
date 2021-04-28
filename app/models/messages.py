@@ -15,7 +15,7 @@ class Message(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow, nullable=False)
 
-    def to_dict():
+    def to_dict(self):
         return {
             'id': self.id,
             'body': self.body,

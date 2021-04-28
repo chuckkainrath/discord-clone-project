@@ -12,7 +12,7 @@ class UserServer(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False)
 
-    def to_dict():
+    def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
