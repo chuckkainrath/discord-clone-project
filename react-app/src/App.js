@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
+
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
@@ -11,6 +12,7 @@ import Server from "./components/server/Server"
 import ServerBar from "./components/server/ServerBar"
 // import { authenticate } from "./services/auth";
 import { authenticate } from "./store/session";
+import { getServers } from "./store/server";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -19,7 +21,10 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(authenticate())
+      const authenticated = await dispatch(authenticate());
+      if (authenticated) {
+        await dispatch(getServers());
+      }
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -32,6 +37,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path="/" exact={true}>
+          <h1>My Home Page</h1>
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -39,17 +47,16 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path="/servers" exact={true}>
-          <ServerBar />
-          <Server />
+          <div className='server_top_grid'>
+            <ServerBar />
+            <Server />
+          </div>
         </Route>
         <ProtectedRoute path="/users" exact={true} >
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

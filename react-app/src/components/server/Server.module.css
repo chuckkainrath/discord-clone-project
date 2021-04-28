@@ -1,0 +1,17 @@
+.server_container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    height: 100%;
+}
+
+.server_channels{
+    background-color: brown;
+}
+
+.server_messages {
+    background-color: burlywood;
+}
+
+.server_members{
+    background-color: cadetblue;
+}
