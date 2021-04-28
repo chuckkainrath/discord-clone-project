@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
+import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
+
+export let socket;
 
 function shortenServer(name) {
     const splitName = name.split(' ');
@@ -21,14 +24,26 @@ function ServerBar() {
     // serverId
 
     const serversArr = [];
+    const serverIds = [];
 
     for (const key in servers) {
         serversArr.push(servers[key])
+        serverIds.push(key)
     }
 
-    // useEffect(() => {
-    //     console.log('NEW SERVER CONTEXT!!!', serverId)
-    // }, [serverId])
+    useEffect(() => {
+        socket = io()
+        console.log('connecting')
+        
+        socket.emit("join", {serverIds})
+
+
+        return (() => {
+            socket.emit("leave", {serverIds})
+            socket.disconnect()
+        })
+    }, [])
+
     return (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
