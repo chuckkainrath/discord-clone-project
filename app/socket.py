@@ -15,6 +15,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 
 @socketio.on('new_message')
 def handle_chat(data):
+    print('New chat message: ', data['msg'])
     emit("chat", data, to=data['serverId'])  # broadcast=True,
 
 
@@ -23,6 +24,7 @@ def on_join(data):
     # username = data['username']
     servers = data['serverIds']
     for server in servers:
+        print('Joining server room : ', server)
         join_room(server)
     # send(username + ' has entered the room.', to=channel)
 
@@ -32,6 +34,6 @@ def on_leave(data):
     # username = data['username']
     servers = data['serverIds']
     for server in servers:
+        print('Leaving server room : ', server)
         leave_room(server)
     # send(username + ' has left the room.', to=room)
-

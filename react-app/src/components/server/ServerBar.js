@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
+import { useChannel, userChannel } from '../../context/ChannelContext';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
@@ -18,9 +19,11 @@ function shortenServer(name) {
 
 function ServerBar() {
     const servers = useSelector(state => state.servers.servers)
+  
 
     const [create, toggleCreate] = useState(false)
     const { setServerId } = useServer();
+    const { setChannelId } = useChannel();
     // serverId
 
     const serversArr = [];
@@ -33,8 +36,7 @@ function ServerBar() {
 
     useEffect(() => {
         socket = io()
-        console.log('connecting')
-        
+
         socket.emit("join", {serverIds})
 
 
@@ -44,13 +46,26 @@ function ServerBar() {
         })
     }, [])
 
+    const changeContext = serverId => {
+        setServerId(serverId);
+        let channelId;
+        for (let channelKey in channels) {
+            let currChannel = channels[channelKey]
+            if (currChannel.server_id === serverId && currChannel.name === 'General') {
+                channelId = channelKey;
+                break;
+            }
+        }
+        setChannelId(channelId);
+    }
+
     return (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
                     <div
                         className={styles.server_icon}
-                        onClick={() => setServerId(server.id)}
+                        onClick={() => changeContext(server.id)}
                         key={server.id}
                     >
                         {shortenServer(server.name)}
