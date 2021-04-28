@@ -1,3 +1,5 @@
+import { createChannelAction } from './channels'
+
 const GET_ALL_SERVERS = "server/GET_ALL_SERVERS"
 // const GET_SERVER = "server/GET_SERVER"
 const CREATE_SERVER = "server/CREATE_SERVER"
@@ -34,7 +36,7 @@ export const createServer = (name, description) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, description})
+        body: JSON.stringify({ name, description })
     })
 
 
@@ -42,12 +44,14 @@ export const createServer = (name, description) => async (dispatch) => {
     if (data.errors) {
         return;
     }
+    console.log('Data', data)
     dispatch(createServerAction(data.server))
+    dispatch(createChannelAction(data.channel))
 }
 
 
 export const deleteServer = (serverId) => async (dispatch) => {
-    const response = await fetch(`api/server/${serverId}`, {
+    const response = await fetch(`api/servers/${serverId}`, {
         method: 'DELETE'
     });
 
@@ -56,13 +60,14 @@ export const deleteServer = (serverId) => async (dispatch) => {
         return;
     }
     dispatch(deleteServerAction(serverId))
+    //dispatch(deleteChannelsInServer(serverId))
 }
 
 const flatServers = (servers) => {
     const fServer = {}
-    for (let server in servers) {
+    servers.forEach(server => {
         fServer[server.id] = server
-    }
+    })
     return fServer
 }
 

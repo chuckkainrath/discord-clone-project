@@ -2,6 +2,7 @@ const GET_ALL_MESSAGES = "message/GET_ALL_MESSAGES"
 const CREATE_MESSAGE = "message/CREATE_MESSAGE"
 const EDIT_MESSAGE = "message/EDIT_MESSAGE"
 const DELETE_MESSAGE = "message/DELETE_MESSAGE"
+// const DELETE_MESSAGES = "message/DELETE_MESSAGES"
 
 const getMessagesAction = (messages) => ({
     type: GET_ALL_MESSAGES,
@@ -23,6 +24,11 @@ const deleteMessageAction = (message) => ({
     payload: message
 })
 
+// export const deleteMessagesInChannels = (channels) => ({
+//     type: DELETE_MESSAGES,
+//     payload: channels
+// })
+
 export const getMessages = (serverId, channelId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels/${channelId}`)
 
@@ -42,7 +48,7 @@ export const createMessage = (body, serverId, channelId) => async (dispatch) => 
         body: JSON.stringify({ body })
     })
 
-    const message = await response.json();
+    const message = await response.json();   // message.message or w/e the key is
     if (message.errors) {
         return;
     }
@@ -80,10 +86,10 @@ export const deleteMessage = (channelId, serverId, messageId) => async (dispatch
 
 const flatMessages = (messages) => {
     const fMessage = {}
-    for (let message in messages) {
-        fMessage[message.id] = message
-    }
-    return fMessage
+    messages.forEach(message => {
+        fMessage[message.id] = message;
+    });
+    return fMessage;
 }
 
 const initialState = { messages: {} }
@@ -105,6 +111,14 @@ export default function reducer(state = initialState, action) {
             newState = { messages: { ...state.messages } }
             delete newState.messages[action.payload]
             return newState
+        // case DELETE_MESSAGES:
+        //     newState = { messages: { ...state.messages } }
+        //     for (let message in newState.messages) {
+        //         if (action.payload.includes(message.channel_id)) {
+        //             delete newState.messages[message.id]
+        //         }
+        //     }
+        //     return newState
         default:
             return state;
     }
