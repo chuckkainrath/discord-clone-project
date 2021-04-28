@@ -1,5 +1,9 @@
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 import os
+from app.models import db, Message
+import json
+from json import JSONEncoder
+import datetime
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
@@ -13,10 +17,25 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
+class DateTimeEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.datetime):
+            return obj.isoformat()
+
+
 @socketio.on('new_message')
 def handle_chat(data):
-    print('New chat message: ', data['msg'])
-    emit("chat", data, to=data['serverId'])  # broadcast=True,
+    message = Message(
+        body=data['msg'],
+        channel_id=data['channelId'],
+        user_id=data['userId']
+    )
+    db.session.add(message)
+    db.session.commit()
+    message_dict = message.to_dict()
+    message_json = json.dumps(message_dict, cls=DateTimeEncoder)
+    emit("chat", message_json, to=data['serverId'])  # broadcast=True,
+    # emit("chat", message_json)
 
 
 @socketio.on('join')

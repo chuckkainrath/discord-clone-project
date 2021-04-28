@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import { getChannels } from '../../store/channels'
+import { useChannel } from '../../context/ChannelContext';
 
 function ChannelList() {
     const dispatch = useDispatch();
     const { serverId } = useServer();
+    const { setChannelId } = useChannel();
 
     const channels = useSelector(state => state.channels.channels)
 
@@ -24,7 +26,9 @@ function ChannelList() {
                     {channelVals.map(channel => {
                         if (channel.server_id === serverId) {
                             return (
-                                <div key={channel.id}>
+                                <div
+                                    onClick={() => setChannelId(channel.id)}
+                                    key={channel.id}>
                                     {channel.name}
                                 </div>
                             )
