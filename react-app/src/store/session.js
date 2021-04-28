@@ -23,10 +23,10 @@ export const authenticate = () => async (dispatch) => {
 
     const data = await response.json();
     if (data.errors) {
-        return;
+        return false;
     }
     dispatch(setUser(data))
-    
+    return true;
 }
 
 export const login = (email, password) => async (dispatch) => {

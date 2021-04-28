@@ -1,1 +1,7 @@
 /* TODO Add site wide styles */
+
+.server_top_grid{
+    display: grid;
+    grid-template-columns: 85px 1fr;
+    background-color: aqua;
+}
