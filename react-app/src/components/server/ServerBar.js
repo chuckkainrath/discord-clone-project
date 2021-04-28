@@ -18,8 +18,8 @@ function shortenServer(name) {
 }
 
 function ServerBar() {
-    const servers = useSelector(state => state.servers.servers)
-  
+    const servers = useSelector(state => state.servers.servers);
+    const channels = useSelector(state => state.channels.channels);
 
     const [create, toggleCreate] = useState(false)
     const { setServerId } = useServer();
