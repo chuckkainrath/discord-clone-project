@@ -9,7 +9,7 @@ const getMessagesAction = (messages) => ({
     payload: messages
 })
 
-const createMessageAction = (message) => ({
+export const createMessageAction = (message) => ({
     type: CREATE_MESSAGE,
     payload: message
 })
