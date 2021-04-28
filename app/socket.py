@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, join_room, leave_room
+from flask_socketio import SocketIO, join_room, leave_room, send, emit
 import os
 
 if os.environ.get("FLASK_ENV") == "production":
@@ -13,29 +13,25 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
-@socketio.on("message")
+@socketio.on('new_message')
 def handle_chat(data):
-    emit("chat", data, broadcast=True, to=data['channelId'])  # broadcast=True,
+    emit("chat", data, to=data['serverId'])  # broadcast=True,
 
 
 @socketio.on('join')
 def on_join(data):
     # username = data['username']
-    channel = data['channelId']
-    join_room(channel)
+    servers = data['serverIds']
+    for server in servers:
+        join_room(server)
     # send(username + ' has entered the room.', to=channel)
 
 
 @socketio.on('leave')
 def on_leave(data):
     # username = data['username']
-    channel = data['room']
-    leave_room(channel)
+    servers = data['serverIds']
+    for server in servers:
+        leave_room(server)
     # send(username + ' has left the room.', to=room)
 
-
-# io.sockets.on('connection', function(socket) {
-#     socket.on('join', function(room) {
-#         socket.join(room)
-#     })
-# })

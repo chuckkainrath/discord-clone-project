@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { io } from 'socket.io-client';
-
-let socket;
+import {useServer} from '../../context/ServerContext'
+import { socket }from '../server/ServerBar'
 
 function Message() {
 
@@ -10,17 +10,22 @@ function Message() {
     const [messages, setMessages] = useState([])
 
     const user = useSelector(state => state.session.user)
+    const {serverId} = useServer()
 
     useEffect(() => {
-        socket = io()
+        // socket = io()
+        // console.log('connecting')
+        
+        // socket.emit("join", {serverId})
 
         socket.on("chat", (chat) => {
             setMessages(messages => [...messages, chat])
         })
 
-        return (() => {
-            socket.disconnect()
-        })
+        // return (() => {
+        //     socket.emit("leave", {serverId})
+        //     socket.disconnect()
+        // })
     }, [])
 
     const updateChatInput = (e) => {
@@ -29,7 +34,7 @@ function Message() {
 
     const sendChat = (e) => {
         e.preventDefault()
-        socket.emit("chat", { user: user.username, msg: chatInput });
+        socket.emit("new_message", { user: user.username, msg: chatInput, serverId });
         setChatInput("")
     }
 
