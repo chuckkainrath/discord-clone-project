@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import ServerProvider from './context/ServerContext';
+import ChannelProvider from './context/ChannelContext';
 
 const store = configureStore();
 
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ServerProvider>
-        <App />
+        <ChannelProvider>
+          <App />
+        </ChannelProvider>
       </ServerProvider>
     </Provider>
   </React.StrictMode>,
