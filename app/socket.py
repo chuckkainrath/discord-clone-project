@@ -1,6 +1,6 @@
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 import os
-from app.models import db, Message
+from app.models import db, Message, Channel
 import json
 from json import JSONEncoder
 import datetime
@@ -21,6 +21,19 @@ class DateTimeEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
             return obj.isoformat()
+
+
+@socketio.on('new_channel')
+def handle_channel(data):
+    channel = Channel(
+        name=data['name'],
+        server_id=data['serverId']
+    )
+    db.session.add(channel)
+    db.session.commit()
+    channel_dict = channel.to_dict()
+    channel_json = json.dumps(channel_dict, cls=DateTimeEncoder)
+    emit("channel", channel_json, to=str(data['serverId']))
 
 
 @socketio.on('new_message')
