@@ -1,6 +1,3 @@
-// import { useSelector } from 'react-redux';
-//import { deleteMessagesInChannels } from './messages'
-
 const GET_ALL_CHANNELS = "channel/GET_ALL_CHANNELS"
 // const GET_channel = "channel/GET_channel"
 const CREATE_CHANNEL = "channel/CREATE_CHANNEL"
@@ -22,7 +19,7 @@ export const createChannelAction = (channel) => ({
     payload: channel
 })
 
-const deleteChannelAction = (channel) => ({
+export const deleteChannelAction = (channel) => ({
     type: DELETE_CHANNEL,
     payload: channel
 })

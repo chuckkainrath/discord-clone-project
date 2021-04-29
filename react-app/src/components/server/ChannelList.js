@@ -4,9 +4,12 @@ import { useServer } from '../../context/ServerContext'
 import { getChannels } from '../../store/channels'
 import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../server/ServerBar';
-import { createChannelAction } from '../../store/channels';
+import { createChannelAction, deleteChannelAction } from '../../store/channels';
+import { deleteMessagesInChannel } from '../../store/messages';
+import ChannelItem from './ChannelItem';
 
 function filterChannels(channels, serverId) {
+    console.log('Filtering channels', channels);
     return channels.filter(channel => {
         return channel.server_id == serverId
     })
@@ -20,7 +23,7 @@ function ChannelList() {
     const channels = useSelector(state => state.channels.channels)
     const filteredChannels = filterChannels(Object.values(channels), serverId)
     const [channelVals, setChannelVals] = useState(filteredChannels)
-    // const channelVals = Object.values(channels)
+    const [changeChannelContext, setChangeChannelContext] = useState(false);
 
     useEffect(async () => {
         if (serverId > 0) {
@@ -33,7 +36,23 @@ function ChannelList() {
             const channel_obj = JSON.parse(channel);
             dispatch(createChannelAction(channel_obj));
         })
-    })
+        socket.on("delete_channel", (channel) => {
+            dispatch(deleteChannelAction(channel.channel_id));
+            dispatch(deleteMessagesInChannel(channel.channel_id));
+            setChangeChannelContext(!changeChannelContext);
+        });
+    }, [])
+
+    useEffect(() => {
+        const allChannels = Object.values(channels);
+        let genChatId;
+        allChannels.forEach(channel => {
+            if (channel.server_id === serverId && channel.name === 'General') {
+                genChatId = channel.id;
+            }
+        })
+        setChannelId(genChatId);
+    }, [changeChannelContext]);
 
     useEffect(() => {
         const filteredChannels = filterChannels(Object.values(channels), serverId)
@@ -44,13 +63,13 @@ function ChannelList() {
         <>
             {!serverId ? <div>No Server</div> :
                 <div>
+
                     {channelVals.map(channel => {
                         return (
-                            <div
-                                onClick={() => setChannelId(channel.id)}
-                                key={channel.id}>
-                                {channel.name}
-                            </div>
+                            <ChannelItem
+                                key={channel.id}
+                                channel={channel}
+                            />
                         )
                     })}
                 </div>}
