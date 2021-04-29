@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import ServerNavBar from './ServerNavBar'
 import ChannelList from './ChannelList'
 import ProfileBar from './ProfileBar'
@@ -14,21 +15,30 @@ function Server() {
     const { serverId, setServerId } = useServer();
     const { channelId, setChannelId } = useChannel();
 
+    const user = useSelector(state => state.session.user)
     const servers = useSelector(state => state.servers.servers)
     const channels = useSelector(state => state.channels.channels);
 
-    const serversArr = []
-    if (servers) {
+    let serversArr = []
+    // if (servers) {
+    //     for (const key in servers) {
+    //         serversArr.push(servers[key])
+    //     }
+    // }
+
+    useEffect(() => {
+        serversArr = []
+        if (servers) {
         for (const key in servers) {
             serversArr.push(servers[key])
         }
     }
-
-    useEffect(() => {
         if (serversArr.length) {
             setServerId(serversArr[0].id)
+        } else {
+            setServerId(0)
         }
-    }, [])
+    }, [servers, serverId])
 
     useEffect(() => {
         let channelId;
@@ -41,6 +51,10 @@ function Server() {
         }
         setChannelId(channelId);
     }, [channels])
+
+    if (!user) {
+        return <Redirect to='/' />
+    }
 
     return (
         <div>
