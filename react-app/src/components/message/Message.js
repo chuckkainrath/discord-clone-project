@@ -20,6 +20,7 @@ function Message() {
         socket.on("chat", (chat) => {
             const chat_obj = JSON.parse(chat);
             // setMessages(messages => [...messages, chat_obj])
+            console.log('CHAT_OBJJJJJJJJJJ', chat_obj);
             dispatch(createMessageAction(chat_obj));
         })
     }, [])
