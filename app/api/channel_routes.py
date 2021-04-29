@@ -9,7 +9,7 @@ channel_routes = Blueprint('channels', __name__)
 @channel_routes.route('/')
 @login_required
 def get_channels(server_id):
-    raw_channels = Channel.query.filter(Server.id == server_id).all()
+    raw_channels = Channel.query.filter(Channel.server_id == server_id).all()
     channels = [channel.to_dict() for channel in raw_channels]
     return {'channels': channels}
 
