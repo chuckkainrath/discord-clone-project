@@ -12,6 +12,8 @@ function ServerOptions() {
     const { serverId, setServerId } = useServer();
 
     const channels = useSelector(state => state.channels.channels);
+    const servers = useSelector(state => state.servers.servers);
+
     console.log('ServerId', serverId);
 
     const deleteAServer = async () => {
@@ -40,7 +42,7 @@ function ServerOptions() {
             <div
                 onClick={() => toggleOptions(!options)}
             >
-                Server Name
+                {servers[serverId].name}
             </div>
             {options &&
                 <div>
