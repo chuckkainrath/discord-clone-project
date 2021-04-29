@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { io } from 'socket.io-client';
 import {useServer} from '../../context/ServerContext'
 import { socket }from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
@@ -42,7 +41,6 @@ function Message() {
 
     const sendChat = (e) => {
         e.preventDefault()
-        console.log('serverIdSendingMessage: ', serverId);
         socket.emit("new_message", { user: user.username, // Logged in user
                                      userId: user.id,
                                      msg: chatInput,      // User's message
