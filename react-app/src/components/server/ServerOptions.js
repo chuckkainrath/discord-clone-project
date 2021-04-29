@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useServer } from '../../context/ServerContext';
-import { deleteServer } from '../../store/server';
+import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
 
@@ -13,6 +13,7 @@ function ServerOptions() {
 
     const channels = useSelector(state => state.channels.channels);
     console.log('ServerId', serverId);
+
     const deleteAServer = async () => {
         await dispatch(deleteServer(serverId))
         const channelIds = [];
