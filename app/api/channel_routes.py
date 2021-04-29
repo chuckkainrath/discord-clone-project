@@ -14,6 +14,14 @@ def get_channels(server_id):
     return {'channels': channels}
 
 
+@channel_routes.route('/members')
+@login_required
+def get_members(server_id):
+
+    # 1. grab every userserver associated w/ serverId.
+        # end product will be array
+    # 2. grab 
+
 @channel_routes.route('/', methods=['POST'])
 @login_required
 def create_channel(server_id):
