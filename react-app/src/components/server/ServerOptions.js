@@ -11,8 +11,14 @@ function ServerOptions() {
     const [channelCreate, toggleChannelCreate] = useState(false)
     const { serverId, setServerId } = useServer();
 
+    //1.) Grab user
+    const user = useSelector(state => state.session.user);
+    //2.) Query all userServers associated with that user
+    //3.) setServerId([firstServer])
+
     const channels = useSelector(state => state.channels.channels);
     console.log('ServerId', serverId);
+
     const deleteAServer = async () => {
         await dispatch(deleteServer(serverId))
         const channelIds = [];
