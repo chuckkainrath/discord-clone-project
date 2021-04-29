@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Message from '../message/Message'
 import { useChannel } from '../../context/ChannelContext';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,12 +10,13 @@ function MessageList() {
     const channels = useSelector(state => state.channels.channels);
     const { channelId } = useChannel();
     const { serverId } = useServer()
-    const channel = channels[channelId];
+    const [channel, setChannel] = useState(channels[channelId])
 
     useEffect(() => {
      (async () => {
          await dispatch(getMessages(serverId, channelId))
-     })();   
+         setChannel(channels[channelId])
+     })();
     }, [channelId])
 
     return (

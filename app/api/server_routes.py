@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Server, User, Channel, Message
+from app.models import db, Server, User, Channel, Message, UserServer
 from flask_login import current_user, login_required
 
 server_routes = Blueprint('servers', __name__)
@@ -9,7 +9,9 @@ server_routes = Blueprint('servers', __name__)
 @login_required
 def get_servers():
     user_id = int(current_user.id)
-    raw_servers = Server.query.filter(User.id == user_id).all()
+    userServers = UserServer.query.filter(UserServer.user_id == user_id).all()
+    serverIds = [userServer.server_id for userServer in userServers]
+    raw_servers = Server.query.filter(Server.id.in_(serverIds)).all()
     servers = [server.to_dict() for server in raw_servers]
     return {'servers': servers}
 
@@ -26,6 +28,13 @@ def create_server():
     )
     db.session.add(server)
     db.session.commit()
+
+    # Create UserServer entry
+    userServer = UserServer(
+        user_id=int(current_user.id),
+        server_id=int(server.id)
+    )
+    db.session.add(userServer)
     channel = Channel(
         name='General',
         server_id=server.id
