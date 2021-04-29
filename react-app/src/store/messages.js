@@ -9,7 +9,7 @@ const getMessagesAction = (messages) => ({
     payload: messages
 })
 
-const createMessageAction = (message) => ({
+export const createMessageAction = (message) => ({
     type: CREATE_MESSAGE,
     payload: message
 })
@@ -30,13 +30,14 @@ export const deleteMessagesInChannels = (channelIds) => ({
 })
 
 export const getMessages = (serverId, channelId) => async (dispatch) => {
-    const response = await fetch(`/api/servers/${serverId}/channels/${channelId}`)
-
+    console.log(serverId, channelId)
+    const response = await fetch(`/api/servers/${serverId}/channels/${channelId}/`)
+    
     const messages = await response.json();
     if (messages.errors) {
         return;
     }
-    dispatch(getMessagesAction(messages))
+    dispatch(getMessagesAction(messages.messages))
 }
 
 export const createMessage = (body, serverId, channelId) => async (dispatch) => {
