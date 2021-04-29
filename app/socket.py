@@ -34,7 +34,7 @@ def handle_chat(data):
     db.session.commit()
     message_dict = message.to_dict()
     message_json = json.dumps(message_dict, cls=DateTimeEncoder)
-    emit("chat", message_json, to=data['serverId'])  # broadcast=True,
+    emit("chat", message_json, to=str(data['serverId']))  # broadcast=True,
     # emit("chat", message_json)
 
 
