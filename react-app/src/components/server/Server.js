@@ -29,16 +29,16 @@ function Server() {
     useEffect(() => {
         serversArr = []
         if (servers) {
-        for (const key in servers) {
-            serversArr.push(servers[key])
+            for (const key in servers) {
+                serversArr.push(servers[key])
+            }
         }
-    }
         if (serversArr.length) {
             setServerId(serversArr[0].id)
         } else {
             setServerId(0)
         }
-    }, [servers, serverId])
+    }, [servers])
 
     useEffect(() => {
         let channelId;

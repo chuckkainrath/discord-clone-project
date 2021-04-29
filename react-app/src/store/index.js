@@ -4,13 +4,15 @@ import session from './session'
 import servers from './server'
 import channels from './channels'
 import messages from './messages'
+import members from './members'
 
 
 const rootReducer = combineReducers({
     session,
     servers,
     channels,
-    messages
+    messages,
+    members
 });
 
 let enhancer;
