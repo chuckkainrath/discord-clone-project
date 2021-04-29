@@ -2,13 +2,14 @@ const GET_ALL_MESSAGES = "message/GET_ALL_MESSAGES"
 const CREATE_MESSAGE = "message/CREATE_MESSAGE"
 const EDIT_MESSAGE = "message/EDIT_MESSAGE"
 const DELETE_MESSAGE = "message/DELETE_MESSAGE"
+const DELETE_MESSAGES = "message/DELETE_MESSAGES"
 
 const getMessagesAction = (messages) => ({
     type: GET_ALL_MESSAGES,
     payload: messages
 })
 
-const createMessageAction = (message) => ({
+export const createMessageAction = (message) => ({
     type: CREATE_MESSAGE,
     payload: message
 })
@@ -23,14 +24,20 @@ const deleteMessageAction = (message) => ({
     payload: message
 })
 
-export const getMessages = (serverId, channelId) => async (dispatch) => {
-    const response = await fetch(`/api/servers/${serverId}/channels/${channelId}`)
+export const deleteMessagesInChannels = (channelIds) => ({
+    type: DELETE_MESSAGES,
+    payload: channelIds
+})
 
+export const getMessages = (serverId, channelId) => async (dispatch) => {
+    console.log(serverId, channelId)
+    const response = await fetch(`/api/servers/${serverId}/channels/${channelId}/`)
+    
     const messages = await response.json();
     if (messages.errors) {
         return;
     }
-    dispatch(getMessagesAction(messages))
+    dispatch(getMessagesAction(messages.messages))
 }
 
 export const createMessage = (body, serverId, channelId) => async (dispatch) => {
@@ -42,7 +49,7 @@ export const createMessage = (body, serverId, channelId) => async (dispatch) => 
         body: JSON.stringify({ body })
     })
 
-    const message = await response.json();
+    const message = await response.json();   // message.message or w/e the key is
     if (message.errors) {
         return;
     }
@@ -80,10 +87,10 @@ export const deleteMessage = (channelId, serverId, messageId) => async (dispatch
 
 const flatMessages = (messages) => {
     const fMessage = {}
-    for (let message in messages) {
-        fMessage[message.id] = message
-    }
-    return fMessage
+    messages.forEach(message => {
+        fMessage[message.id] = message;
+    });
+    return fMessage;
 }
 
 const initialState = { messages: {} }
@@ -104,6 +111,14 @@ export default function reducer(state = initialState, action) {
         case DELETE_MESSAGE:
             newState = { messages: { ...state.messages } }
             delete newState.messages[action.payload]
+            return newState
+        case DELETE_MESSAGES:
+            newState = { messages: { ...state.messages } }
+            for (let messageId in newState.messages) {
+                if (action.payload.includes(newState.messages[messageId].channel_id)) {
+                    delete newState.messages[messageId]
+                }
+            }
             return newState
         default:
             return state;

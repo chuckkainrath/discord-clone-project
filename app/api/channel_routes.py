@@ -33,6 +33,10 @@ def delete_channel(server_id, channel_id):
     channel = Channel.query.get(channel_id)
     if channel.server_id != server_id:
         return {'errors': 'Channel is not part of server'}, 401
+    messages = Message.query.filter(Message.channel_id == channel_id).all()
+    for message in messages:
+        db.session.delete(message)
+    db.session.commit()
     db.session.delete(channel)
     db.commit()
     return {'message': 'Channel successfully deleted'}
