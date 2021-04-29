@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useServer } from '../../context/ServerContext';
-import { deleteServer } from '../../store/server';
+import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
 
@@ -10,11 +10,6 @@ function ServerOptions() {
     const [options, toggleOptions] = useState(false)
     const [channelCreate, toggleChannelCreate] = useState(false)
     const { serverId, setServerId } = useServer();
-
-    //1.) Grab user
-    const user = useSelector(state => state.session.user);
-    //2.) Query all userServers associated with that user
-    //3.) setServerId([firstServer])
 
     const channels = useSelector(state => state.channels.channels);
     console.log('ServerId', serverId);
