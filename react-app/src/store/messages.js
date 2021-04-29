@@ -24,15 +24,15 @@ const deleteMessageAction = (message) => ({
     payload: message
 })
 
-export const deleteMessagesInChannels = (channelIds) => ({
+export const deleteMessagesInChannel = (channelId) => ({
     type: DELETE_MESSAGES,
-    payload: channelIds
+    payload: channelId
 })
 
 export const getMessages = (serverId, channelId) => async (dispatch) => {
     console.log(serverId, channelId)
     const response = await fetch(`/api/servers/${serverId}/channels/${channelId}/`)
-    
+
     const messages = await response.json();
     if (messages.errors) {
         return;
@@ -115,7 +115,7 @@ export default function reducer(state = initialState, action) {
         case DELETE_MESSAGES:
             newState = { messages: { ...state.messages } }
             for (let messageId in newState.messages) {
-                if (action.payload.includes(newState.messages[messageId].channel_id)) {
+                if (action.payload === newState.messages[messageId].channel_id) {
                     delete newState.messages[messageId]
                 }
             }
