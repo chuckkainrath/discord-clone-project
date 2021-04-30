@@ -11,28 +11,31 @@ import ServerIcon from './ServerIcon';
 
 export let socket;
 
-function ServerBar() {
+function ServerBar({loaded}) {
+    const user = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     const history = useHistory();
     const servers = useSelector(state => state.servers.servers);
     const userId = useSelector(state => state.session.user.id);
     const channels = useSelector(state => state.channels.channels);
-
     const [create, toggleCreate] = useState(false)
+
     const { serverId, setServerId } = useServer();
     const { setChannelId } = useChannel();
 
     const serversArr = [];
     const serverIds = [];
-
     for (const key in servers) {
         serversArr.push(servers[key])
         serverIds.push(key)
     }
-
+    // useEffect(()=> {
+    //    toggleIsLoaded(true)
+    // }, [servers])
     useEffect(() => {
         socket = io()
         socket.emit("join", { serverIds })
+
 
         socket.on('leave_server', (data) => {
             if (data.user_id === userId) {
@@ -48,7 +51,6 @@ function ServerBar() {
             socket.disconnect()
         })
     }, [])
-
     const changeContext = serverId => {
         setServerId(serverId);
         let channelId;
@@ -61,8 +63,7 @@ function ServerBar() {
         }
         setChannelId(channelId);
     }
-
-    return (
+    return loaded && (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
@@ -82,5 +83,4 @@ function ServerBar() {
         </div>
     )
 }
-
 export default ServerBar

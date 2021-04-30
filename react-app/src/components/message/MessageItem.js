@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {useServer} from '../../context/ServerContext'
-import { socket }from '../server/ServerBar'
+import { useServer } from '../../context/ServerContext'
+import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
 
 
-function MessageItem({message}) {
+function MessageItem({ message }) {
     const userId = useSelector(store => store.session.user.id);
     const [displayEdit, setDisplayEdit] = useState(false);
     const [messageBody, setMessageBody] = useState(message.body);
@@ -16,10 +16,6 @@ function MessageItem({message}) {
     const { serverId } = useServer();
 
     const usersMessage = message.user_id === userId;
-
-    console.log('USER MESSAGEEE', usersMessage);
-    console.log('USERID', userId)
-    console.log('MESSAGE USERID', message.user_id);
 
     const handleEditClick = () => {
         // toggle display popup state
