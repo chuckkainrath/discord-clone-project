@@ -14,14 +14,15 @@ export const createMessageAction = (message) => ({
     payload: message
 })
 
-const editMessageAction = (message) => ({
+export const editMessageAction = (messageId, body) => ({
     type: EDIT_MESSAGE,
-    payload: message
+    messageId,
+    body
 })
 
-const deleteMessageAction = (message) => ({
+export const deleteMessageAction = (messageId) => ({
     type: DELETE_MESSAGE,
-    payload: message
+    messageId
 })
 
 export const deleteMessagesInChannel = (channelId) => ({
@@ -105,11 +106,11 @@ export default function reducer(state = initialState, action) {
             return newState
         case EDIT_MESSAGE:
             newState = { messages: { ...state.messages } }
-            newState.messages[action.payload.id] = action.payload
+            newState.messages[action.messageId].body = action.body
             return newState
         case DELETE_MESSAGE:
             newState = { messages: { ...state.messages } }
-            delete newState.messages[action.payload]
+            delete newState.messages[action.messageId]
             return newState
         case DELETE_MESSAGES:
             newState = { messages: { ...state.messages } }
