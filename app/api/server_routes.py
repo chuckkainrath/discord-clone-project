@@ -76,3 +76,14 @@ def delete_server(server_id):
     db.session.delete(server)
     db.session.commit()
     return {'message': 'Server successfully deleted'}
+  
+  
+@server_routes.route('/userservers')
+@login_required
+def get_userservers():
+    user_id = int(current_user.id)
+    userServers = UserServer.query.filter(UserServer.user_id == user_id).all()
+    serverIds = [userServer.server_id for userServer in userServers]
+    raw_servers = Server.query.filter(Server.id.in_(serverIds)).all()
+    servers = [server.to_dict() for server in raw_servers]
+    return {'servers': servers}
