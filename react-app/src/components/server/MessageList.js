@@ -14,8 +14,10 @@ function MessageList() {
 
     useEffect(() => {
         (async () => {
-            await dispatch(getMessages(serverId, channelId))
-            setChannel(channels[channelId])
+            if (channelId) {
+                await dispatch(getMessages(serverId, channelId))
+                setChannel(channels[channelId])
+            }
         })();
     }, [channelId])
 
