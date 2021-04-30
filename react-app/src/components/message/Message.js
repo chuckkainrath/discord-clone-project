@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { io } from 'socket.io-client';
-import {useServer} from '../../context/ServerContext'
-import { socket }from '../server/ServerBar'
+import { useServer } from '../../context/ServerContext'
+import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
 
@@ -15,7 +15,7 @@ function Message() {
 
     const user = useSelector(state => state.session.user)
     const stateMessages = useSelector(state => state.messages.messages)
-    const {serverId} = useServer()
+    const { serverId } = useServer()
 
     useEffect(() => {
         socket.on("chat", (chat) => {
@@ -26,10 +26,11 @@ function Message() {
         })
     }, [])
 
-    useEffect (() => {
+    useEffect(() => {
         const channelMsgs = []
         for (let key in stateMessages) {
             const currMsg = stateMessages[key]
+            console.log('CHANNEL ID', channelId)
             if (currMsg.channel_id == channelId) {
                 channelMsgs.push(currMsg)
             }
@@ -50,11 +51,13 @@ function Message() {
     const sendChat = (e) => {
         e.preventDefault()
         console.log('serverIdSendingMessage: ', serverId);
-        socket.emit("new_message", { user: user.username, // Logged in user
-                                     userId: user.id,
-                                     msg: chatInput,      // User's message
-                                     serverId,            // Server message is in
-                                     channelId });        // Channel message is in
+        socket.emit("new_message", {
+            user: user.username, // Logged in user
+            userId: user.id,
+            msg: chatInput,      // User's message
+            serverId,            // Server message is in
+            channelId
+        });        // Channel message is in
         setChatInput("")
         toggleChatValid(true)
     }
@@ -71,7 +74,7 @@ function Message() {
                     value={chatInput}
                     onChange={updateChatInput}
                 />
-                <button type="submit" disabled = {chatValid}>Send</button>
+                <button type="submit" disabled={chatValid}>Send</button>
             </form>
         </>)
     )
