@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useServer } from '../../context/ServerContext';
+import InviteCreate from './InviteCreate';
 import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
@@ -10,6 +11,7 @@ function ServerOptions() {
     const dispatch = useDispatch();
     const [options, toggleOptions] = useState(false)
     const [channelCreate, toggleChannelCreate] = useState(false)
+    const [inviteCreate, toggleInviteCreate] = useState(false);
     const { serverId, setServerId } = useServer();
 
     const channels = useSelector(state => state.channels.channels);
@@ -53,9 +55,12 @@ function ServerOptions() {
                         +Channel
                     </div>
                     {channelCreate && <ChannelCreate toggleChannelCreate={toggleChannelCreate} />}
-                    <div>
+                    <div
+                        onClick={() => toggleInviteCreate(!inviteCreate)}
+                    >
                         +User
                     </div>
+                    {inviteCreate && <InviteCreate toggleInviteCreate={toggleInviteCreate} />}
                     <div
                         onClick={deleteAServer}
                     >

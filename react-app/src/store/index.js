@@ -5,6 +5,7 @@ import servers from './server'
 import channels from './channels'
 import messages from './messages'
 import members from './members'
+import invites from './invites'
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     servers,
     channels,
     messages,
-    members
+    members,
+    invites
 });
 
 let enhancer;
