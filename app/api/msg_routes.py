@@ -15,8 +15,6 @@ def get_messages(server_id, channel_id):
     # print('MESSSSSSSAGGGGEEEEEESSSSS', raw_messages)
     messages = []
     for (message, user) in raw_query:
-        print('MESSAGE', message)
-        print('USER', user)
         msg = message.to_dict()
         usr = user.to_dict()
         msg['username'] = usr['username']

@@ -26,6 +26,7 @@ export const processInvite = (server_id, accept) => async dispatch => {
         body: JSON.stringify({accept})
     });
     const data = await response.json();
+    console.log('INVITE RESPONES ', data);
     if (data.response) {
         return;
     }
