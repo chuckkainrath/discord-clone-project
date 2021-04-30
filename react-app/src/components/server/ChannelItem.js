@@ -37,7 +37,8 @@ function ChannelItem({channel}) {
     }, [channelName]);
 
 
-    const submitNameChange = () => {
+    const submitNameChange = (e) => {
+        e.preventDefault();
         socket.emit('edit_channel', {
             serverId,
             channelId: channel.id,

@@ -4,7 +4,9 @@ import { io } from 'socket.io-client';
 import { useServer } from '../../context/ServerContext'
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
-import { createMessageAction } from '../../store/messages';
+import { createMessageAction,
+         deleteMessageAction,
+         editMessageAction } from '../../store/messages';
 import MessageItem from './MessageItem';
 
 function Message() {
@@ -22,6 +24,12 @@ function Message() {
         socket.on("chat", (chat) => {
             const chat_obj = JSON.parse(chat);
             dispatch(createMessageAction(chat_obj));
+        })
+        socket.on('edit_message', (response) => {
+            dispatch(editMessageAction(response.message_id, response.body))
+        })
+        socket.on('delete_message', (response) => {
+            dispatch(deleteMessageAction(response.message_id))
         })
     }, [])
 
@@ -54,7 +62,7 @@ function Message() {
             msg: chatInput,      // User's message
             serverId,            // Server message is in
             channelId            // Channel message is in
-        });        
+        });
         setChatInput("")
         toggleChatValid(true)
     }

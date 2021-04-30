@@ -81,6 +81,30 @@ def handle_edit_channel(data):
     emit("edit_channel", returnData, to=str(data['serverId']))
 
 
+@socketio.on('delete_message')
+def handle_delete_message(data):
+    message = Message.query.get(data['messageId'])
+    db.session.delete(message)
+    db.session.commit()
+    returnData = {
+        'message_id': data['messageId']
+    }
+    emit("delete_message", returnData, to=str(data['serverId']))
+
+
+@socketio.on('edit_message')
+def handle_edit_message(data):
+    message = Message.query.get(data['messageId'])
+    message.body = data['body']
+    db.session.add(message)
+    db.session.commit()
+    returnData = {
+        'message_id': data['messageId'],
+        'body': data['body']
+    }
+    emit("edit_message", returnData, to=str(data['serverId']))
+
+
 @socketio.on('join')
 def on_join(data):
     # username = data['username']
