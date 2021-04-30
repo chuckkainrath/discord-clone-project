@@ -1,9 +1,10 @@
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 import os
-from app.models import db, Message, Channel
+from app.models import db, Message, Channel, UserServer
 import json
 from json import JSONEncoder
 import datetime
+from flask_login import current_user
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
@@ -103,6 +104,24 @@ def handle_edit_message(data):
         'body': data['body']
     }
     emit("edit_message", returnData, to=str(data['serverId']))
+
+
+@socketio.on('leave_server')
+def handle_leave_server(data):
+    userId = data['userId']
+    userServers = UserServer.query.filter(UserServer.user_id == userId).all()
+    for userServer in userServers:
+        if userServer.server_id == data['serverId']:
+            db.session.delete(userServer)
+            db.session.commit()
+            break
+
+    returnData = {
+        'server_id': data['serverId'],
+        'user_id': userId,
+    }
+    emit("leave_server", returnData, to=str(data['serverId']))
+    leave_room(str(data['serverId']))
 
 
 @socketio.on('join')
