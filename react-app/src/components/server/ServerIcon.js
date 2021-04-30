@@ -35,11 +35,14 @@ function ServerIcon({server}) {
 
     const leaveServer = () => {
         // emit leave server
-        console.log('LEAVING SERVER: ', server.id, server.name)
-        socket.emit('leave_server', {
-            serverId: server.id,
-            userId
-        });
+        if (server.owner_id !== userId) {
+            socket.emit('leave_server', {
+                serverId: server.id,
+                userId
+            });
+        } else {
+            // Alert user somehow
+        }
     }
 
     return (

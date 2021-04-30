@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import { useChannel } from '../../context/ChannelContext';
 import { deleteServerAction } from '../../store/server';
+import { deleteChannelsInServer } from '../../store/channels';
 import { removeMemberAction } from '../../store/members';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
@@ -36,9 +37,21 @@ function ServerBar({loaded}) {
         socket = io()
         socket.emit("join", { serverIds })
 
+        socket.on('delete_server', (data) => {
+            dispatch(deleteServerAction(data.server_id))
+            const channelIds = [];
+            for (const channelId in channels) {
+                if (channels[channelId].server_id === serverId) {
+                    channelIds.push(channelId);
+                }
+            }
+            dispatch(deleteChannelsInServer(data.server_id))
+            if (serverId === data.server_id) {
+                history.push('/servers')
+            }
+        });
 
         socket.on('leave_server', (data) => {
-            console.log('USER IS LEAVING SERVER', userId);
             if (data.user_id === userId) {
                 console.log('DATA.USER_ID', data.user_id);
                 dispatch(deleteServerAction(data.server_id));
@@ -46,9 +59,7 @@ function ServerBar({loaded}) {
                     history.push('/servers');
                 }
             } else {
-                if (data.server_id === serverId) {
-                    dispatch(removeMemberAction(data.user_id))
-                }
+                dispatch(removeMemberAction(data.user_id))
             }
         });
 
@@ -57,7 +68,7 @@ function ServerBar({loaded}) {
             socket.disconnect()
         })
     }, [])
-    
+
     const changeContext = serverId => {
         setServerId(serverId);
         let channelId;

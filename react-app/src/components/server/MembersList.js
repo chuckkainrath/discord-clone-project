@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import { getUsersForSidebar, removeMembers } from '../../store/members'
@@ -6,17 +6,22 @@ function MembersList() {
     const dispatch = useDispatch()
     const { serverId } = useServer()
     const members = useSelector(state => state.members.members)
-    let membersArr = []
-    for (let member in members) {
-        membersArr.push(members[member])
-    }
+    const [membersArr, setMembersArr] = useState([])
+    useEffect(() => {
+        let tempMembersArr = []
+        for (let member in members) {
+            tempMembersArr.push(members[member])
+        }
+        setMembersArr(tempMembersArr)
+    }, [members])
     useEffect(() => {
         dispatch(removeMembers())
         dispatch(getUsersForSidebar(serverId))
-        membersArr = []
+        let tempMembersArr = []
         for (let member in members) {
-            membersArr.push(members[member])
+            tempMembersArr.push(members[member])
         }
+        setMembersArr(tempMembersArr);
     }, [serverId])
     return (
         <div>
