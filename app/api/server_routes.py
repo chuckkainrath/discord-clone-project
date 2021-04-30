@@ -65,7 +65,6 @@ def delete_server(server_id):
     db.session.commit()
     userservers = UserServer.query.filter(
         UserServer.server_id == server_id).all()
-    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', userservers)
     for userserver in userservers:
         db.session.delete(userserver)
     db.session.commit()

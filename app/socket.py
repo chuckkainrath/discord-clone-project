@@ -43,7 +43,6 @@ def on_join(data):
     # username = data['username']
     servers = data['serverIds']
     for server in servers:
-        print('Joining server room : ', server)
         join_room(server)
     # send(username + ' has entered the room.', to=channel)
 
@@ -53,6 +52,5 @@ def on_leave(data):
     # username = data['username']
     servers = data['serverIds']
     for server in servers:
-        print('Leaving server room : ', server)
         leave_room(server)
     # send(username + ' has left the room.', to=room)

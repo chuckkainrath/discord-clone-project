@@ -30,7 +30,6 @@ export const deleteMessagesInChannels = (channelIds) => ({
 })
 
 export const getMessages = (serverId, channelId) => async (dispatch) => {
-    console.log(serverId, channelId)
     const response = await fetch(`/api/servers/${serverId}/channels/${channelId}/`)
 
     const messages = await response.json();

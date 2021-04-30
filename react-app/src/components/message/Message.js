@@ -20,8 +20,6 @@ function Message() {
     useEffect(() => {
         socket.on("chat", (chat) => {
             const chat_obj = JSON.parse(chat);
-            // setMessages(messages => [...messages, chat_obj])
-            console.log('CHAT_OBJJJJJJJJJJ', chat_obj);
             dispatch(createMessageAction(chat_obj));
         })
     }, [])
@@ -30,7 +28,6 @@ function Message() {
         const channelMsgs = []
         for (let key in stateMessages) {
             const currMsg = stateMessages[key]
-            console.log('CHANNEL ID', channelId)
             if (currMsg.channel_id == channelId) {
                 channelMsgs.push(currMsg)
             }
@@ -50,7 +47,6 @@ function Message() {
 
     const sendChat = (e) => {
         e.preventDefault()
-        console.log('serverIdSendingMessage: ', serverId);
         socket.emit("new_message", {
             user: user.username, // Logged in user
             userId: user.id,

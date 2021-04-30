@@ -23,7 +23,6 @@ const deleteServerAction = (server) => ({
 
 export const getServers = () => async (dispatch) => {
     const response = await fetch('/api/servers/')
-    console.log(response)
     const data = await response.json();
     if (data.errors) {
         return;
@@ -45,7 +44,6 @@ export const createServer = (name, description) => async (dispatch) => {
     if (data.errors) {
         return;
     }
-    console.log('Data', data)
     dispatch(createServerAction(data.server))
     dispatch(createChannelAction(data.channel))
 }
