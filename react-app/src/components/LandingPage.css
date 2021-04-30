@@ -18,9 +18,11 @@
 
 .text-container {
     position: absolute;
-    top: 300px;
+    top: 20%;
+    text-align: center;
     background: transparent;
-    left: 200px;
+    margin: .5em;
+    /* left: 200px; */
 }
 
 .landing-textheader {
@@ -40,6 +42,7 @@
     background: transparent;
 }
 .landing-description {
+    margin: .5em;
     font-size: 20px;
     color: #dfe0e2;
     font-family: 'Mukta', sans-serif;
