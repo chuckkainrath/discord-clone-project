@@ -68,6 +68,11 @@ def delete_server(server_id):
     for invite in invites:
         db.session.delete(invite)
     db.session.commit()
+    # Get all userServers
+    userServers = UserServer.query.filter(UserServer.server_id == server_id).all()
+    for userServer in userServers:
+        db.session.delete(userServer)
+    db.session.commit()
     db.session.delete(server)
     db.session.commit()
     return {'message': 'Server successfully deleted'}
