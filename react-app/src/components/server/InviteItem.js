@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useServer } from '../../context/ServerContext';
 import { processInvite } from '../../store/invites';
 import { addServerAction } from '../../store/server';
+import { socket } from './ServerBar';
 
 function InviteItem({invite}) {
     const dispatch = useDispatch();
@@ -14,6 +15,9 @@ function InviteItem({invite}) {
         const server = await dispatch(processInvite(invite.server_id, acceptInv));
         // dispatch add server to store if accept
         if (acceptInv) {
+            console.log(server);
+            const servId = server.id.toString()
+            socket.emit("join", { serverIds: [servId] })
             dispatch(addServerAction(server));
         }
     }
