@@ -4,3 +4,4 @@ from .channels import Channel
 from .messages import Message
 from .servers import Server
 from .userservers import UserServer
+from .invites import Invite
