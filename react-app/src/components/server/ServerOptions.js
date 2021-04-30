@@ -34,15 +34,6 @@ function ServerOptions() {
         // Otherwise display something
     }
 
-    // if (!servers) {
-    //     return <Redirect to='/servers' />
-    // }
-
-
-    // const createAChannel = async () => {
-    //     await dispatch(createChannel())
-    // }
-
     let serverName;
     if (servers[serverId]) {
         serverName = servers[serverId].name
@@ -53,7 +44,9 @@ function ServerOptions() {
             {servers[serverId] ? <div
                 onClick={() => toggleOptions(!options)}
             >
-                Server Name: {serverName}
+                <div>
+                    {serverName}
+                </div>
             </div> : null}
             {options &&
                 <div>

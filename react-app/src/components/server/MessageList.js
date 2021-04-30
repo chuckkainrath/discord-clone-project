@@ -9,21 +9,19 @@ function MessageList() {
     const dispatch = useDispatch()
     const channels = useSelector(state => state.channels.channels);
     const { channelId } = useChannel();
-    const { serverId } = useServer()
+    const { serverId } = useServer();
     const [channel, setChannel] = useState(channels[channelId])
 
     useEffect(() => {
-     (async () => {
-         await dispatch(getMessages(serverId, channelId))
-         setChannel(channels[channelId])
-     })();
+        (async () => {
+            await dispatch(getMessages(serverId, channelId))
+            setChannel(channels[channelId])
+        })();
     }, [channelId])
 
     return (
         <>
             <div>{channel && `Channel: ${channel.name}, ${channel.id}`}</div>
-            {/* <div>Message List</div>
-            <div>Send Messages</div> */}
             <Message />
         </>
     )
