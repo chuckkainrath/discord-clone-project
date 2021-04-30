@@ -10,8 +10,14 @@ invite_routes = Blueprint('invites', __name__)
 @login_required
 def get_invites():
     user_id = int(current_user.id)
-    raw_invites = Invite.query.filter(Invite.user_id == user_id).all()
-    invites = [invite.to_dict() for invite in raw_invites]
+    raw_query = db.session.query(Invite, Server).join(Server) \
+                  .filter(Invite.user_id == user_id).all()
+    invites = []
+    for (invite, server) in raw_query:
+        inv = invite.to_dict()
+        serv = server.to_dict()
+        inv['server_name'] = serv['name']
+        invites.append(inv)
     return {'invites': invites}
 
 
@@ -39,6 +45,7 @@ def send_invite(server_id):
 
 @invite_routes.route('/<int:server_id>', methods=["DELETE"])
 def process_invite(server_id):
+    print('PROCESSING INV TO ', server_id)
     user_id = int(current_user.id)
     accept = request.json['accept']
     invite = Invite.query.filter(Invite.user_id == user_id and
@@ -47,17 +54,22 @@ def process_invite(server_id):
         return {'response': 'Invite not found'}
 
     if not accept:
+        print('DECLINE INVITE')
         db.session.delete(invite)
-        db.commit()
-        return {'response': 'Invite declined'}
+        db.session.commit()
+        return {'server': 'Invite declined'}
 
+    print('ACCEPTING INVITE')
     # If invite accepted
     userServer = UserServer(
         user_id=user_id,
         server_id=server_id
     )
+    print('INVITE USERSERVER DATA PRE COMMIT', userServer)
     db.session.add(userServer)
+    db.session.delete(invite)
     db.session.commit()
+    print('INVITE USERSERVER DATA POST COMMIT', userServer)
     server = Server.query.get(server_id)
     server_dict = server.to_dict()
     return {'server': server_dict}
