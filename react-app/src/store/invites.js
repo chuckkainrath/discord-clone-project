@@ -23,7 +23,7 @@ export const processInvite = (server_id, accept) => async dispatch => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({accept})
+        body: JSON.stringify({ accept })
     });
     const data = await response.json();
     if (data.response) {
@@ -39,9 +39,9 @@ export const sendInvite = async (serverId, username) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username})
+        body: JSON.stringify({ username })
     });
-    const data= await response.json();
+    const data = await response.json();
     return data.response;
 }
 
