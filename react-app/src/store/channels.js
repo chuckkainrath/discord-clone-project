@@ -3,10 +3,17 @@ const GET_ALL_CHANNELS = "channel/GET_ALL_CHANNELS"
 const CREATE_CHANNEL = "channel/CREATE_CHANNEL"
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL"
 const DELETE_CHANNELS = "channel/DELETE_CHANNELS"
+const EDIT_CHANNEL = "channel/EDIT_CHANNEL"
 
 const getChannelsAction = (channel) => ({
     type: GET_ALL_CHANNELS,
     payload: channel
+})
+
+export const editChannelAction = (channelId, channelName) => ({
+    type: EDIT_CHANNEL,
+    channelId,
+    channelName
 })
 
 export const deleteChannelsInServer = (serverId) => ({
@@ -95,6 +102,10 @@ export default function reducer(state = initialState, action) {
                 }
             }
             return newState;
+        case EDIT_CHANNEL:
+            newState = { channels: { ...state.channels } }
+            newState.channels[action.channelId].name = action.channelName
+            return newState
         default:
             return state;
     }

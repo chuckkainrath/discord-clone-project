@@ -4,7 +4,9 @@ import { useServer } from '../../context/ServerContext'
 import { getChannels } from '../../store/channels'
 import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../server/ServerBar';
-import { createChannelAction, deleteChannelAction } from '../../store/channels';
+import { createChannelAction,
+         deleteChannelAction,
+         editChannelAction } from '../../store/channels';
 import { deleteMessagesInChannel } from '../../store/messages';
 import ChannelItem from './ChannelItem';
 
@@ -41,6 +43,10 @@ function ChannelList() {
             dispatch(deleteMessagesInChannel(channel.channel_id));
             setChangeChannelContext(!changeChannelContext);
         });
+        socket.on("edit_channel", (channel) => {
+            console.log('EDIT_CHANNEL_SOCKET_RESPONSE', channel)
+            dispatch(editChannelAction(channel.channel_id, channel.name));
+        })
     }, [])
 
     useEffect(() => {
