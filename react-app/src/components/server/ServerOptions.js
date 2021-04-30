@@ -5,6 +5,7 @@ import InviteCreate from './InviteCreate';
 import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
+import { Redirect } from 'react-router';
 
 function ServerOptions() {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function ServerOptions() {
     const { serverId, setServerId } = useServer();
 
     const channels = useSelector(state => state.channels.channels);
-    console.log('ServerId', serverId);
+    const servers = useSelector(state => state.servers.servers);
 
     const deleteAServer = async () => {
         await dispatch(deleteServer(serverId))
@@ -32,18 +33,20 @@ function ServerOptions() {
         // Otherwise display something
     }
 
-    // const createAChannel = async () => {
-    //     await dispatch(createChannel())
-    // }
+    let serverName;
+    if (servers[serverId]) {
+        serverName = servers[serverId].name
+    }
 
     return (
         <>
-            {/* <div className={styles.server_name}>Server Name</div> */}
-            <div
+            {servers[serverId] ? <div
                 onClick={() => toggleOptions(!options)}
             >
-                Server Name
-            </div>
+                <div>
+                    {serverName}
+                </div>
+            </div> : null}
             {options &&
                 <div>
                     <div

@@ -69,8 +69,7 @@ function ChannelList() {
         <>
             {!serverId ? <div>No Server</div> :
                 <div>
-
-                    {channelVals.map(channel => {
+                    {channelVals && channelVals.map(channel => {
                         return (
                             <ChannelItem
                                 key={channel.id}

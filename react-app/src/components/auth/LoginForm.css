@@ -1,6 +1,4 @@
-/* * {
 
-} */
 
 .background-image {
     height: 100%;
@@ -13,6 +11,7 @@
 
 .login-container {
     position: relative;
+    color: white;
 }
 
 .login-form {
@@ -30,8 +29,8 @@
     display: flex;
     height: 350px;
     width: 400px;
-    top: 200px;
-    left: 200px;
+    top: 20%;
+    left: 35%;
     justify-content: center;
     padding: 15px;
     border-radius: 50%;
