@@ -48,7 +48,7 @@ function App() {
         </Route>
         <Route path="/servers" exact={true}>
           <div className='server_top_grid'>
-            <ServerBar />
+            <ServerBar loaded={loaded} />
             <Server />
           </div>
         </Route>
