@@ -8,8 +8,8 @@ from flask_login import current_user
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://most-basic-chat-app.herokuapp.com",
-        "https://most-basic-chat-app.herokuapp.com"
+        "http://racketapp.herokuapp.com",
+        "https://racketapp.herokuapp.com"
     ]
 else:
     origins = "*"
