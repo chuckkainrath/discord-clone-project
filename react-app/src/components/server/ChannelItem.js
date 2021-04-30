@@ -5,7 +5,7 @@ import { socket } from '../server/ServerBar';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
 
-function ChannelItem({channel}) {
+function ChannelItem({ channel }) {
     const { setChannelId } = useChannel();
     const { serverId } = useServer();
     const [displayEdit, setDisplayEdit] = useState(false);
@@ -13,7 +13,6 @@ function ChannelItem({channel}) {
     const [validName, setValidName] = useState(true)
 
     const handleEditClick = (e, data) => {
-        console.log('CLICKED RIGHT');
         if (channel.name !== 'General') {
             setDisplayEdit(true);
         }

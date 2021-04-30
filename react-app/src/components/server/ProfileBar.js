@@ -23,8 +23,6 @@ function ProfileBar() {
   }, [])
 
   useEffect(() => {
-    console.log('SHOWING INVITES', showInvites);
-    console.log('INVITES????', invites);
   }, [showInvites])
 
   return (
