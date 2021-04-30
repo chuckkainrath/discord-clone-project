@@ -7,15 +7,23 @@ const getMembersAction = (members) => ({
 
 export const getUsersForSidebar = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels/members`)
-
     const members = await response.json();
+    console.log("!!!!!MEMBERS IN THUNK!!!!!",members)
     if (members.errors) {
         return;
     }
-    for (let key in members.members) {
-        dispatch(getMembersAction(members.members[key]))
-    }
 
+    const membersArr = []
+
+    for (const key in members.members) {
+        membersArr.push(members.members[key])
+    }
+    console.log('MEMBERS ARR!!!!!', membersArr )
+    dispatch(getMembersAction(membersArr))
+
+    // for (let key in members.members) {
+    //     dispatch(getMembersAction(members.members[key]))
+    // }
 }
 
 // const flatMembers = (members) => {
@@ -26,14 +34,19 @@ export const getUsersForSidebar = (serverId) => async (dispatch) => {
 //     return fChannel
 // }
 
-const initialState = {}
+const initialState = {members: {}}
 
 export default function reducer(state = initialState, action) {
     let newState
     switch (action.type) {
         case GET_ALL_MEMBERS: // MIGHT BE COMPLETELY MESSED UP
-            newState = { ...state.members }
-            newState[action.payload.id] = action.payload.name
+            newState = {members: {...state.members}}
+            console.log("!!!NEW STATE ADDED PAYLOAD!!!", newState, action.payload)
+            action.payload.forEach(member => {
+                newState.members[member.id] = member
+            })
+            console.log("!!!NEWSTATE!!!", newState)
+            // newState[action.payload.id] = action.payload.name
             return newState
         default:
             return state;

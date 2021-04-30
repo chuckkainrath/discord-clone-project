@@ -26,8 +26,9 @@ python-dateutil = "==2.8.1"
 python-editor = "==1.0.4"
 Mako = "==1.1.3"
 PyJWT = "==1.7.1"
-flask-socketio = "*"
 eventlet = "*"
+Flask-SocketIO = "*"
+Flask-JWT-Extended = "==3.24.1"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
