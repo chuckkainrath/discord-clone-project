@@ -16,7 +16,7 @@ const createServerAction = (server) => ({
     payload: server
 })
 
-const deleteServerAction = (server) => ({
+export const deleteServerAction = (server) => ({
     type: DELETE_SERVER,
     payload: server
 })
