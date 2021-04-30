@@ -38,5 +38,5 @@ def delete_channel(server_id, channel_id):
         db.session.delete(message)
     db.session.commit()
     db.session.delete(channel)
-    db.commit()
+    db.session.commit()
     return {'message': 'Channel successfully deleted'}
