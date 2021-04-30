@@ -17,11 +17,13 @@ function shortenServer(name) {
     return initals;
 }
 
-function ServerBar() {
-    const servers = useSelector(state => state.servers.servers);
+function ServerBar({loaded}) {
+    const user = useSelector(state => state.session.user)
     const channels = useSelector(state => state.channels.channels);
-
+    const servers = useSelector(state => state.servers.servers);
+   
     const [create, toggleCreate] = useState(false)
+    // const [isLoaded, toggleIsLoaded] = useState(false)
     const { setServerId } = useServer();
     const { setChannelId } = useChannel();
     // serverId
@@ -34,6 +36,10 @@ function ServerBar() {
         serverIds.push(key)
     }
 
+    // useEffect(()=> {
+    //    toggleIsLoaded(true)
+    // }, [servers])
+
     useEffect(() => {
         socket = io()
 
@@ -45,6 +51,9 @@ function ServerBar() {
             socket.disconnect()
         })
     }, [])
+
+
+
 
     const changeContext = serverId => {
         setServerId(serverId);
@@ -59,7 +68,9 @@ function ServerBar() {
         setChannelId(channelId);
     }
 
-    return (
+
+
+    return loaded && (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (

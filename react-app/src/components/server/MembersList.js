@@ -8,14 +8,15 @@ function MembersList() {
 
     const { serverId } = useServer()
 
-    const members = useSelector(state => state.members)
+    const members = useSelector(state => state.members.members)
 
     const membersArr = []
 
     for (let member in members) {
         membersArr.push(members[member])
     }
-
+    console.log("!!!!MEMBERS ARRAY IN MEMBERS LIST!!!!",membersArr)
+    
     useEffect(() => {
         dispatch(getUsersForSidebar(serverId))
     }, [serverId])
@@ -24,7 +25,9 @@ function MembersList() {
         <div>
             <p>Members:</p>
             <div>{membersArr.map(member => (
-                member
+                <div>
+                  {member.name}
+                </div>
             ))}</div>
         </div>
     )
