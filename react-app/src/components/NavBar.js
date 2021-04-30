@@ -26,9 +26,6 @@ const NavBar = () => {
             Servers
           </NavLink>
         </li>
-        <li>
-          <LogoutButton />
-        </li>
       </ul>
     </nav>
   );

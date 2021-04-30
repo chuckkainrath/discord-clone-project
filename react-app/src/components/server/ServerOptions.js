@@ -4,6 +4,7 @@ import { useServer } from '../../context/ServerContext';
 import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
+import { Redirect } from 'react-router';
 
 function ServerOptions() {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ServerOptions() {
     const channels = useSelector(state => state.channels.channels);
     const servers = useSelector(state => state.servers.servers);
 
+    console.log(servers)
     console.log('ServerId', serverId);
 
     const deleteAServer = async () => {
@@ -32,17 +34,21 @@ function ServerOptions() {
         // Otherwise display something
     }
 
+    // if (!servers) {
+    //     return <Redirect to='/servers' />
+    // }
+
+
     // const createAChannel = async () => {
     //     await dispatch(createChannel())
     // }
 
     return (
         <>
-            {/* <div className={styles.server_name}>Server Name</div> */}
             <div
                 onClick={() => toggleOptions(!options)}
             >
-                {servers[serverId].name}
+                {servers && servers[serverId].name}
             </div>
             {options &&
                 <div>

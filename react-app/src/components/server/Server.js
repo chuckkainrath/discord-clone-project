@@ -33,6 +33,7 @@ function Server() {
                 serversArr.push(servers[key])
             }
         }
+        console.log(serversArr)
         if (serversArr.length) {
             setServerId(serversArr[0].id)
         } else {

@@ -1,7 +1,3 @@
-body {
-    background-color: #32373b;
-}
-
 .landing {
     display: flex;
     flex-direction: column;

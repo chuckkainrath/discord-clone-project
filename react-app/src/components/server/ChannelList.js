@@ -23,7 +23,7 @@ function ChannelList() {
         <>
             {!serverId ? <div>No Server</div> :
                 <div>
-                    {channelVals.map(channel => {
+                    {channelVals && channelVals.map(channel => {
                         if (channel.server_id === serverId) {
                             return (
                                 <div

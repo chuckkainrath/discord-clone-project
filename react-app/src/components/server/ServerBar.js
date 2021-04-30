@@ -37,11 +37,11 @@ function ServerBar() {
     useEffect(() => {
         socket = io()
 
-        socket.emit("join", {serverIds})
+        socket.emit("join", { serverIds })
 
 
         return (() => {
-            socket.emit("leave", {serverIds})
+            socket.emit("leave", { serverIds })
             socket.disconnect()
         })
     }, [])
@@ -74,7 +74,10 @@ function ServerBar() {
             })}
             <div
                 className={styles.server_create}
-                onClick={() => toggleCreate(!create)}>+</div>
+                onClick={() => toggleCreate(!create)}
+            >
+                +
+            </div>
             {create && <ServerCreate toggleCreate={toggleCreate} />}
         </div>
     )
