@@ -43,13 +43,18 @@ function ServerOptions() {
     //     await dispatch(createChannel())
     // }
 
+    let serverName;
+    if (servers[serverId]) {
+        serverName = servers[serverId].name
+    }
+
     return (
         <>
-            <div
+            {servers[serverId] ? <div
                 onClick={() => toggleOptions(!options)}
             >
-                {servers && servers[serverId].name}
-            </div>
+                Server Name: {serverName}
+            </div> : null}
             {options &&
                 <div>
                     <div
