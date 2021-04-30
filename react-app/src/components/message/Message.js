@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { io } from 'socket.io-client';
 import {useServer} from '../../context/ServerContext'
 import { socket }from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
+import MessageItem from './MessageItem';
 
 function Message() {
     const dispatch = useDispatch();
@@ -42,7 +42,6 @@ function Message() {
 
     const sendChat = (e) => {
         e.preventDefault()
-        console.log('serverIdSendingMessage: ', serverId);
         socket.emit("new_message", { user: user.username, // Logged in user
                                      userId: user.id,
                                      msg: chatInput,      // User's message
@@ -55,7 +54,8 @@ function Message() {
         <>
             <div>
                 {messages.map((message, ind) => (
-                    <div key={ind}>{`${message.user_id}: ${message.body}`}</div>
+                    <MessageItem key={ind} message={message} />
+                    // <div key={ind}>{`${message.user_id}: ${message.body}`}</div>
                 ))}
             </div>
             <form onSubmit={sendChat}>
