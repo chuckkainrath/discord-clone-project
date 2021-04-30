@@ -15,7 +15,6 @@ function InviteItem({invite}) {
         const server = await dispatch(processInvite(invite.server_id, acceptInv));
         // dispatch add server to store if accept
         if (acceptInv) {
-            console.log(server);
             const servId = server.id.toString()
             socket.emit("join", { serverIds: [servId] })
             dispatch(addServerAction(server));
