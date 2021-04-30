@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import  { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
+import { getServers } from '../../store/server';
 import background from './login-background.jpg'
 import './LoginForm.css'
 
@@ -18,6 +19,7 @@ const LoginForm = () => {
     if (data.errors) {
       setErrors(data.errors);
     }
+    await dispatch(getServers());
   };
 
   const DemoLogin = async (e) => {
@@ -26,6 +28,7 @@ const LoginForm = () => {
     if (data.errors) {
       setErrors(data.errors);
     }
+    await dispatch(getServers());
   };
 
   const updateEmail = (e) => {
