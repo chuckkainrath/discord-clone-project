@@ -4,6 +4,7 @@ const GET_ALL_SERVERS = "server/GET_ALL_SERVERS"
 // const GET_SERVER = "server/GET_SERVER"
 const CREATE_SERVER = "server/CREATE_SERVER"
 const DELETE_SERVER = "server/DELETE_SERVER"
+const ADD_SERVER = "server/ADD_SERVER"
 
 const getServersAction = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -15,11 +16,15 @@ const createServerAction = (server) => ({
     payload: server
 })
 
-const deleteServerAction = (server) => ({
+export const deleteServerAction = (server) => ({
     type: DELETE_SERVER,
     payload: server
 })
 
+export const addServerAction = (server) => ({
+    type: ADD_SERVER,
+    server
+})
 
 export const getServers = () => async (dispatch) => {
     const response = await fetch('/api/servers/')
@@ -83,6 +88,10 @@ export default function reducer(state = initialState, action) {
         case DELETE_SERVER:
             newState = { servers: { ...state.servers } }
             delete newState.servers[action.payload]
+            return newState
+        case ADD_SERVER:
+            newState = { servers: { ...state.servers } }
+            newState.servers[action.server.id] = action.server
             return newState
         default:
             return state;

@@ -1,60 +1,56 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
-import { useChannel, userChannel } from '../../context/ChannelContext';
+import { useChannel } from '../../context/ChannelContext';
+import { deleteServerAction } from '../../store/server';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
+import ServerIcon from './ServerIcon';
 
 export let socket;
 
-function shortenServer(name) {
-    const splitName = name.split(' ');
-    let initals = '';
-    splitName.forEach(word => {
-        initals += word[0].toUpperCase();
-    });
-    return initals;
-}
-
 function ServerBar({loaded}) {
     const user = useSelector(state => state.session.user)
-    const channels = useSelector(state => state.channels.channels);
+    const dispatch = useDispatch();
+    const history = useHistory();
     const servers = useSelector(state => state.servers.servers);
-   
+    const userId = useSelector(state => state.session.user.id);
+    const channels = useSelector(state => state.channels.channels);
     const [create, toggleCreate] = useState(false)
-    // const [isLoaded, toggleIsLoaded] = useState(false)
-    const { setServerId } = useServer();
+
+    const { serverId, setServerId } = useServer();
     const { setChannelId } = useChannel();
-    // serverId
 
     const serversArr = [];
     const serverIds = [];
-
     for (const key in servers) {
         serversArr.push(servers[key])
         serverIds.push(key)
     }
-
     // useEffect(()=> {
     //    toggleIsLoaded(true)
     // }, [servers])
-
     useEffect(() => {
         socket = io()
-
         socket.emit("join", { serverIds })
 
+
+        socket.on('leave_server', (data) => {
+            if (data.user_id === userId) {
+                dispatch(deleteServerAction(data.server_id));
+                if (serverId === data.server_id) {
+                    history.push('/servers');
+                }
+            }
+        });
 
         return (() => {
             socket.emit("leave", { serverIds })
             socket.disconnect()
         })
     }, [])
-
-
-
-
     const changeContext = serverId => {
         setServerId(serverId);
         let channelId;
@@ -67,20 +63,14 @@ function ServerBar({loaded}) {
         }
         setChannelId(channelId);
     }
-
-
-
     return loaded && (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
-                    <div
-                        className={styles.server_icon}
-                        onClick={() => changeContext(server.id)}
+                    <ServerIcon
                         key={server.id}
-                    >
-                        {shortenServer(server.name)}
-                    </div>
+                        server={server}
+                    />
                 )
             })}
             <div
@@ -93,5 +83,4 @@ function ServerBar({loaded}) {
         </div>
     )
 }
-
 export default ServerBar
