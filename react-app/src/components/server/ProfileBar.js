@@ -1,14 +1,24 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getServers } from '../../store/server'
+import LogoutButton from '../auth/LogoutButton'
 
 function ProfileBar() {
-    const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.session.user)
 
-    return (
-        <div className="user-displayname">
-          {user && user.username}
-        </div>
-    )
+  useEffect(() => {
+    dispatch(getServers())
+  }, [])
+
+  return (
+    <div>
+      <div className="user-displayname">
+        {user && user.username}
+      </div>
+      <LogoutButton />
+    </div>
+  )
 }
 
 export default ProfileBar
