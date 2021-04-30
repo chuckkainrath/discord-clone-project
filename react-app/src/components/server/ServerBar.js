@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import { useChannel } from '../../context/ChannelContext';
 import { deleteServerAction } from '../../store/server';
+import { deleteChannelsInServer } from '../../store/channels';
+import { removeMemberAction } from '../../store/members';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
@@ -12,7 +14,6 @@ import ServerIcon from './ServerIcon';
 export let socket;
 
 function ServerBar({loaded}) {
-    const user = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     const history = useHistory();
     const servers = useSelector(state => state.servers.servers);
@@ -25,24 +26,40 @@ function ServerBar({loaded}) {
 
     const serversArr = [];
     const serverIds = [];
+
     for (const key in servers) {
         serversArr.push(servers[key])
         serverIds.push(key)
     }
-    // useEffect(()=> {
-    //    toggleIsLoaded(true)
-    // }, [servers])
+
+
     useEffect(() => {
         socket = io()
         socket.emit("join", { serverIds })
 
+        socket.on('delete_server', (data) => {
+            dispatch(deleteServerAction(data.server_id))
+            const channelIds = [];
+            for (const channelId in channels) {
+                if (channels[channelId].server_id === serverId) {
+                    channelIds.push(channelId);
+                }
+            }
+            dispatch(deleteChannelsInServer(data.server_id))
+            if (serverId === data.server_id) {
+                history.push('/servers')
+            }
+        });
 
         socket.on('leave_server', (data) => {
             if (data.user_id === userId) {
+                console.log('DATA.USER_ID', data.user_id);
                 dispatch(deleteServerAction(data.server_id));
                 if (serverId === data.server_id) {
                     history.push('/servers');
                 }
+            } else {
+                dispatch(removeMemberAction(data.user_id))
             }
         });
 
@@ -51,6 +68,7 @@ function ServerBar({loaded}) {
             socket.disconnect()
         })
     }, [])
+
     const changeContext = serverId => {
         setServerId(serverId);
         let channelId;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useServer } from '../../context/ServerContext';
 import InviteCreate from './InviteCreate';
+import { socket } from './ServerBar';
 import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
@@ -13,19 +14,24 @@ function ServerOptions() {
     const [channelCreate, toggleChannelCreate] = useState(false)
     const [inviteCreate, toggleInviteCreate] = useState(false);
     const { serverId, setServerId } = useServer();
+    const userId = useSelector(state => state.session.user.id)
 
     const channels = useSelector(state => state.channels.channels);
     const servers = useSelector(state => state.servers.servers);
 
     const deleteAServer = async () => {
-        await dispatch(deleteServer(serverId))
-        const channelIds = [];
-        for (const channelId in channels) {
-            if (channels[channelId].server_id === serverId) {
-                channelIds.push(channelId);
-            }
-        }
-        dispatch(deleteChannelsInServer(serverId))
+        // await dispatch(deleteServer(serverId))
+        socket.emit('delete_server', {
+            userId,
+            serverId
+        });
+        // const channelIds = [];
+        // for (const channelId in channels) {
+        //     if (channels[channelId].server_id === serverId) {
+        //         channelIds.push(channelId);
+        //     }
+        // }
+        // dispatch(deleteChannelsInServer(serverId))
 
         // Delete channels data in store and messages
 
