@@ -5,9 +5,7 @@ import { useChannel, userChannel } from '../../context/ChannelContext';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
-
 export let socket;
-
 function shortenServer(name) {
     const splitName = name.split(' ');
     let initals = '';
@@ -16,36 +14,32 @@ function shortenServer(name) {
     });
     return initals;
 }
-
-function ServerBar() {
-    const servers = useSelector(state => state.servers.servers);
+function ServerBar({loaded}) {
+    const user = useSelector(state => state.session.user)
     const channels = useSelector(state => state.channels.channels);
-
+    const servers = useSelector(state => state.servers.servers);
     const [create, toggleCreate] = useState(false)
+    // const [isLoaded, toggleIsLoaded] = useState(false)
     const { setServerId } = useServer();
     const { setChannelId } = useChannel();
     // serverId
-
     const serversArr = [];
     const serverIds = [];
-
     for (const key in servers) {
         serversArr.push(servers[key])
         serverIds.push(key)
     }
-
+    // useEffect(()=> {
+    //    toggleIsLoaded(true)
+    // }, [servers])
     useEffect(() => {
         socket = io()
-
         socket.emit("join", { serverIds })
-
-
         return (() => {
             socket.emit("leave", { serverIds })
             socket.disconnect()
         })
     }, [])
-
     const changeContext = serverId => {
         setServerId(serverId);
         let channelId;
@@ -58,8 +52,7 @@ function ServerBar() {
         }
         setChannelId(channelId);
     }
-
-    return (
+    return loaded && (
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
@@ -82,5 +75,4 @@ function ServerBar() {
         </div>
     )
 }
-
 export default ServerBar
