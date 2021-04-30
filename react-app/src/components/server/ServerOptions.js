@@ -15,9 +15,6 @@ function ServerOptions() {
     const channels = useSelector(state => state.channels.channels);
     const servers = useSelector(state => state.servers.servers);
 
-    console.log(servers)
-    console.log('ServerId', serverId);
-
     const deleteAServer = async () => {
         await dispatch(deleteServer(serverId))
         const channelIds = [];

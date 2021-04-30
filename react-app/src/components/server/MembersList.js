@@ -16,8 +16,6 @@ function MembersList() {
         membersArr.push(members[member])
     }
 
-    console.log('PLEASE GOD, ', membersArr)
-
     useEffect(() => {
         dispatch(getUsersForSidebar(serverId))
     }, [serverId])

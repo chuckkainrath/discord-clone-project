@@ -12,7 +12,6 @@ function ChannelList() {
     const channels = useSelector(state => state.channels.channels)
 
     const channelVals = Object.values(channels)
-    console.log(channelVals)
 
     useEffect(async () => {
         if (serverId > 0) {

@@ -24,15 +24,10 @@ def get_members(server_id):
     userIds = [userserver.user_id for userserver in userservers]
     # 3. Find each user associated with user_id and append it to usernames list
     usernames = {}
-    # print(userIds, '...............................................................')
     for userId in userIds:
-        # print(
-        # userId, "?????????????????????????????????????????????????????????????????????")
         user = User.query.get(userId)
-        # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', user)
         usernames[user.id] = {'name': user.username, 'id': user.id}
     # 4. Return usernames
-    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', usernames)
     return {'members': usernames}
 
 

@@ -6,11 +6,9 @@ const getMembersAction = (members) => ({
 })
 
 export const getUsersForSidebar = (serverId) => async (dispatch) => {
-    console.log("HOOOHAAAAAAAAAAAAAAAAAA")
     const response = await fetch(`/api/servers/${serverId}/channels/members`)
 
     const members = await response.json();
-    console.log('EHEHEHEHEHHEHEHEHE', members)
     if (members.errors) {
         return;
     }
