@@ -11,15 +11,6 @@ import ServerIcon from './ServerIcon';
 
 export let socket;
 
-function shortenServer(name) {
-    const splitName = name.split(' ');
-    let initals = '';
-    splitName.forEach(word => {
-        initals += word[0].toUpperCase();
-    });
-    return initals;
-}
-
 function ServerBar() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -30,7 +21,6 @@ function ServerBar() {
     const [create, toggleCreate] = useState(false)
     const { serverId, setServerId } = useServer();
     const { setChannelId } = useChannel();
-    // serverId
 
     const serversArr = [];
     const serverIds = [];
@@ -80,14 +70,6 @@ function ServerBar() {
                         key={server.id}
                         server={server}
                     />
-
-                    // <div
-                    //     className={styles.server_icon}
-                    //     onClick={() => changeContext(server.id)}
-                    //     key={server.id}
-                    // >
-                    //     {shortenServer(server.name)}
-                    // </div>
                 )
             })}
             <div
