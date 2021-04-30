@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Server, User, Channel, Message, UserServer
+from app.models import db, Server, User, Channel, Message, UserServer, Invite
 from flask_login import current_user, login_required
 
 server_routes = Blueprint('servers', __name__)
@@ -63,16 +63,21 @@ def delete_server(server_id):
     for channel in channels:
         db.session.delete(channel)
     db.session.commit()
-    userservers = UserServer.query.filter(
-        UserServer.server_id == server_id).all()
-    for userserver in userservers:
-        db.session.delete(userserver)
+    # Get all invites in channel
+    invites = Invite.query.filter(Invite.server_id == server_id).all()
+    for invite in invites:
+        db.session.delete(invite)
+    db.session.commit()
+    # Get all userServers
+    userServers = UserServer.query.filter(UserServer.server_id == server_id).all()
+    for userServer in userServers:
+        db.session.delete(userServer)
     db.session.commit()
     db.session.delete(server)
     db.session.commit()
     return {'message': 'Server successfully deleted'}
-
-
+  
+  
 @server_routes.route('/userservers')
 @login_required
 def get_userservers():
@@ -82,6 +87,3 @@ def get_userservers():
     raw_servers = Server.query.filter(Server.id.in_(serverIds)).all()
     servers = [server.to_dict() for server in raw_servers]
     return {'servers': servers}
-
-
-# Need to delete all channels/messages in server as well

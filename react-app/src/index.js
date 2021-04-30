@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
+import './contextMenu.css';
 import App from './App';
 import configureStore from './store';
 import ServerProvider from './context/ServerContext';
