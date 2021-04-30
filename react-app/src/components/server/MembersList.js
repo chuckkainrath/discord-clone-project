@@ -22,7 +22,7 @@ function MembersList() {
         <div>
             <p>Members:</p>
             <div>{membersArr.map(member => (
-                <div>
+                <div key={member.id}>
                     {member.name}
                 </div>
             ))}</div>
