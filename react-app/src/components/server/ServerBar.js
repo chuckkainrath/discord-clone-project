@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
-import { useChannel, userChannel } from '../../context/ChannelContext';
+import { useChannel } from '../../context/ChannelContext';
+import { deleteServerAction } from '../../store/server';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
+import ServerIcon from './ServerIcon';
 
 export let socket;
 
@@ -18,11 +21,14 @@ function shortenServer(name) {
 }
 
 function ServerBar() {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const servers = useSelector(state => state.servers.servers);
+    const userId = useSelector(state => state.session.user.id);
     const channels = useSelector(state => state.channels.channels);
 
     const [create, toggleCreate] = useState(false)
-    const { setServerId } = useServer();
+    const { serverId, setServerId } = useServer();
     const { setChannelId } = useChannel();
     // serverId
 
@@ -36,9 +42,16 @@ function ServerBar() {
 
     useEffect(() => {
         socket = io()
-
         socket.emit("join", { serverIds })
 
+        socket.on('leave_server', (data) => {
+            if (data.user_id === userId) {
+                dispatch(deleteServerAction(data.server_id));
+                if (serverId === data.server_id) {
+                    history.push('/servers');
+                }
+            }
+        });
 
         return (() => {
             socket.emit("leave", { serverIds })
@@ -63,13 +76,18 @@ function ServerBar() {
         <div className={styles.server_icon__container}>
             {serversArr.map(server => {
                 return (
-                    <div
-                        className={styles.server_icon}
-                        onClick={() => changeContext(server.id)}
+                    <ServerIcon
                         key={server.id}
-                    >
-                        {shortenServer(server.name)}
-                    </div>
+                        server={server}
+                    />
+
+                    // <div
+                    //     className={styles.server_icon}
+                    //     onClick={() => changeContext(server.id)}
+                    //     key={server.id}
+                    // >
+                    //     {shortenServer(server.name)}
+                    // </div>
                 )
             })}
             <div
