@@ -1,19 +1,13 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, Channel, Server, UserServer, User
 from flask_login import current_user, login_required
-
-
 channel_routes = Blueprint('channels', __name__)
-
-
 @channel_routes.route('/')
 @login_required
 def get_channels(server_id):
     raw_channels = Channel.query.filter(Channel.server_id == server_id).all()
     channels = [channel.to_dict() for channel in raw_channels]
     return {'channels': channels}
-
-
 @channel_routes.route('/members')
 @login_required
 def get_members(server_id):
@@ -29,8 +23,6 @@ def get_members(server_id):
         usernames[user.id] = {'name': user.username, 'id': user.id}
     # 4. Return usernames
     return {'members': usernames}
-
-
 @ channel_routes.route('/', methods=['POST'])
 @ login_required
 def create_channel(server_id):
@@ -42,8 +34,6 @@ def create_channel(server_id):
     db.session.add(channel)
     db.session.commit()
     return {'channel': channel.to_dict()}
-
-
 @ channel_routes.route('/<int:channel_id>', methods=['DELETE'])
 @ login_required
 def delete_channel(server_id, channel_id):
