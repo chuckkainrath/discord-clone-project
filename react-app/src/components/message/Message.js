@@ -71,22 +71,27 @@ function Message() {
     }
 
     return (user && (
-        <div>
-            <div>
-                {messages.map((message, ind) => (
-                    <MessageItem key={ind} message={message} />
-                    // <div key={ind}>{`${message.user_id}: ${message.body}`}</div>
-                ))}
+        <>
+            <div className={styles.message_sender_container}>
+                <div className={styles.message_sender}>
+                    {messages.map((message, ind) => (
+                        <MessageItem key={ind} message={message} />
+                        // <div key={ind}>{`${message.user_id}: ${message.body}`}</div>
+                    ))}
+                </div>
             </div>
-            <form onSubmit={sendChat}>
-                <input
-                    value={chatInput}
-                    onChange={updateChatInput}
-                />
-                <button type="submit" disabled={chatValid}>Send</button>
-            </form>
-        </div>)
-    )
+            < div >
+                <form onSubmit={sendChat} className={styles.send_chat_form}>
+                    <input
+                        value={chatInput}
+                        onChange={updateChatInput}
+                        className={styles.send_chat}
+                    />
+                    <button className={styles.send_chat__button} type="submit" disabled={chatValid}>Send</button>
+                </form>
+            </div >
+        </>
+    ))
 }
 
 export default Message
