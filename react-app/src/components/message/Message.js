@@ -10,6 +10,7 @@ import {
     editMessageAction
 } from '../../store/messages';
 import MessageItem from './MessageItem';
+import styles from './Message.module.css';
 
 function Message() {
     const dispatch = useDispatch();
