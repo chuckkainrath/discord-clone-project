@@ -1,3 +1,11 @@
+.server_icon__container_invisible{
+    position: relative;
+    left: 0;
+    height: 100vh;
+    width: 30em;
+    /* border: 1px solid yellow; */
+}
+
 .server_icon__container {
     display: flex;
     flex-direction: column;

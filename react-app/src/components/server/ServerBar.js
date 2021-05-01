@@ -82,15 +82,17 @@ function ServerBar({ loaded }) {
         setChannelId(channelId);
     }
     return loaded && (
-        <div className={styles.server_icon__container}>
-            {serversArr.map(server => {
-                return (
-                    <ServerIcon
-                        key={server.id}
-                        server={server}
-                    />
-                )
-            })}
+        <div className={styles.server_icon__container_invisible}>
+            <div className={styles.server_icon__container}>
+                {serversArr.map(server => {
+                    return (
+                        <ServerIcon
+                            key={server.id}
+                            server={server}
+                        />
+                    )
+                })}
+            </div>
             <div
                 className={styles.server_create}
                 onClick={() => toggleCreate(!create)}
