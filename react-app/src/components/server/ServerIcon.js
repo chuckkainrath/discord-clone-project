@@ -4,6 +4,7 @@ import { socket } from './ServerBar';
 import { useServer } from '../../context/ServerContext'
 import { useChannel } from '../../context/ChannelContext';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import styles from './ServerIcon.module.css'
 
 function shortenServer(name) {
     const splitName = name.split(' ');
@@ -14,7 +15,7 @@ function shortenServer(name) {
     return initals;
 }
 
-function ServerIcon({server}) {
+function ServerIcon({ server }) {
     const { serverId, setServerId } = useServer();
     const { setChannelId } = useChannel();
     const userId = useSelector(state => state.session.user.id)
@@ -35,15 +36,18 @@ function ServerIcon({server}) {
 
     const leaveServer = () => {
         // emit leave server
-        console.log('LEAVING SERVER: ', server.id, server.name)
-        socket.emit('leave_server', {
-            serverId: server.id,
-            userId
-        });
+        if (server.owner_id !== userId) {
+            socket.emit('leave_server', {
+                serverId: server.id,
+                userId
+            });
+        } else {
+            // Alert user somehow
+        }
     }
 
     return (
-        <div>
+        <div className={styles.server_icon}>
             <ContextMenuTrigger id={server.id.toString()}>
                 <div onClick={() => changeContext(server.id)}>
                     {shortenServer(server.name)}

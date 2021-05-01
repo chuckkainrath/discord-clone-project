@@ -1,0 +1,15 @@
+.server_options__container{
+    /* display: none; */
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    position: absolute;
+    margin: .2em;
+    transition: 1s ease-in-out;
+    width: 10em;
+    height: 10em;
+}
+
+.selects {
+    cursor: pointer;
+}
