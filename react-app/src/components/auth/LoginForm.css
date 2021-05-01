@@ -84,6 +84,7 @@
     color: #dfe0e2;
     background-color: #17252a;
     font-family: 'Righteous', cursive;
+    cursor: pointer;
 }
 
 .demo-button {
@@ -104,4 +105,5 @@
     color: #dfe0e2;
     background-color: #17252a;
     font-family: 'Righteous', cursive;
+    cursor: pointer;
 }
