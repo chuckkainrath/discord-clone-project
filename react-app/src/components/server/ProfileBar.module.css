@@ -1,0 +1,24 @@
+.profile_bar_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #253634;
+    color: white;
+    height: 3em;
+}
+
+.show_invites_container__invis {
+    position: absolute;
+    /* border: 1px solid yellow; */
+}
+
+.show_invites_container{
+    position: absolute;
+    top: -6em;
+    left: 3.5em;
+    width: 5em;
+    height: 5em;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
