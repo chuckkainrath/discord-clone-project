@@ -42,34 +42,36 @@ function ServerCreate({ toggleCreate }) {
     }, [name, desc])
 
     return (
-        <div className={styles.server_create_container}>
-            <form onSubmit={handleSubmit} className={styles.server_create_form}>
-                <div>
-                    <label>Name: </label>
-                    <input
-                        value={name}
-                        onChange={e => nameChange(e.target.value)}
-                        type='text'
-                        maxLength='50'
-                    />
-                </div>
-                <div>
-                    <label>Description: </label>
-                    <input
-                        value={desc}
-                        onChange={e => descChange(e.target.value)}
-                        type='text'
-                        maxLength='255'
-                    />
-                </div>
-                <div>
-                    <button
-                        type='submit'
-                        // onClick={e => createServer(e)}
-                        disabled={valid}
-                    >Create Server</button>
-                </div>
-            </form>
+        <div className={styles.server_create_container__invis}>
+            <div className={styles.server_create_container}>
+                <form onSubmit={handleSubmit} className={styles.server_create_form}>
+                    <div>
+                        <label>Name: </label>
+                        <input
+                            value={name}
+                            onChange={e => nameChange(e.target.value)}
+                            type='text'
+                            maxLength='50'
+                        />
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <input
+                            value={desc}
+                            onChange={e => descChange(e.target.value)}
+                            type='text'
+                            maxLength='255'
+                        />
+                    </div>
+                    <div>
+                        <button
+                            type='submit'
+                            // onClick={e => createServer(e)}
+                            disabled={valid}
+                        >Create Server</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
