@@ -75,7 +75,7 @@ const LoginForm = () => {
             <button  className="li-button" type="submit">Login</button>
             <button className="demo-button" type="submit" onClick={DemoLogin}>Demo User</button>
           </div>
-          <div className='field-container'> Dont have an account? <NavLink className ='li-button' to='/sign-up'>Sign Up Here</NavLink></div>
+          <div className='field-container nav-text'> Dont have an account? <NavLink className ='li-button' to='/sign-up'>Sign Up Here</NavLink></div>
         </form>
      </div>
    </div>

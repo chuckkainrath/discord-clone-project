@@ -89,7 +89,7 @@ const SignUpForm = () => {
           <div className='field-container'>
             <button className='signup-button' type="submit">Sign Up</button>
           </div>
-          <div className='field-container'> Already have an account? <NavLink className ='signup-button' to='/login'>Login Here</NavLink></div>
+          <div className='field-container nav-text'> Already have an account? <NavLink className ='signup-button' to='/login'>Login Here</NavLink></div>
         </form>
       </div>
     </div>
