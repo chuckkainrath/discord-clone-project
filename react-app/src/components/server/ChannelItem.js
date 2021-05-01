@@ -4,6 +4,7 @@ import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../server/ServerBar';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
+import styles from './ChannelItem.module.css'
 
 function ChannelItem({ channel }) {
     const { setChannelId } = useChannel();
@@ -48,9 +49,10 @@ function ChannelItem({ channel }) {
     }
 
     return (
-        <div>
+        <div className={styles.channel_name_container}>
             <ContextMenuTrigger id={channel.id.toString()}>
                 <div
+                    className={styles.channel_name}
                     onClick={() => setChannelId(channel.id)}
                 >
                     {channel.name}
