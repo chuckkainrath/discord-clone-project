@@ -11,6 +11,7 @@ import {
 } from '../../store/channels';
 import { deleteMessagesInChannel } from '../../store/messages';
 import ChannelItem from './ChannelItem';
+import styles from './ChannelList.module.css'
 
 function filterChannels(channels, serverId) {
     return channels.filter(channel => {
@@ -68,7 +69,7 @@ function ChannelList() {
     return (
         <>
             {!serverId ? <div>No Server</div> :
-                <div>
+                <div className={styles.channels_container}>
                     {channelVals && channelVals.map(channel => {
                         return (
                             <ChannelItem

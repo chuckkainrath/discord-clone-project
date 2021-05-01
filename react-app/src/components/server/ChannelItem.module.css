@@ -1,0 +1,14 @@
+.channel_name_container {
+    color: white;
+    margin-top: .4em;
+    padding: .2em;
+    cursor: pointer;
+}
+
+.channel_name_container:hover {
+    background-color: #273836;
+}
+
+.channel_name::before {
+    content: "#  "
+}

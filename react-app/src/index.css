@@ -48,11 +48,14 @@ table {
 
 body {
     background-color: #32373b;
+	/* background-color: royalblue; */
 }
 
 .server_top_grid{
     display: grid;
     grid-template-columns: 85px 1fr;
     background-color: #2C423F;
+	height: 100vh;
+	/* width: 100vh; */
 }
 
