@@ -53,6 +53,6 @@ body {
 .server_top_grid{
     display: grid;
     grid-template-columns: 85px 1fr;
-    background-color: aqua;
+    background-color: #2C423F;
 }
 
