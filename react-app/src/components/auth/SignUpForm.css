@@ -91,3 +91,8 @@
     font-family: 'Righteous', cursive;
     cursor: pointer;
 }
+
+.nav-text{
+  margin-top: 55px;
+  font-size: 22px;
+}
