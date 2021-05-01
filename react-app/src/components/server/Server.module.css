@@ -1,11 +1,32 @@
 .server_container {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 5fr 1fr;
     height: 100%;
 }
 
 .server_channels{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: brown;
+}
+
+.server_channel_options__top{
+    /* border: 1px solid green; */
+    height: 10em;
+}
+
+.server_options {
+    /* border: 1px solid rgb(255, 255, 0); */
+    height: 1.5em;
+    padding: .25em;
+    padding-top: .5em;
+    /* display: flex;
+    align-items: center; */
+    cursor: pointer;
+    font-size: 1.25em;
+    background-color: #253634;
+    color: white;
 }
 
 .server_messages {

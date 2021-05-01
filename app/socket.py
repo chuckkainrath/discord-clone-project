@@ -1,6 +1,6 @@
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 import os
-from app.models import db, Message, Channel, UserServer
+from app.models import db, Message, Channel, UserServer, Server, Invite
 import json
 from json import JSONEncoder
 import datetime
@@ -51,6 +51,42 @@ def handle_chat(data):
     message_json = json.dumps(message_dict, cls=DateTimeEncoder)
     emit("chat", message_json, to=str(data['serverId']))  # broadcast=True,
     # emit("chat", message_json)
+
+
+# data must have userId, serverId
+@socketio.on('delete_server')
+def handle_delete_server(data):
+    user_id = data['userId']
+    server_id = data['serverId']
+    server = Server.query.get(server_id)
+    if server.owner_id == user_id:
+        # Get all channels/messages
+        channels = Channel.query.filter(Channel.server_id == server_id).all()
+        channelIds = [channel.id for channel in channels]
+        messages = Message.query.filter(Message.channel_id.in_(channelIds)).all()
+        for message in messages:
+            db.session.delete(message)
+        db.session.commit()
+        for channel in channels:
+            db.session.delete(channel)
+        db.session.commit()
+        # Get all invites in channel
+        invites = Invite.query.filter(Invite.server_id == server_id).all()
+        for invite in invites:
+            db.session.delete(invite)
+        db.session.commit()
+        # Get all userServers
+        userServers = UserServer.query.filter(UserServer.server_id == server_id).all()
+        for userServer in userServers:
+            db.session.delete(userServer)
+        db.session.commit()
+        db.session.delete(server)
+        db.session.commit()
+
+        returnData = {
+            'server_id': server_id
+        }
+        emit("delete_server", returnData, to=str(server_id))
 
 
 @socketio.on('delete_channel')
