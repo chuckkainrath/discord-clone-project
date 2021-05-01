@@ -1,7 +1,7 @@
 .server_icon__container_invisible{
     position: relative;
     left: 0;
-    height: 100vh;
+    height: 0em;
     width: 30em;
     /* border: 1px solid yellow; */
 }
@@ -12,7 +12,7 @@
     flex-wrap: nowrap;
     overflow-y: auto;
     overflow-x: hidden;
-    
+    width: 85px;
 }
 
 .server_icon, .server_create {
