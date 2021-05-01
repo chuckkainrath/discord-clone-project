@@ -4,6 +4,7 @@ import { useChannel } from '../../context/ChannelContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMessages } from '../../store/messages'
 import { useServer } from '../../context/ServerContext';
+import styles from './MessageList.module.css'
 
 function MessageList() {
     const dispatch = useDispatch()
@@ -23,7 +24,9 @@ function MessageList() {
 
     return (
         <>
-            <div>{channel && `Channel: ${channel.name}, ${channel.id}`}</div>
+            <div
+                className={styles.channel_name}
+            >{channel && `Channel: ${channel.name}, ${channel.id}`}</div>
             <Message />
         </>
     )
