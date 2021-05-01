@@ -4,6 +4,7 @@ import { getServers } from '../../store/server'
 import { getInvites } from '../../store/invites'
 import LogoutButton from '../auth/LogoutButton'
 import InviteItem from './InviteItem';
+import styles from './ProfileBar.module.css'
 
 function ProfileBar() {
   const dispatch = useDispatch()
@@ -26,7 +27,7 @@ function ProfileBar() {
   }, [showInvites])
 
   return (
-    <div>
+    <div className={styles.profile_bar_container}>
       <div className="user-displayname">
         {user && user.username}
       </div>
@@ -34,16 +35,18 @@ function ProfileBar() {
         <i class="fas fa-bell"></i>
       </div>
       {showInvites &&
-        <div>
-          {invites &&
-            <ul>
-              {invites.map(invite => {
-                // return <li key={invite.id}>Join {invite.server_name}</li>
-                return <InviteItem key={invite.id} invite={invite} />
-              })}
-            </ul>
-          }
-          {invites.length === 0 && <div>No Invites</div>}
+        <div className={styles.show_invites_container__invis}>
+          <div className={styles.show_invites_container}>
+            {invites &&
+              <ul>
+                {invites.map(invite => {
+                  // return <li key={invite.id}>Join {invite.server_name}</li>
+                  return <InviteItem key={invite.id} invite={invite} />
+                })}
+              </ul>
+            }
+            {invites.length === 0 && <div>No Invites</div>}
+          </div>
         </div>
       }
       <LogoutButton />

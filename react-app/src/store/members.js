@@ -1,9 +1,15 @@
 const GET_ALL_MEMBERS = "message/GET_ALL_MEMBERS"
 const REMOVE_MEMBERS = "message/REMOVE_MEMBERS"
+const REMOVE_MEMBER = "message/REMOVE_MEMBER"
 
 const getMembersAction = (members) => ({
     type: GET_ALL_MEMBERS,
     payload: members
+})
+
+export const removeMemberAction = (memberId) => ({
+    type: REMOVE_MEMBER,
+    memberId
 })
 
 export const removeMembers = () => ({
@@ -39,6 +45,10 @@ export default function reducer(state = initialState, action) {
             return newState
         case REMOVE_MEMBERS:
             newState = { members: {} }
+            return newState
+        case REMOVE_MEMBER:
+            newState = { members: { ...state.members } }
+            delete newState.members[action.memberId]
             return newState
         default:
             return state;

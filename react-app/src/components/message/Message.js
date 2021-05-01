@@ -4,9 +4,11 @@ import { io } from 'socket.io-client';
 import { useServer } from '../../context/ServerContext'
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
-import { createMessageAction,
-         deleteMessageAction,
-         editMessageAction } from '../../store/messages';
+import {
+    createMessageAction,
+    deleteMessageAction,
+    editMessageAction
+} from '../../store/messages';
 import MessageItem from './MessageItem';
 
 function Message() {
@@ -68,7 +70,7 @@ function Message() {
     }
 
     return (user && (
-        <>
+        <div>
             <div>
                 {messages.map((message, ind) => (
                     <MessageItem key={ind} message={message} />
@@ -82,7 +84,7 @@ function Message() {
                 />
                 <button type="submit" disabled={chatValid}>Send</button>
             </form>
-        </>)
+        </div>)
     )
 }
 
