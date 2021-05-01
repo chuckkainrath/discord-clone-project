@@ -13,7 +13,7 @@ import ServerIcon from './ServerIcon';
 
 export let socket;
 
-function ServerBar({loaded}) {
+function ServerBar({ loaded }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const servers = useSelector(state => state.servers.servers);

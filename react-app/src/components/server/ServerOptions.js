@@ -7,6 +7,7 @@ import { deleteServer, getServers } from '../../store/server';
 import { createChannel, deleteChannelsInServer } from '../../store/channels';
 import ChannelCreate from './channel/ChannelCreate';
 import { Redirect } from 'react-router';
+import styles from './ServerOptions.module.css'
 
 function ServerOptions() {
     const dispatch = useDispatch();
@@ -54,20 +55,23 @@ function ServerOptions() {
                 </div>
             </div> : null}
             {options &&
-                <div>
+                <div className={styles.server_options__container}>
                     <div
+                        className={styles.selects}
                         onClick={() => toggleChannelCreate(!channelCreate)}
                     >
                         +Channel
                     </div>
                     {channelCreate && <ChannelCreate toggleChannelCreate={toggleChannelCreate} />}
                     <div
+                        className={styles.selects}
                         onClick={() => toggleInviteCreate(!inviteCreate)}
                     >
                         +User
                     </div>
                     {inviteCreate && <InviteCreate toggleInviteCreate={toggleInviteCreate} />}
                     <div
+                        className={styles.selects}
                         onClick={deleteAServer}
                     >
                         -Server
