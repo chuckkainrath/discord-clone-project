@@ -6,10 +6,10 @@ import ProfileBar from './ProfileBar'
 import MessageList from './MessageList'
 import MembersList from './MembersList'
 import ServerOptions from './ServerOptions'
-import styles from './Server.module.css'
 import { useServer } from '../../context/ServerContext'
 import { useSelector } from 'react-redux'
 import { useChannel } from '../../context/ChannelContext'
+import styles from './Server.module.css'
 
 function Server() {
     const { serverId, setServerId } = useServer();
@@ -60,8 +60,12 @@ function Server() {
         <div>
             {serverId == 0 ? <div>Please make or join a server.</div> : <div className={styles.server_container}>
                 <div className={styles.server_channels}>
-                    <ServerOptions />
-                    <ChannelList />
+                    <div className={styles.server_channel_options__top}>
+                        <div className={styles.server_options}>
+                            <ServerOptions />
+                        </div>
+                        <ChannelList />
+                    </div>
                     <ProfileBar />
                 </div>
                 <div className={styles.server_messages}>

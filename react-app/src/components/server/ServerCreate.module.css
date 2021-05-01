@@ -1,0 +1,22 @@
+.server_create_container__invis{
+    position: relative;
+    left: 0;
+    height: 0em;
+    width: 30em;
+    /* border: 1px solid yellow; */
+}
+
+.server_create_container {
+    width: 10em;
+    height: 5em;
+}
+
+.server_create_form{
+    position: relative;
+    left: 4.0em;
+    top: -3.5em;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 2;
+    width: 12em;
+}
