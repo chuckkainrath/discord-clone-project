@@ -12,7 +12,7 @@ function shortenServer(name) {
     splitName.forEach(word => {
         initals += word[0].toUpperCase();
     });
-    return initals;
+    return initals.substring(0,2);
 }
 
 function ServerIcon({ server }) {
@@ -61,6 +61,9 @@ function ServerIcon({ server }) {
                     Leave Server
                 </MenuItem>
             </ContextMenu>
+            <div className={styles.server_name}>
+                {server.name}
+            </div>
         </div>
     )
 }
