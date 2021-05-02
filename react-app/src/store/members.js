@@ -36,7 +36,7 @@ const initialState = { members: {} }
 export default function reducer(state = initialState, action) {
     let newState
     switch (action.type) {
-        case GET_ALL_MEMBERS: // MIGHT BE COMPLETELY MESSED UP
+        case GET_ALL_MEMBERS:
             newState = { members: { ...state.members } }
             action.payload.forEach(member => {
                 newState.members[member.id] = member

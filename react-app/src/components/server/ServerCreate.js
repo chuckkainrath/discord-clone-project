@@ -78,7 +78,6 @@ function ServerCreate({ toggleCreate }) {
                         <button
                             className={styles.server_submit}
                             type='submit'
-                            // onClick={e => createServer(e)}
                             disabled={valid}
                         >Create Server</button>
                     </div>

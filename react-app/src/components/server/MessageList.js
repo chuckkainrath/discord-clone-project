@@ -12,8 +12,6 @@ function MessageList() {
     const { channelId } = useChannel();
     const { serverId } = useParams();
     const [channel, setChannel] = useState(channels[channelId])
-    console.log('CHANNELID', channelId);
-    console.log('CHANNEL', channel);
     useEffect(() => {
         (async () => {
             if (channelId) {
