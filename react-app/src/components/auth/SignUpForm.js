@@ -37,7 +37,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/servers" />;
+    return <Redirect to="/servers/0" />;
   }
 
   return (
