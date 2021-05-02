@@ -8,6 +8,7 @@ function LandingPage() {
     <div className="landing">
       <div className="landing-home">
         <div className="landing-content">
+          <h1 className="landing-title">Racket</h1>
           <img className="landing-background" src={landing} alt='landing' />
           <div className="text-container">
             <h1 className="landing-textheader">Your place to talk</h1>
