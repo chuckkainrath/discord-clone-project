@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { processInvite } from '../../store/invites';
 import { socket } from './ServerBar';
 
-function InviteItem({ invite }) {
+function InviteItem({ invite, toggleShowInvites }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const processInv = async (acceptInv) => {
         const servId = invite.server_id.toString()
+        toggleShowInvites(false);
         if (acceptInv) { // Join via sockets
             socket.emit('join_server', {
                 userId: user.id,
