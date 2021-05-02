@@ -1,7 +1,6 @@
 import { createChannelAction } from './channels'
 
 const GET_ALL_SERVERS = "server/GET_ALL_SERVERS"
-// const GET_SERVER = "server/GET_SERVER"
 const CREATE_SERVER = "server/CREATE_SERVER"
 const DELETE_SERVER = "server/DELETE_SERVER"
 const ADD_SERVER = "server/ADD_SERVER"

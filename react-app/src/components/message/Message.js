@@ -76,7 +76,6 @@ function Message() {
                 <div className={styles.message_sender}>
                     {messages.map((message, ind) => (
                         <MessageItem key={ind} message={message} />
-                        // <div key={ind}>{`${message.user_id}: ${message.body}`}</div>
                     ))}
                 </div>
             </div>

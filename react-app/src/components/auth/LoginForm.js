@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import  { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import { getServers } from '../../store/server'
@@ -71,7 +71,6 @@ const LoginForm = () => {
             <input className="email-input"
               name="email"
               type="text"
-              // placeholder="Email"
               value={email}
               onChange={updateEmail}
             />
@@ -81,16 +80,15 @@ const LoginForm = () => {
             <input className="pw-input"
               name="password"
               type="password"
-              // placeholder="Password"
               value={password}
               onChange={updatePassword}
             />
-            <button  className="li-button" type="submit">Login</button>
+            <button className="li-button" type="submit">Login</button>
             <button className="demo-button" type="submit" onClick={DemoLogin}>Demo User</button>
           </div>
         </form>
-     </div>
-   </div>
+      </div>
+    </div>
   );
 };
 
