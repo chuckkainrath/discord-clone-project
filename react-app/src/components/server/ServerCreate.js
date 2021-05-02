@@ -36,7 +36,6 @@ function ServerCreate({ toggleCreate }) {
             toggleCreate(false)
             history.push(`/servers/${serverId}`);
         }
-
     }
 
     useEffect(() => {
