@@ -15,7 +15,7 @@ import styles from './ChannelList.module.css'
 
 function filterChannels(channels, serverId) {
     return channels.filter(channel => {
-        return channel.server_id == serverId
+        return channel.server_id === Number(serverId)
     })
 }
 
@@ -28,18 +28,21 @@ function ChannelList() {
     const filteredChannels = filterChannels(Object.values(channels), serverId)
     const [channelVals, setChannelVals] = useState(filteredChannels)
 
-    useEffect(async () => {
-        const servId = parseInt(serverId);
-        if (servId > 0) {
-            const servChannels = await dispatch(getChannels(servId));
-            for (let i = 0; i < servChannels.length; i++) {
-                if (servChannels[i].name === 'General') {
-                    setChannelId(servChannels[i].id);
-                    break;
+    useEffect(() => {
+        async function fetchData() {
+            const servId = parseInt(serverId);
+            if (servId > 0) {
+                const servChannels = await dispatch(getChannels(servId));
+                for (let i = 0; i < servChannels.length; i++) {
+                    if (servChannels[i].name === 'General') {
+                        setChannelId(servChannels[i].id);
+                        break;
+                    }
                 }
             }
         }
-    }, [serverId])
+        fetchData()
+    }, [serverId, setChannelId, dispatch])
 
     useEffect(() => {
         const filteredChannels = filterChannels(Object.values(channels), serverId)
@@ -58,7 +61,7 @@ function ChannelList() {
         socket.on("edit_channel", (channel) => {
             dispatch(editChannelAction(channel.channel_id, channel.name));
         })
-    }, [channels, serverId])
+    }, [channels, setChannelId, serverId, dispatch])
 
     const changeChannelContext = (rmChanId) => {
         if (channelId == rmChanId) {

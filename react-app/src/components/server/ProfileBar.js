@@ -21,7 +21,7 @@ function ProfileBar() {
   useEffect(() => {
     dispatch(getServers())
     dispatch(getInvites())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
   }, [showInvites])

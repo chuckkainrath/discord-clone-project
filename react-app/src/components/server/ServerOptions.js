@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import InviteCreate from './InviteCreate';
 import { socket } from './ServerBar';
 import ChannelCreate from './channel/ChannelCreate';

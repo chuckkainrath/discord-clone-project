@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { processInvite } from '../../store/invites';
-import { addServerAction } from '../../store/server';
 import { socket } from './ServerBar';
 
-function InviteItem({invite}) {
+function InviteItem({ invite }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const processInv = async (acceptInv) => {

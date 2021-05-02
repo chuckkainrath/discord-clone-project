@@ -42,7 +42,7 @@ const SignUpForm = () => {
 
   return (
     <div className='signup-container'>
-      <img className="background-image" src={background} />
+      <img className="background-image" src={background} alt='background' />
       <div className="form-container">
         <form classname='signup-form' onSubmit={onSignUp}>
           <div className='field-container'>
@@ -89,7 +89,7 @@ const SignUpForm = () => {
           <div className='field-container'>
             <button className='signup-button' type="submit">Sign Up</button>
           </div>
-          <div className='field-container nav-text'> Already have an account? <NavLink className ='signup-button' to='/login'>Login Here</NavLink></div>
+          <div className='field-container nav-text'> Already have an account? <NavLink className='signup-button' to='/login'>Login Here</NavLink></div>
         </form>
       </div>
     </div>

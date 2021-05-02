@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom';
+import React from 'react'
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { socket } from './ServerBar';
-import { useChannel } from '../../context/ChannelContext';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import styles from './ServerIcon.module.css'
 
@@ -12,7 +11,7 @@ function shortenServer(name) {
     splitName.forEach(word => {
         initals += word[0].toUpperCase();
     });
-    return initals.substring(0,2);
+    return initals.substring(0, 2);
 }
 
 function ServerIcon({ server }) {
