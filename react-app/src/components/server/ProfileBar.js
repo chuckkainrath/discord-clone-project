@@ -31,16 +31,27 @@ function ProfileBar() {
       <div className="user-displayname">
         {user && user.username}
       </div>
-      <div onClick={() => toggleShowInvites(!showInvites)}>
-        <i className="fas fa-bell"></i>
-      </div>
+      {invites.length > 0 &&
+        <div onClick={() => toggleShowInvites(!showInvites)}>
+            <span className={styles.invites}>
+              <i className="fas fa-bell"></i>
+            </span>
+        </div>
+      }
+      {invites.length === 0 &&
+        <div>
+          <span>
+            <i className="fas fa-bell"></i>
+          </span>
+        </div>
+      }
       {showInvites &&
         <div className={styles.show_invites_container__invis}>
           <div className={styles.show_invites_container}>
             {invites &&
               <ul>
                 {invites.map(invite => {
-                  return <InviteItem key={invite.id} invite={invite} />
+                  return <InviteItem key={invite.id} invite={invite} toggleShowInvites={toggleShowInvites} />
                 })}
               </ul>
             }
