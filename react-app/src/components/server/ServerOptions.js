@@ -33,8 +33,18 @@ function ServerOptions() {
             {servers[serverId] ? <div
                 onClick={() => toggleOptions(!options)}
             >
-                <div>
+                <div className={styles.server_container}>
                     {serverName}
+                    {!options &&
+                        <span className={styles.server_cog_closed}>
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    }
+                    {options &&
+                        <span className={styles.server_cog_open}>
+                            <i class="far fa-times"></i>
+                        </span>
+                    }
                 </div>
             </div> : null}
             {options &&
