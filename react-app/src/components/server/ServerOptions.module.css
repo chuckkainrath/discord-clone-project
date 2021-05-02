@@ -13,3 +13,8 @@
 .selects {
     cursor: pointer;
 }
+
+.server_name{
+    font-family: 'Noto Serif', serif;
+    font-weight: 600;
+}
