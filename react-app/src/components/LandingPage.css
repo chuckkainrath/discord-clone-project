@@ -5,6 +5,10 @@
 }
 
 .landing-title {
+    text-align: center;
+    border-style: solid;
+    border-radius: 0ch;
+    border-color: white;
     top: 8px;
     left: 16px;
     font-size: 56px;
