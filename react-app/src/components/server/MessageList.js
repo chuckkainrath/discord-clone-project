@@ -20,7 +20,6 @@ function MessageList() {
             }
         })();
     }, [channelId, channels, dispatch, serverId])
-
     return (
         <>
             <div
