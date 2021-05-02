@@ -1,8 +1,8 @@
-.server_icon__container_invisible{
+.server_icon__container_invisible {
     position: relative;
     left: 0;
     height: 0em;
-    width: 30em;
+    width: fit-content;
     /* border: 1px solid yellow; */
 }
 
@@ -12,7 +12,8 @@
     flex-wrap: nowrap;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 85px;
+    width: 60px;
+    margin-left: 10px;
 }
 
 .server_icon, .server_create {
@@ -30,6 +31,7 @@
 .server_create{
     font-weight: bold;
     cursor: pointer;
+    margin-left: 15px;
 }
 
 .server__above_context {
