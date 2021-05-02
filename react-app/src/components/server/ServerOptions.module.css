@@ -4,7 +4,7 @@
     border: 1px solid black;
     color: black;
     position: absolute;
-    margin: .2em;
+    margin-top: 5px;
     transition: 1s ease-in-out;
     width: 10em;
     height: 10em;
@@ -14,7 +14,18 @@
     cursor: pointer;
 }
 
-.server_name{
+.server_container {
+    position: relative;
     font-family: 'Noto Serif', serif;
     font-weight: 600;
+}
+
+.server_cog_closed {
+    position: absolute;
+    right: 10px;
+}
+
+.server_cog_open {
+    position: absolute;
+    right: 12px;
 }
