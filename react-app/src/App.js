@@ -3,14 +3,10 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage"
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
 import Server from "./components/server/Server"
 import ServerBar from "./components/server/ServerBar"
-// import { authenticate } from "./services/auth";
 import { authenticate } from "./store/session";
 import { getServers } from "./store/server";
 
@@ -35,7 +31,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar /> */}
       <Switch>
         <Route path="/" exact={true}>
           <LandingPage />
@@ -46,18 +41,12 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <Route path="/servers" exact={true}>
+        <Route path="/servers/:serverId" exact={true}>
           <div className='server_top_grid'>
             <ServerBar loaded={loaded} />
             <Server />
           </div>
         </Route>
-        <ProtectedRoute path="/users" exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} >
-          <User />
-        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

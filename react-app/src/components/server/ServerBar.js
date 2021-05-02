@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { useServer } from '../../context/ServerContext'
-import { useChannel } from '../../context/ChannelContext';
 import { deleteServerAction } from '../../store/server';
 import { deleteChannelsInServer } from '../../store/channels';
 import { removeMemberAction } from '../../store/members';
@@ -18,12 +16,9 @@ function ServerBar({ loaded }) {
     const history = useHistory();
     const servers = useSelector(state => state.servers.servers);
     const userId = useSelector(state => state.session.user.id);
-    const channels = useSelector(state => state.channels.channels);
     const [create, toggleCreate] = useState(false)
 
-    const { serverId, setServerId } = useServer();
-    const { setChannelId } = useChannel();
-
+    const { serverId } = useParams();
     const serversArr = [];
     const serverIds = [];
 
@@ -32,55 +27,49 @@ function ServerBar({ loaded }) {
         serverIds.push(key)
     }
 
-
     useEffect(() => {
         socket = io()
         socket.emit("join", { serverIds })
-
-        socket.on('delete_server', (data) => {
-            dispatch(deleteServerAction(data.server_id))
-            const channelIds = [];
-            for (const channelId in channels) {
-                if (channels[channelId].server_id === serverId) {
-                    channelIds.push(channelId);
-                }
-            }
-            dispatch(deleteChannelsInServer(data.server_id))
-            if (serverId === data.server_id) {
-                history.push('/servers')
-            }
-        });
-
-        socket.on('leave_server', (data) => {
-            if (data.user_id === userId) {
-                console.log('DATA.USER_ID', data.user_id);
-                dispatch(deleteServerAction(data.server_id));
-                if (serverId === data.server_id) {
-                    history.push('/servers');
-                }
-            } else {
-                dispatch(removeMemberAction(data.user_id))
-            }
-        });
 
         return (() => {
             socket.emit("leave", { serverIds })
             socket.disconnect()
         })
-    }, [])
+    }, []);
 
-    const changeContext = serverId => {
-        setServerId(serverId);
-        let channelId;
-        for (let channelKey in channels) {
-            let currChannel = channels[channelKey]
-            if (currChannel.server_id === serverId && currChannel.name === 'General') {
-                channelId = channelKey;
-                break;
+    useEffect(() => {
+        socket.on('delete_server', (data) => {
+            dispatch(deleteServerAction(data.server_id))
+            dispatch(deleteChannelsInServer(data.server_id))
+            redirectToServer(data.server_id);
+        });
+
+        socket.on('leave_server', (data) => {
+            if (data.user_id === userId) {
+                dispatch(deleteServerAction(data.server_id));
+                redirectToServer(data.server_id)
+            } else {
+                dispatch(removeMemberAction(data.user_id))
+            }
+        });
+    }, [servers])
+
+    const redirectToServer = (rmServId) => {
+        if (serverId == rmServId) {
+            const servKeys = Object.keys(servers);
+            let newServ = servKeys[0];
+            if (newServ && newServ !== rmServId) {
+                history.push(`/servers/${newServ}`)
+            }
+            newServ = servKeys[1];
+            if (newServ) {
+                history.push(`/servers/${newServ}`)
+            } else {
+                history.push('/servers/0')
             }
         }
-        setChannelId(channelId);
     }
+
     return loaded && (
         <div className={styles.server_icon__container_invisible}>
             <div className={styles.server_icon__container}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useServer } from '../../context/ServerContext'
+import { useParams } from 'react-router-dom'
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
@@ -13,7 +13,7 @@ function MessageItem({ message }) {
     const [displayEdit, setDisplayEdit] = useState(false);
     const [messageBody, setMessageBody] = useState(message.body);
     const [validMessage, setValidMessage] = useState(true);
-    const { serverId } = useServer();
+    const { serverId } = useParams();
 
     const usersMessage = message.user_id === userId;
 

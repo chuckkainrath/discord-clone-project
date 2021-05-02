@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { socket } from './ServerBar';
-import { useServer } from '../../context/ServerContext'
 import { useChannel } from '../../context/ChannelContext';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import styles from './ServerIcon.module.css'
@@ -16,22 +16,11 @@ function shortenServer(name) {
 }
 
 function ServerIcon({ server }) {
-    const { serverId, setServerId } = useServer();
-    const { setChannelId } = useChannel();
+    const history = useHistory();
     const userId = useSelector(state => state.session.user.id)
-    const channels = useSelector(state => state.channels.channels);
 
-    const changeContext = serverId => {
-        setServerId(serverId);
-        let channelId;
-        for (let channelKey in channels) {
-            let currChannel = channels[channelKey]
-            if (currChannel.server_id === serverId && currChannel.name === 'General') {
-                channelId = channelKey;
-                break;
-            }
-        }
-        setChannelId(channelId);
+    const changeServer = (serverId) => {
+        history.push(`/servers/${serverId}`);
     }
 
     const leaveServer = () => {
@@ -49,7 +38,7 @@ function ServerIcon({ server }) {
     return (
         <div className={styles.server_icon}>
             <ContextMenuTrigger id={server.id.toString()}>
-                <div onClick={() => changeContext(server.id)}>
+                <div onClick={() => changeServer(server.id)}>
                     {shortenServer(server.name)}
                 </div>
             </ContextMenuTrigger>

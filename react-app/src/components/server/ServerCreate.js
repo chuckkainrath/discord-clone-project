@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import { createServer } from '../../store/server'
+import { socket } from './ServerBar'
 import styles from './ServerCreate.module.css'
 
 function ServerCreate({ toggleCreate }) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
@@ -24,12 +27,14 @@ function ServerCreate({ toggleCreate }) {
         if (trimmedStr.length === 0) {
             toggleValid(true);
         } else {
-            await dispatch(createServer(trimmedStr, desc));
+            const serverId = await dispatch(createServer(trimmedStr, desc));
+            socket.emit("join", { serverIds: [serverId.toString()] })
             setName('')
             setDesc('')
             setErrs([])
             toggleValid(true)
             toggleCreate(false)
+            history.push(`/servers/${serverId}`);
         }
 
     }
