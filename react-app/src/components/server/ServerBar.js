@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteServerAction } from '../../store/server';
+import { deleteServerAction, addServerAction } from '../../store/server';
 import { deleteChannelsInServer } from '../../store/channels';
-import { removeMemberAction } from '../../store/members';
+import { removeMemberAction, addMemberAction } from '../../store/members';
+import { removeInviteAction } from '../../store/invites';
 import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
@@ -53,6 +54,19 @@ function ServerBar({ loaded }) {
             }
         });
     }, [servers])
+
+    useEffect(() => {
+        socket.on('join_server', (data) => {
+            const server = data.server;
+            if (userId == data.userId) {
+                dispatch(addServerAction(server));
+                dispatch(removeInviteAction(server.id))
+                history.push(`/servers/${server.id}`)
+            } else if (server.id == serverId) {
+                dispatch(addMemberAction(data.userId, data.username))
+            }
+        })
+    }, [serverId])
 
     const redirectToServer = (rmServId) => {
         if (serverId == rmServId) {

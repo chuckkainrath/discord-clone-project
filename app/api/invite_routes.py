@@ -29,8 +29,8 @@ def send_invite(server_id):
     if not invited_user:
         return {'response': 'No user with that username exists'}
 
-    invite = Invite.query.filter(Invite.user_id == invited_user.id and
-                                 Invite.server_id == server_id).first()
+    invite = Invite.query.filter((Invite.user_id == invited_user.id) &
+                                 (Invite.server_id == server_id)).first()
     if invite:
         return {'response': 'User already has invite pending.'}
 
@@ -48,8 +48,8 @@ def process_invite(server_id):
     print('PROCESSING INV TO ', server_id)
     user_id = int(current_user.id)
     accept = request.json['accept']
-    invite = Invite.query.filter(Invite.user_id == user_id and
-                                 Invite.server_id == server_id).first()
+    invite = Invite.query.filter((Invite.user_id == user_id) &
+                                 (Invite.server_id == server_id)).first()
     if not invite:
         return {'response': 'Invite not found'}
 
