@@ -28,6 +28,22 @@ function ServerBar({ loaded }) {
         serverIds.push(key)
     }
 
+    const redirectToServer = (rmServId) => {
+        if (parseInt(serverId) === parseInt(rmServId)) {
+            const servKeys = Object.keys(servers);
+            let newServ = servKeys[0];
+            if (newServ && newServ !== rmServId) {
+                history.push(`/servers/${newServ}`)
+            }
+            newServ = servKeys[1];
+            if (newServ) {
+                history.push(`/servers/${newServ}`)
+            } else {
+                history.push('/servers/0')
+            }
+        }
+    }
+
     useEffect(() => {
         socket = io()
         socket.emit("join", { serverIds })
@@ -36,7 +52,7 @@ function ServerBar({ loaded }) {
             socket.emit("leave", { serverIds })
             socket.disconnect()
         })
-    }, []);
+    }, []); // Ignore this error
 
     useEffect(() => {
         socket.on('delete_server', (data) => {
@@ -53,36 +69,20 @@ function ServerBar({ loaded }) {
                 dispatch(removeMemberAction(data.user_id))
             }
         });
-    }, [servers])
+    }, [servers, dispatch, redirectToServer, userId])
 
     useEffect(() => {
         socket.on('join_server', (data) => {
             const server = data.server;
-            if (userId == data.userId) {
+            if (parseInt(userId) === parseInt(data.userId)) {
                 dispatch(addServerAction(server));
                 dispatch(removeInviteAction(server.id))
                 history.push(`/servers/${server.id}`)
-            } else if (server.id == serverId) {
+            } else if (parseInt(server.id) === parseInt(serverId)) {
                 dispatch(addMemberAction(data.userId, data.username))
             }
         })
-    }, [serverId])
-
-    const redirectToServer = (rmServId) => {
-        if (serverId == rmServId) {
-            const servKeys = Object.keys(servers);
-            let newServ = servKeys[0];
-            if (newServ && newServ !== rmServId) {
-                history.push(`/servers/${newServ}`)
-            }
-            newServ = servKeys[1];
-            if (newServ) {
-                history.push(`/servers/${newServ}`)
-            } else {
-                history.push('/servers/0')
-            }
-        }
-    }
+    }, [serverId, dispatch, history, userId])
 
     return loaded && (
         <div className={styles.server_icon__container_invisible}>
