@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { socket } from '../server/ServerBar'
-import { useChannel } from '../../context/ChannelContext';
-import { createMessageAction } from '../../store/messages';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
 import styles from './MessageItem.module.css'
@@ -50,7 +48,7 @@ function MessageItem({ message }) {
         } else {
             setValidMessage(true);
         }
-    }, [messageBody]);
+    }, [messageBody, message.body]);
 
     return (
         <>
