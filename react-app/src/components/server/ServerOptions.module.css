@@ -14,16 +14,7 @@
     cursor: pointer;
 }
 
-.server_container {
-    position: relative;
-}
-
-.server_cog_closed {
-    position: absolute;
-    right: 10px;
-}
-
-.server_cog_open {
-    position: absolute;
-    right: 12px;
+.server_name {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600;
 }
