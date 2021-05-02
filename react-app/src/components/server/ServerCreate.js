@@ -20,12 +20,18 @@ function ServerCreate({ toggleCreate }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(createServer(name, desc));
-        setName('')
-        setDesc('')
-        setErrs([])
-        toggleValid(true)
-        toggleCreate(false)
+        let trimmedStr = name.trim();
+        if (trimmedStr.length === 0) {
+            toggleValid(true);
+        } else {
+            await dispatch(createServer(trimmedStr, desc));
+            setName('')
+            setDesc('')
+            setErrs([])
+            toggleValid(true)
+            toggleCreate(false)
+        }
+
     }
 
     useEffect(() => {
@@ -45,7 +51,7 @@ function ServerCreate({ toggleCreate }) {
         <div className={styles.server_create_container__invis}>
             <div className={styles.server_create_container}>
                 <form onSubmit={handleSubmit} className={styles.server_create_form}>
-                    <div>
+                    <div className={styles.server_name}>
                         <label>Name: </label>
                         <input
                             value={name}
@@ -54,9 +60,9 @@ function ServerCreate({ toggleCreate }) {
                             maxLength='50'
                         />
                     </div>
-                    <div>
+                    <div className={styles.server_desc}>
                         <label>Description: </label>
-                        <input
+                        <textarea
                             value={desc}
                             onChange={e => descChange(e.target.value)}
                             type='text'
@@ -65,6 +71,7 @@ function ServerCreate({ toggleCreate }) {
                     </div>
                     <div>
                         <button
+                            className={styles.server_submit}
                             type='submit'
                             // onClick={e => createServer(e)}
                             disabled={valid}
