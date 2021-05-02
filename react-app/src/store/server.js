@@ -1,7 +1,6 @@
 import { createChannelAction } from './channels'
 
 const GET_ALL_SERVERS = "server/GET_ALL_SERVERS"
-// const GET_SERVER = "server/GET_SERVER"
 const CREATE_SERVER = "server/CREATE_SERVER"
 const DELETE_SERVER = "server/DELETE_SERVER"
 const ADD_SERVER = "server/ADD_SERVER"
@@ -33,6 +32,7 @@ export const getServers = () => async (dispatch) => {
         return;
     }
     dispatch(getServersAction(data.servers))
+    return data.servers;
 }
 
 export const createServer = (name, description) => async (dispatch) => {
@@ -51,6 +51,7 @@ export const createServer = (name, description) => async (dispatch) => {
     }
     dispatch(createServerAction(data.server))
     dispatch(createChannelAction(data.channel))
+    return data.server.id;
 }
 
 

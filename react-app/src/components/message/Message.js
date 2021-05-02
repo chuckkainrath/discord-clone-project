@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { io } from 'socket.io-client';
-import { useServer } from '../../context/ServerContext'
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import {
@@ -10,6 +8,8 @@ import {
     editMessageAction
 } from '../../store/messages';
 import MessageItem from './MessageItem';
+import styles from './Message.module.css';
+import { useParams } from 'react-router-dom';
 
 function Message() {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function Message() {
 
     const user = useSelector(state => state.session.user)
     const stateMessages = useSelector(state => state.messages.messages)
-    const { serverId } = useServer()
+    const { serverId } = useParams()
 
     useEffect(() => {
         socket.on("chat", (chat) => {
@@ -33,18 +33,18 @@ function Message() {
         socket.on('delete_message', (response) => {
             dispatch(deleteMessageAction(response.message_id))
         })
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         const channelMsgs = []
         for (let key in stateMessages) {
             const currMsg = stateMessages[key]
-            if (currMsg.channel_id == channelId) {
+            if (parseInt(currMsg.channel_id) === parseInt(channelId)) {
                 channelMsgs.push(currMsg)
             }
         }
         setMessages(channelMsgs)
-    }, [stateMessages])
+    }, [stateMessages, channelId])
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value)
@@ -70,22 +70,26 @@ function Message() {
     }
 
     return (user && (
-        <div>
-            <div>
-                {messages.map((message, ind) => (
-                    <MessageItem key={ind} message={message} />
-                    // <div key={ind}>{`${message.user_id}: ${message.body}`}</div>
-                ))}
+        <>
+            <div className={styles.message_sender_container}>
+                <div className={styles.message_sender}>
+                    {messages.map((message, ind) => (
+                        <MessageItem key={ind} message={message} />
+                    ))}
+                </div>
             </div>
-            <form onSubmit={sendChat}>
-                <input
-                    value={chatInput}
-                    onChange={updateChatInput}
-                />
-                <button type="submit" disabled={chatValid}>Send</button>
-            </form>
-        </div>)
-    )
+            <div>
+                <form onSubmit={sendChat} className={styles.send_chat_form}>
+                    <textarea
+                        value={chatInput}
+                        onChange={updateChatInput}
+                        className={styles.send_chat}
+                    />
+                    <button className={styles.send_chat__button} type="submit" disabled={chatValid}>Send</button>
+                </form>
+            </div >
+        </>
+    ))
 }
 
 export default Message

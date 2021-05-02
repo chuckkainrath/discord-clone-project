@@ -21,7 +21,7 @@ function ProfileBar() {
   useEffect(() => {
     dispatch(getServers())
     dispatch(getInvites())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
   }, [showInvites])
@@ -32,7 +32,7 @@ function ProfileBar() {
         {user && user.username}
       </div>
       <div onClick={() => toggleShowInvites(!showInvites)}>
-        <i class="fas fa-bell"></i>
+        <i className="fas fa-bell"></i>
       </div>
       {showInvites &&
         <div className={styles.show_invites_container__invis}>
@@ -40,7 +40,6 @@ function ProfileBar() {
             {invites &&
               <ul>
                 {invites.map(invite => {
-                  // return <li key={invite.id}>Join {invite.server_name}</li>
                   return <InviteItem key={invite.id} invite={invite} />
                 })}
               </ul>

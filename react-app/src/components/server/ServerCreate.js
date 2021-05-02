@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import { createServer } from '../../store/server'
+import { socket } from './ServerBar'
 import styles from './ServerCreate.module.css'
 
 function ServerCreate({ toggleCreate }) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
@@ -20,12 +23,20 @@ function ServerCreate({ toggleCreate }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(createServer(name, desc));
-        setName('')
-        setDesc('')
-        setErrs([])
-        toggleValid(true)
-        toggleCreate(false)
+        let trimmedStr = name.trim();
+        if (trimmedStr.length === 0) {
+            toggleValid(true);
+        } else {
+            const serverId = await dispatch(createServer(trimmedStr, desc));
+            socket.emit("join", { serverIds: [serverId.toString()] })
+            setName('')
+            setDesc('')
+            setErrs([])
+            toggleValid(true)
+            toggleCreate(false)
+            history.push(`/servers/${serverId}`);
+        }
+
     }
 
     useEffect(() => {
@@ -39,13 +50,14 @@ function ServerCreate({ toggleCreate }) {
         }
         else toggleValid(false)
         setErrs(errors)
+        console.log(errs)
     }, [name, desc])
 
     return (
         <div className={styles.server_create_container__invis}>
             <div className={styles.server_create_container}>
                 <form onSubmit={handleSubmit} className={styles.server_create_form}>
-                    <div>
+                    <div className={styles.server_name}>
                         <label>Name: </label>
                         <input
                             value={name}
@@ -54,9 +66,9 @@ function ServerCreate({ toggleCreate }) {
                             maxLength='50'
                         />
                     </div>
-                    <div>
+                    <div className={styles.server_desc}>
                         <label>Description: </label>
-                        <input
+                        <textarea
                             value={desc}
                             onChange={e => descChange(e.target.value)}
                             type='text'
@@ -65,8 +77,8 @@ function ServerCreate({ toggleCreate }) {
                     </div>
                     <div>
                         <button
+                            className={styles.server_submit}
                             type='submit'
-                            // onClick={e => createServer(e)}
                             disabled={valid}
                         >Create Server</button>
                     </div>

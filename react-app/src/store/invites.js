@@ -1,7 +1,7 @@
 const REMOVE_INVITE = 'invites/REMOVE'
 const GET_INVITES = 'invites/GET'
 
-const removeInviteAction = server_id => ({
+export const removeInviteAction = server_id => ({
     type: REMOVE_INVITE,
     payload: server_id
 })

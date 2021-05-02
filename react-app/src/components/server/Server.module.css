@@ -1,5 +1,7 @@
 .server_container {
     display: grid;
+    position: relative;
+    z-index: 0;
     grid-template-columns: 1fr 5fr 1fr;
     height: 100%;
 }
