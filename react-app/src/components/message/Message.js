@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { io } from 'socket.io-client';
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import {
@@ -34,18 +33,18 @@ function Message() {
         socket.on('delete_message', (response) => {
             dispatch(deleteMessageAction(response.message_id))
         })
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         const channelMsgs = []
         for (let key in stateMessages) {
             const currMsg = stateMessages[key]
-            if (currMsg.channel_id == channelId) {
+            if (parseInt(currMsg.channel_id) === parseInt(channelId)) {
                 channelMsgs.push(currMsg)
             }
         }
         setMessages(channelMsgs)
-    }, [stateMessages])
+    }, [stateMessages, channelId])
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value)

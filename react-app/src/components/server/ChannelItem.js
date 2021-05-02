@@ -34,7 +34,7 @@ function ChannelItem({ channel }) {
         } else {
             setValidName(false);
         }
-    }, [channelName]);
+    }, [channelName, channel.name]);
 
 
     const submitNameChange = (e) => {
