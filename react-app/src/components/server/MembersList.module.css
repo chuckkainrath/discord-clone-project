@@ -4,14 +4,14 @@
     padding-top: .5em;
     cursor: pointer;
     font-size: 1.25em;
-    background-color: #253634;
+    background-color: #2f4f50;
     color: white;
 }
 
 .member_name {
     /* height: 1.5em; */
     padding: .25em;
-    /* padding-top: .5em; */
+    padding-left: .75em;
     cursor: pointer;
     font-size: 1.10em;
     color: white
