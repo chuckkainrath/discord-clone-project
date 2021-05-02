@@ -18,7 +18,7 @@ function Server() {
     let serversArr = []
 
     useEffect(() => {
-        serversArr = []
+        serversArr = [] // Console is throwing an error, but we want a reset of serversArr every time
         if (servers) {
             for (const key in servers) {
                 serversArr.push(servers[key])
@@ -38,7 +38,7 @@ function Server() {
 
     return (
         <div>
-            {serverId == 0 ? <div>Please make or join a server.</div> : <div className={styles.server_container}>
+            {Number(serverId) === 0 ? <div>Please make or join a server.</div> : <div className={styles.server_container}>
                 <div className={styles.server_channels}>
                     <div className={styles.server_channel_options__top}>
                         <div className={styles.server_options}>
