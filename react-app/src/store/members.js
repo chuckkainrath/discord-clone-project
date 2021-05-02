@@ -1,6 +1,7 @@
 const GET_ALL_MEMBERS = "message/GET_ALL_MEMBERS"
 const REMOVE_MEMBERS = "message/REMOVE_MEMBERS"
 const REMOVE_MEMBER = "message/REMOVE_MEMBER"
+const ADD_MEMBER = "message/ADD_MEMBER"
 
 const getMembersAction = (members) => ({
     type: GET_ALL_MEMBERS,
@@ -14,6 +15,12 @@ export const removeMemberAction = (memberId) => ({
 
 export const removeMembers = () => ({
     type: REMOVE_MEMBERS
+})
+
+export const addMemberAction = (userId, username) => ({
+    type: ADD_MEMBER,
+    userId,
+    username
 })
 
 export const getUsersForSidebar = (serverId) => async (dispatch) => {
@@ -48,6 +55,13 @@ export default function reducer(state = initialState, action) {
         case REMOVE_MEMBER:
             newState = { members: { ...state.members } }
             delete newState.members[action.memberId]
+            return newState
+        case ADD_MEMBER:
+            newState = { members: { ...state.members } }
+            newState.members[action.userId] = {
+                userId: action.userId,
+                name: action.username
+            }
             return newState
         default:
             return state;
