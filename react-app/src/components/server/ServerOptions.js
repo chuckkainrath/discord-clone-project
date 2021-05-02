@@ -33,7 +33,7 @@ function ServerOptions() {
             {servers[serverId] ? <div
                 onClick={() => toggleOptions(!options)}
             >
-                <div>
+                <div className={styles.server_name}>
                     {serverName}
                 </div>
             </div> : null}
