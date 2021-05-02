@@ -6,6 +6,7 @@ import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
+import './Message.css'
 
 
 function MessageItem({ message }) {
@@ -58,7 +59,7 @@ function MessageItem({ message }) {
                 <div>
                     <ContextMenuTrigger id={message.id.toString()}>
                         <div>
-                            <p>{message.username}: {message.body}</p>
+                            <p c><span className='user'>{message.username}: </span> <span className='message'>{message.body}</span></p>
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenu

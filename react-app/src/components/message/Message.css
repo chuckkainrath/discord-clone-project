@@ -1,0 +1,12 @@
+.message{
+  font-family: 'Mukta', sans-serif;
+  font-size: 18px;
+  color: white;
+}
+
+.user{
+  font-family: 'Noto Serif', serif;
+  /* font-weight: 500; */
+  font-size: 21px;
+  color: white;
+}

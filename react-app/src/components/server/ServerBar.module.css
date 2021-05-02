@@ -13,6 +13,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     width: 85px;
+    background-color: #383737;
 }
 
 .server_icon, .server_create {
@@ -23,13 +24,14 @@
     text-align: center;
     border: 1px solid black;
     border-radius: 50%;
-    background-color: #4C5B61;
+    background-color: #4b4949;
     color: white;
 }
 
 .server_create{
     font-weight: bold;
     cursor: pointer;
+
 }
 
 .server__above_context {
