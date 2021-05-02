@@ -19,17 +19,30 @@
 .send_chat_form {
     /* height: 3em; */
     /* background-color: #c5c5c5; */
+    display: flex;
+    align-items: center;
 }
 
 .send_chat {
-    height: 3em;
-    width: 90%;
-    overflow-wrap: break-word;
+    height: 3.5em;
+    width: 100%;
+    /* overflow-wrap: break-word; */
+    overflow-y: hidden;
     background-color: #c5c5c5;
-    border-radius: .75em;
+    border: 2px solid #2C423F;
+    border-radius: .5em;
+    resize: none;
+    transition: .2s ease-in-out;
+    box-sizing: border-box;
+}
+
+.send_chat:focus {
+    border: 2px solid #21312f;
+    outline: 0;
 }
 
 .send_chat__button{
-    width: 9%;
-    height: 3em;
+    /* width: 9%;
+    height: 3em; */
+    display: none;
 }
