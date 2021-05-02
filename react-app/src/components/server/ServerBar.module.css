@@ -33,7 +33,7 @@
 .server_create{
     font-weight: bold;
     cursor: pointer;
-    margin-left: 15px;
+    margin: 5px auto
 }
 
 .server__above_context {
