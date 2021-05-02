@@ -1,5 +1,5 @@
 .server_create_container__invis{
-    position: relative;
+    position: absolute;
     left: 0;
     height: 0em;
     width: fit-content;
