@@ -21,7 +21,7 @@ const LoginForm = () => {
       setErrors(data.errors);
     }
     let servs = await dispatch(getServers());
-    if (servs.length > 0) {
+    if (servs && servs.length > 0) {
       return <Redirect to={`/servers/${servs[0].id}`} />
     }
     return <Redirect to="/servers/0" />;
@@ -34,7 +34,7 @@ const LoginForm = () => {
       setErrors(data.errors);
     }
     let servs = await dispatch(getServers());
-    if (servs.length > 0) {
+    if (servs && servs.length > 0) {
       return <Redirect to={`/servers/${servs[0].id}`} />
     }
     return <Redirect to="/servers/0" />;

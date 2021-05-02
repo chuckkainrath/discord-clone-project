@@ -4,6 +4,19 @@
     width: auto
 }
 
+.landing-title {
+    text-align: center;
+    border-style: solid;
+    border-radius: 0ch;
+    border-color: white;
+    top: 8px;
+    left: 16px;
+    font-size: 56px;
+    color: #dfe0e2;
+    font-family: 'Righteous', cursive;
+    background: transparent;
+  }
+
 .landing-links {
     display: flex;
     justify-content: center;
@@ -16,13 +29,14 @@
     height: 500px;
 }
 
+
 .text-container {
     position: absolute;
     top: 20%;
     text-align: center;
     background: transparent;
     margin: .5em;
-    /* left: 200px; */
+    left: 180px;
 }
 
 .landing-textheader {
@@ -34,6 +48,7 @@
     font-family: 'Righteous', cursive;
     background: transparent;
 }
+
 
 .landing-textbody {
     text-align: center;

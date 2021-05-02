@@ -6,6 +6,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
 import styles from './MessageItem.module.css'
 
+
 function MessageItem({ message }) {
     const userId = useSelector(store => store.session.user.id);
     const [displayEdit, setDisplayEdit] = useState(false);
@@ -56,7 +57,7 @@ function MessageItem({ message }) {
                 <div>
                     <ContextMenuTrigger id={message.id.toString()}>
                         <div>
-                            <p>{message.username}: {message.body}</p>
+                            <p c><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenu
