@@ -6,7 +6,7 @@ import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
-
+import styles from './MessageItem.module.css'
 
 function MessageItem({ message }) {
     const userId = useSelector(store => store.session.user.id);
@@ -78,9 +78,11 @@ function MessageItem({ message }) {
                         </MenuItem>
                     </ContextMenu>
                     <Popup open={displayEdit} onClose={() => setDisplayEdit(false)}>
-                        <form onSubmit={submitMessageChange}>
+                        <form onSubmit={submitMessageChange} className={styles.edit_message_form}>
                             <div>
                                 <label>Edit Message: </label>
+                            </div>
+                            <div>
                                 <input
                                     type='text'
                                     value={messageBody}
