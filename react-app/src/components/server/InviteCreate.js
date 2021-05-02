@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { sendInvite } from '../../store/invites'
 
-function InviteCreate({toggleOptions}) {
+function InviteCreate({ toggleOptions }) {
     const [username, setUsername] = useState('');
     const [validInv, setValidInv] = useState(true);
     const { serverId } = useParams();
@@ -18,7 +18,6 @@ function InviteCreate({toggleOptions}) {
     const submitInvite = async (e) => {
         e.preventDefault();
         const response = await sendInvite(serverId, username)
-        console.log(response); // Notify user of response?
         setUsername('');
         setValidInv(true);
         toggleOptions(false);

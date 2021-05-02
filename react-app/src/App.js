@@ -11,7 +11,6 @@ import { authenticate } from "./store/session";
 import { getServers } from "./store/server";
 
 function App() {
-  // const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false);
 

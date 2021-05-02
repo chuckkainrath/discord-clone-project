@@ -40,7 +40,6 @@ function ProfileBar() {
             {invites &&
               <ul>
                 {invites.map(invite => {
-                  // return <li key={invite.id}>Join {invite.server_name}</li>
                   return <InviteItem key={invite.id} invite={invite} />
                 })}
               </ul>
