@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import  { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
-import { getServers } from '../../store/server';
+import { getServers } from '../../store/server'
 import background from './login-background.jpg'
 import './LoginForm.css'
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
+  const servers = useSelector(state => state.servers.servers);
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +20,11 @@ const LoginForm = () => {
     if (data.errors) {
       setErrors(data.errors);
     }
-    await dispatch(getServers());
+    let servs = await dispatch(getServers());
+    if (servs.length > 0) {
+      return <Redirect to={`/servers/${servs[0].id}`} />
+    }
+    return <Redirect to="/servers/0" />;
   };
 
   const DemoLogin = async (e) => {
@@ -28,7 +33,11 @@ const LoginForm = () => {
     if (data.errors) {
       setErrors(data.errors);
     }
-    await dispatch(getServers());
+    let servs = await dispatch(getServers());
+    if (servs.length > 0) {
+      return <Redirect to={`/servers/${servs[0].id}`} />
+    }
+    return <Redirect to="/servers/0" />;
   };
 
   const updateEmail = (e) => {
@@ -40,7 +49,11 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/servers" />;
+    let serverData = Object.keys(servers);
+    if (serverData.length > 0) {
+      return <Redirect to={`/servers/${serverData[0]}`} />
+    }
+    return <Redirect to="/servers/0" />;
   }
 
   return (
@@ -58,7 +71,6 @@ const LoginForm = () => {
             <input className="email-input"
               name="email"
               type="text"
-              // placeholder="Email"
               value={email}
               onChange={updateEmail}
             />
@@ -68,16 +80,15 @@ const LoginForm = () => {
             <input className="pw-input"
               name="password"
               type="password"
-              // placeholder="Password"
               value={password}
               onChange={updatePassword}
             />
-            <button  className="li-button" type="submit">Login</button>
+            <button className="li-button" type="submit">Login</button>
             <button className="demo-button" type="submit" onClick={DemoLogin}>Demo User</button>
           </div>
         </form>
-     </div>
-   </div>
+      </div>
+    </div>
   );
 };
 

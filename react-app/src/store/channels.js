@@ -1,5 +1,4 @@
 const GET_ALL_CHANNELS = "channel/GET_ALL_CHANNELS"
-// const GET_channel = "channel/GET_channel"
 const CREATE_CHANNEL = "channel/CREATE_CHANNEL"
 const DELETE_CHANNEL = "channel/DELETE_CHANNEL"
 const DELETE_CHANNELS = "channel/DELETE_CHANNELS"
@@ -39,6 +38,7 @@ export const getChannels = (serverId) => async (dispatch) => {
         return;
     }
     dispatch(getChannelsAction(data.channels))
+    return data.channels
 }
 
 export const createChannel = (name, serverId) => async (dispatch) => {
@@ -95,7 +95,6 @@ export default function reducer(state = initialState, action) {
             return newState
         case DELETE_CHANNELS:
             newState = { channels: { ...state.channels } }
-            // action.payload === serverId
             for (let channel in newState.channels) {
                 if (newState.channels[channel].server_id === action.payload) {
                     delete newState.channels[channel]

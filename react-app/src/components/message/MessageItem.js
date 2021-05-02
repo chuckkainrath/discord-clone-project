@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useServer } from '../../context/ServerContext'
+import { useParams } from 'react-router-dom'
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import { createMessageAction } from '../../store/messages';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
-
+import styles from './MessageItem.module.css'
 
 function MessageItem({ message }) {
     const userId = useSelector(store => store.session.user.id);
     const [displayEdit, setDisplayEdit] = useState(false);
     const [messageBody, setMessageBody] = useState(message.body);
     const [validMessage, setValidMessage] = useState(true);
-    const { serverId } = useServer();
+    const { serverId } = useParams();
 
     const usersMessage = message.user_id === userId;
 
@@ -78,9 +78,11 @@ function MessageItem({ message }) {
                         </MenuItem>
                     </ContextMenu>
                     <Popup open={displayEdit} onClose={() => setDisplayEdit(false)}>
-                        <form onSubmit={submitMessageChange}>
+                        <form onSubmit={submitMessageChange} className={styles.edit_message_form}>
                             <div>
                                 <label>Edit Message: </label>
+                            </div>
+                            <div>
                                 <input
                                     type='text'
                                     value={messageBody}

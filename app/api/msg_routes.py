@@ -11,8 +11,7 @@ message_routes = Blueprint('messages', __name__)
 def get_messages(server_id, channel_id):
     # raw_messages = Message.query.filter(Message.channel_id == channel_id).all()
     raw_query = db.session.query(Message, User).join(User) \
-                     .filter(Message.channel_id == channel_id).all()
-    # print('MESSSSSSSAGGGGEEEEEESSSSS', raw_messages)
+        .filter(Message.channel_id == channel_id).all()
     messages = []
     for (message, user) in raw_query:
         msg = message.to_dict()

@@ -160,6 +160,37 @@ def handle_leave_server(data):
     leave_room(str(data['serverId']))
 
 
+@socketio.on('join_server')
+def handle_join_server(data):
+    userId = data['userId']
+    serverId = data['serverId']
+    join_room(str(serverId))
+    invite = Invite.query.filter((Invite.user_id == userId) &
+                                 (Invite.server_id == serverId)).first()
+
+    userServer = UserServer(
+        user_id=userId,
+        server_id=serverId
+    )
+    db.session.add(userServer)
+    db.session.delete(invite)
+    db.session.commit()
+    server = Server.query.get(serverId)
+    server_dict = server.to_dict()
+    slim_server = {
+        'id': server_dict['id'],
+        'name': server_dict['name'],
+        'owner_id': server_dict['owner_id'],
+        'description': server_dict['description']
+    }
+    returnData = {
+        'server': slim_server,
+        'userId': userId,
+        'username': data['username']
+    }
+    emit('join_server', returnData, to=str(serverId))
+
+
 @socketio.on('join')
 def on_join(data):
     # username = data['username']

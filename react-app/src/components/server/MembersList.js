@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useServer } from '../../context/ServerContext'
+import { useParams } from 'react-router-dom'
 import { getUsersForSidebar, removeMembers } from '../../store/members'
 import styles from './MembersList.module.css'
 
 function MembersList() {
     const dispatch = useDispatch()
-    const { serverId } = useServer()
+    const { serverId } = useParams();
     const members = useSelector(state => state.members.members)
     const [membersArr, setMembersArr] = useState([])
     useEffect(() => {
