@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import { getUsersForSidebar, removeMembers } from '../../store/members'
+import styles from './MembersList.module.css'
 
 function MembersList() {
     const dispatch = useDispatch()
@@ -26,9 +27,9 @@ function MembersList() {
     }, [serverId])
     return (
         <div>
-            <p>Members:</p>
+            <p className={styles.memberslist_header}>Members:</p>
             <div>{membersArr.map(member => (
-                <div key={member.id}>
+                <div className={styles.member_name} key={member.id}>
                     {member.name}
                 </div>
             ))}</div>
