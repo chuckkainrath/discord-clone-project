@@ -32,7 +32,7 @@ function ProfileBar() {
         {user && user.username}
       </div>
       <div onClick={() => toggleShowInvites(!showInvites)}>
-        <i class="fas fa-bell"></i>
+        <i className="fas fa-bell"></i>
       </div>
       {showInvites &&
         <div className={styles.show_invites_container__invis}>
