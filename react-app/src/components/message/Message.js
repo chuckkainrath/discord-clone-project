@@ -80,9 +80,9 @@ function Message() {
                     ))}
                 </div>
             </div>
-            < div >
+            <div>
                 <form onSubmit={sendChat} className={styles.send_chat_form}>
-                    <input
+                    <textarea
                         value={chatInput}
                         onChange={updateChatInput}
                         className={styles.send_chat}
