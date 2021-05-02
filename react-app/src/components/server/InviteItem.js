@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useServer } from '../../context/ServerContext';
+import { useHistory } from 'react-router-dom';
 import { processInvite } from '../../store/invites';
 import { addServerAction } from '../../store/server';
 import { socket } from './ServerBar';
 
 function InviteItem({invite}) {
     const dispatch = useDispatch();
-    const { serverId } = useServer();
-
-
+    const history = useHistory();
     const processInv = async (acceptInv) => {
         // dispatch processInv
         const server = await dispatch(processInvite(invite.server_id, acceptInv));
@@ -18,6 +16,7 @@ function InviteItem({invite}) {
             const servId = server.id.toString()
             socket.emit("join", { serverIds: [servId] })
             dispatch(addServerAction(server));
+            history.push(`/servers/${servId}`)
         }
     }
 

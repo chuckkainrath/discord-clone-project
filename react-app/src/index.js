@@ -5,7 +5,6 @@ import './index.css';
 import './contextMenu.css';
 import App from './App';
 import configureStore from './store';
-import ServerProvider from './context/ServerContext';
 import ChannelProvider from './context/ChannelContext';
 
 const store = configureStore();
@@ -13,11 +12,9 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ServerProvider>
-        <ChannelProvider>
-          <App />
-        </ChannelProvider>
-      </ServerProvider>
+      <ChannelProvider>
+        <App />
+      </ChannelProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
