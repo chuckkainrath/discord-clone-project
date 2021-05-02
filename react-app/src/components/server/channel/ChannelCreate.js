@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useServer } from '../../../context/ServerContext'
-import { createChannel } from '../../../store/channels';
+import { useParams } from 'react-router-dom';
 import { socket } from '../../server/ServerBar';
 
-function ChannelCreate({ toggleChannelCreate }) {
+function ChannelCreate({ toggleOptions }) {
     const dispatch = useDispatch();
 
     const [validChannel, toggleValidChannel] = useState(true)
     const [channelName, setChannelName] = useState('')
-    const { serverId } = useServer();
+    const { serverId } = useParams();
 
     useEffect(() => {
         if (channelName.length > 0 && channelName.length <= 50) {
@@ -22,12 +21,11 @@ function ChannelCreate({ toggleChannelCreate }) {
 
     const submitChannel = async (e) => {
         e.preventDefault()
-        // await dispatch(createChannel(channelName, serverId))
         socket.emit("new_channel", {
             name: channelName,
             serverId: serverId
         });
-        toggleChannelCreate(false)
+        toggleOptions(false)
         toggleValidChannel(true)
         setChannelName('')
     }

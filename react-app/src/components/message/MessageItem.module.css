@@ -1,0 +1,10 @@
+.edit_message_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    height: 5em;
+}
