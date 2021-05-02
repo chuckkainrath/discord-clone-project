@@ -16,6 +16,8 @@
 
 .server_container {
     position: relative;
+    font-family: 'Noto Serif', serif;
+    font-weight: 600;
 }
 
 .server_cog_closed {
