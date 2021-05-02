@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import LandingPage from "./components/LandingPage"
-import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Server from "./components/server/Server"
 import ServerBar from "./components/server/ServerBar"
 import { authenticate } from "./store/session";
