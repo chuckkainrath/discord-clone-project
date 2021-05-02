@@ -15,7 +15,7 @@ import styles from './ChannelList.module.css'
 
 function filterChannels(channels, serverId) {
     return channels.filter(channel => {
-        return channel.server_id == serverId
+        return channel.server_id === Number(serverId)
     })
 }
 
