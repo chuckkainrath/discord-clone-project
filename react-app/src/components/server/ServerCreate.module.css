@@ -2,21 +2,41 @@
     position: relative;
     left: 0;
     height: 0em;
-    width: 30em;
+    width: fit-content;
     /* border: 1px solid yellow; */
 }
 
 .server_create_container {
-    width: 10em;
     height: 5em;
 }
 
-.server_create_form{
+.server_create_form {
     position: relative;
-    left: 4.0em;
+    left: 4.5em;
     top: -3.5em;
     background-color: white;
     border: 1px solid black;
+    border-radius: 5px;
     z-index: 2;
-    width: 12em;
+    padding: 10px;
+}
+
+.server_desc textarea {
+    height: 7em;
+    width: 250px;
+}
+
+.server_desc {
+    margin-top: 5px;
+}
+
+.server_name label {
+    display: block;
+}
+
+.server_submit {
+    margin-top: 5px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }

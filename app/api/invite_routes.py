@@ -24,13 +24,12 @@ def get_invites():
 @invite_routes.route('/<int:server_id>', methods=["POST"])
 def send_invite(server_id):
     username = request.json['username']
-    print('SENDING INVITE TO SERVER', server_id, username)
     invited_user = User.query.filter(User.username == username).first()
     if not invited_user:
         return {'response': 'No user with that username exists'}
 
-    invite = Invite.query.filter(Invite.user_id == invited_user.id and
-                                 Invite.server_id == server_id).first()
+    invite = Invite.query.filter((Invite.user_id == invited_user.id) &
+                                 (Invite.server_id == server_id)).first()
     if invite:
         return {'response': 'User already has invite pending.'}
 
@@ -45,31 +44,26 @@ def send_invite(server_id):
 
 @invite_routes.route('/<int:server_id>', methods=["DELETE"])
 def process_invite(server_id):
-    print('PROCESSING INV TO ', server_id)
     user_id = int(current_user.id)
     accept = request.json['accept']
-    invite = Invite.query.filter(Invite.user_id == user_id and
-                                 Invite.server_id == server_id).first()
+    invite = Invite.query.filter((Invite.user_id == user_id) &
+                                 (Invite.server_id == server_id)).first()
     if not invite:
         return {'response': 'Invite not found'}
 
     if not accept:
-        print('DECLINE INVITE')
         db.session.delete(invite)
         db.session.commit()
         return {'server': 'Invite declined'}
 
-    print('ACCEPTING INVITE')
     # If invite accepted
     userServer = UserServer(
         user_id=user_id,
         server_id=server_id
     )
-    print('INVITE USERSERVER DATA PRE COMMIT', userServer)
     db.session.add(userServer)
     db.session.delete(invite)
     db.session.commit()
-    print('INVITE USERSERVER DATA POST COMMIT', userServer)
     server = Server.query.get(server_id)
     server_dict = server.to_dict()
     return {'server': server_dict}
