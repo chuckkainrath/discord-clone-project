@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { login } from "../../store/session";
 import { getServers } from '../../store/server'
 import background from './login-background.jpg'
@@ -66,18 +66,18 @@ const LoginForm = () => {
               <div>{error}</div>
             ))}
           </div>
-          <div className="email-container">
-            <label className="email-label" htmlFor="email">Email</label>
-            <input className="email-input"
+          <div className="field-container">
+            <label className="form-label" htmlFor="email">Email</label>
+            <input className="form-input"
               name="email"
               type="text"
               value={email}
               onChange={updateEmail}
             />
           </div>
-          <div className="pw-container">
-            <label className="pw-label" htmlFor="password">Password</label>
-            <input className="pw-input"
+          <div className="field-container">
+            <label className="form-label" htmlFor="password">Password</label>
+            <input className="form-input"
               name="password"
               type="password"
               value={password}
@@ -86,6 +86,7 @@ const LoginForm = () => {
             <button className="li-button" type="submit">Login</button>
             <button className="demo-button" type="submit" onClick={DemoLogin}>Demo User</button>
           </div>
+          <div className='field-container nav-text'> Need an account? <NavLink className='signup-button' to='/sign-up'>Sign Up Here</NavLink></div>
         </form>
       </div>
     </div>
