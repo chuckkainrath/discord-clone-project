@@ -4,8 +4,10 @@
     padding-top: .5em;
     cursor: pointer;
     font-size: 1.25em;
-    background-color: #2f4f50;
+    background-color: #383737;
     color: white;
+    font-family: 'Noto Serif', serif;
+    font-weight: 600;
 }
 
 .member_name {
@@ -14,5 +16,7 @@
     padding-left: .75em;
     cursor: pointer;
     font-size: 1.10em;
-    color: white
+    color: white;
+    font-family: 'Noto Serif', serif;
+    /* font-weight: 600; */
 }

@@ -2,9 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #253634;
+    background-color: #383737;
     color: white;
     height: 3em;
+    padding: 5px;
+    font-family: 'Noto Serif', serif;
+    font-weight: 600;
 }
 
 .show_invites_container__invis {
@@ -27,3 +30,4 @@
 .invites {
     color: red;
 }
+
