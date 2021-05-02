@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useServer } from '../../context/ServerContext'
 import { getUsersForSidebar, removeMembers } from '../../store/members'
+
 function MembersList() {
     const dispatch = useDispatch()
     const { serverId } = useServer()
