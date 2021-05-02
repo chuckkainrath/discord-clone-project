@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { socket } from '../server/ServerBar'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Popup from 'reactjs-popup';
-import './Message.css'
 import styles from './MessageItem.module.css'
 
 
@@ -58,7 +57,7 @@ function MessageItem({ message }) {
                 <div>
                     <ContextMenuTrigger id={message.id.toString()}>
                         <div>
-                            <p c><span className='user'>{message.username}: </span> <span className='message'>{message.body}</span></p>
+                            <p c><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenu
