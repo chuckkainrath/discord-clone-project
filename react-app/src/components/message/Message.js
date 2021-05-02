@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { io } from 'socket.io-client';
-import { useServer } from '../../context/ServerContext'
 import { socket } from '../server/ServerBar'
 import { useChannel } from '../../context/ChannelContext';
 import {
@@ -11,6 +10,7 @@ import {
 } from '../../store/messages';
 import MessageItem from './MessageItem';
 import styles from './Message.module.css';
+import { useParams } from 'react-router-dom';
 
 function Message() {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function Message() {
 
     const user = useSelector(state => state.session.user)
     const stateMessages = useSelector(state => state.messages.messages)
-    const { serverId } = useServer()
+    const { serverId } = useParams()
 
     useEffect(() => {
         socket.on("chat", (chat) => {

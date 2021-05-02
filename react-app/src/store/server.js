@@ -33,6 +33,7 @@ export const getServers = () => async (dispatch) => {
         return;
     }
     dispatch(getServersAction(data.servers))
+    return data.servers;
 }
 
 export const createServer = (name, description) => async (dispatch) => {
@@ -51,6 +52,7 @@ export const createServer = (name, description) => async (dispatch) => {
     }
     dispatch(createServerAction(data.server))
     dispatch(createChannelAction(data.channel))
+    return data.server.id;
 }
 
 
