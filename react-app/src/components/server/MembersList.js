@@ -22,7 +22,7 @@ function MembersList() {
             tempMembersArr.push(members[member])
         }
         setMembersArr(tempMembersArr);
-    }, [serverId])
+    }, [serverId, dispatch]) // If you put members in here it will be hell on earth
     return (
         <div>
             <p>Members:</p>
