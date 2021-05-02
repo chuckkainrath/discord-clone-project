@@ -12,8 +12,9 @@
     flex-wrap: nowrap;
     overflow-y: auto;
     overflow-x: hidden;
+    /* align-items: center; */
     width: 60px;
-    margin-left: 10px;
+    margin: 0 auto
 }
 
 .server_icon, .server_create {
@@ -31,7 +32,7 @@
 .server_create{
     font-weight: bold;
     cursor: pointer;
-    margin-left: 15px;
+    margin: 5px auto
 }
 
 .server__above_context {
