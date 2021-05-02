@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
 import { sendInvite } from '../../store/invites'
-import { useServer } from '../../context/ServerContext'
 
-function InviteCreate({toggleInviteCreate}) {
+function InviteCreate({toggleOptions}) {
     const [username, setUsername] = useState('');
     const [validInv, setValidInv] = useState(true);
-    const { serverId } = useServer();
+    const { serverId } = useParams();
 
     useEffect(() => {
         if (username.length > 0 && username.length <= 50) {
@@ -21,7 +21,7 @@ function InviteCreate({toggleInviteCreate}) {
         console.log(response); // Notify user of response?
         setUsername('');
         setValidInv(true);
-        toggleInviteCreate(false);
+        toggleOptions(false);
     }
 
     return (

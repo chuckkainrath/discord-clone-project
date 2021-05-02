@@ -39,6 +39,7 @@ export const getChannels = (serverId) => async (dispatch) => {
         return;
     }
     dispatch(getChannelsAction(data.channels))
+    return data.channels
 }
 
 export const createChannel = (name, serverId) => async (dispatch) => {
