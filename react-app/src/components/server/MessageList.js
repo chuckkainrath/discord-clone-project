@@ -26,7 +26,7 @@ function MessageList() {
         <>
             <div
                 className={styles.channel_name}
-            >{channel && `Channel: ${channel.name}, ${channel.id}`}</div>
+            >{channel && `# ${channel.name}`}</div>
             <Message />
         </>
     )
