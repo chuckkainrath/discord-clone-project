@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const LogoutButton = () => {
       history.push('/')
     }
     setLogoutTog(false)
-  }, [logoutTog])
+  }, [logoutTog, history])
   const onLogout = async (e) => {
     setLogoutTog(true)
     await dispatch(logout());

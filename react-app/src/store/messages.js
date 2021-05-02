@@ -34,7 +34,6 @@ export const getMessages = (serverId, channelId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels/${channelId}/`)
 
     const messages = await response.json();
-    console.log('MESSAGES RESOPNE TEXT', messages);
     if (messages.errors) {
         return;
     }

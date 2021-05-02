@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useServer } from '../../context/ServerContext'
+import { useParams } from 'react-router-dom'
 import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../server/ServerBar';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
@@ -8,7 +8,7 @@ import styles from './ChannelItem.module.css'
 
 function ChannelItem({ channel }) {
     const { setChannelId } = useChannel();
-    const { serverId } = useServer();
+    const { serverId } = useParams();
     const [displayEdit, setDisplayEdit] = useState(false);
     const [channelName, setChannelName] = useState(channel.name)
     const [validName, setValidName] = useState(true)
@@ -34,7 +34,7 @@ function ChannelItem({ channel }) {
         } else {
             setValidName(false);
         }
-    }, [channelName]);
+    }, [channelName, channel.name]);
 
 
     const submitNameChange = (e) => {

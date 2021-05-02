@@ -1,56 +1,36 @@
 import React, { useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
-import ServerNavBar from './ServerNavBar'
+import { Redirect, useParams, useHistory } from 'react-router-dom'
 import ChannelList from './ChannelList'
 import ProfileBar from './ProfileBar'
 import MessageList from './MessageList'
 import MembersList from './MembersList'
 import ServerOptions from './ServerOptions'
-import { useServer } from '../../context/ServerContext'
 import { useSelector } from 'react-redux'
-import { useChannel } from '../../context/ChannelContext'
 import styles from './Server.module.css'
 
 function Server() {
-    const { serverId, setServerId } = useServer();
-    const { channelId, setChannelId } = useChannel();
+    const history = useHistory();
+    const { serverId } = useParams();
 
     const user = useSelector(state => state.session.user)
     const servers = useSelector(state => state.servers.servers)
-    const channels = useSelector(state => state.channels.channels);
 
     let serversArr = []
-    // if (servers) {
-    //     for (const key in servers) {
-    //         serversArr.push(servers[key])
-    //     }
-    // }
 
     useEffect(() => {
-        serversArr = []
+        serversArr = [] // Console is throwing an error, but we want a reset of serversArr every time
         if (servers) {
             for (const key in servers) {
                 serversArr.push(servers[key])
             }
         }
         if (serversArr.length) {
-            setServerId(serversArr[0].id)
+            const serverKeys = Object.keys(servers);
+            history.push(`/servers/${serverKeys[0]}`)
         } else {
-            setServerId(0)
+            history.push(`/servers/0`);
         }
     }, [servers])
-
-    useEffect(() => {
-        let channelId;
-        for (let channelKey in channels) {
-            let currChannel = channels[channelKey]
-            if (currChannel.server_id === serverId && currChannel.name === 'General') {
-                channelId = channelKey;
-                break;
-            }
-        }
-        setChannelId(channelId);
-    }, [channels])
 
     if (!user) {
         return <Redirect to='/' />
@@ -58,7 +38,7 @@ function Server() {
 
     return (
         <div>
-            {serverId == 0 ? <div>Please make or join a server.</div> : <div className={styles.server_container}>
+            {Number(serverId) === 0 ? <div>Please make or join a server.</div> : <div className={styles.server_container}>
                 <div className={styles.server_channels}>
                     <div className={styles.server_channel_options__top}>
                         <div className={styles.server_options}>
