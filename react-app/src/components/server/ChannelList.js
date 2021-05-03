@@ -42,7 +42,7 @@ function ChannelList() {
             }
         }
         fetchData()
-    }, [serverId, setChannelId, dispatch])
+    }, [serverId, dispatch])
 
     useEffect(() => {
         const filteredChannels = filterChannels(Object.values(channels), serverId)
@@ -61,7 +61,7 @@ function ChannelList() {
         socket.on("edit_channel", (channel) => {
             dispatch(editChannelAction(channel.channel_id, channel.name));
         })
-    }, [channels, setChannelId, serverId, dispatch])
+    }, [channels, serverId, dispatch])
 
     const changeChannelContext = (rmChanId) => {
         if (channelId == rmChanId) {
