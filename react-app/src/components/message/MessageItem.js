@@ -54,10 +54,10 @@ function MessageItem({ message }) {
     return (
         <>
             {usersMessage &&
-                <div>
+                <div className={styles.messages_container}>
                     <ContextMenuTrigger id={message.id.toString()}>
                         <div>
-                            <p c><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
+                            <p className={styles.message_container}><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenu
@@ -77,19 +77,19 @@ function MessageItem({ message }) {
                         </MenuItem>
                     </ContextMenu>
                     <Popup open={displayEdit} onClose={() => setDisplayEdit(false)}>
-                        <form onSubmit={submitMessageChange} className={styles.edit_message_form}>
-                            <div>
-                                <label>Edit Message: </label>
-                            </div>
-                            <div>
-                                <input
-                                    type='text'
-                                    value={messageBody}
-                                    onChange={(e) => setMessageBody(e.target.value)}
-                                />
-                            </div>
-                            <button disabled={validMessage} type="submit">Submit Message Change</button>
-                        </form>
+                        <div className={styles.popup_container}>
+                            <form onSubmit={submitMessageChange} className={styles.edit_message_form}>
+                                <div className={styles.edit_message}>
+                                    <label>Edit Message: </label>
+                                    <textarea
+                                        type='text'
+                                        value={messageBody}
+                                        onChange={(e) => setMessageBody(e.target.value)}
+                                    />
+                                </div>
+                                <button disabled={validMessage} type="submit">Submit Message Change</button>
+                            </form>
+                        </div>
                     </Popup>
                 </div>
             }

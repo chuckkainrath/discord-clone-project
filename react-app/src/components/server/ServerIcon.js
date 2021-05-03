@@ -36,6 +36,9 @@ function ServerIcon({ server }) {
 
     return (
         <div className={styles.server_icon}>
+           <div className={styles.server_name}>
+                {server.name}
+            </div>
             <ContextMenuTrigger id={server.id.toString()}>
                 <div onClick={() => changeServer(server.id)}>
                     {shortenServer(server.name)}
@@ -49,9 +52,6 @@ function ServerIcon({ server }) {
                     Leave Server
                 </MenuItem>
             </ContextMenu>
-            <div className={styles.server_name}>
-                {server.name}
-            </div>
         </div>
     )
 }

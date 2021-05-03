@@ -15,3 +15,36 @@
 .channel_name::before {
     content: "#  "
 }
+
+.popup_container {
+    background-color: lightgrey;
+    height: 6rem;
+    padding: 20px;
+    border-radius: 5px;
+    width: 150%;
+    transform: translateX(-20%);
+}
+
+.channel_edit {
+    font-size: 1.3rem;
+    font-family: 'Mukta', sans-serif;
+}
+
+.channel_edit label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.channel_edit input {
+    width: 95%;
+    font-size: 1.2rem;
+    font-family: 'Mukta', sans-serif;
+    margin-bottom: 10px;
+}
+
+.popup_container button {
+    font-size: 1.1rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}

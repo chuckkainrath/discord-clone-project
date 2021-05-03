@@ -21,13 +21,17 @@
 
 .server_name {
     display: none;
+    position: relative;
 }
 
 .server_icon:hover .server_name {
     display: block;
-    position: absolute;
-    z-index: 100000;
-    top: 0px;
-    left: 60px;
+    position: fixed;
+    margin-bottom: 50px;
+    z-index: 100000000;
+    left: 70px;
     font-size: 1.2rem;
+    padding: 5px;
+    background-color: #4b4949;
+    border-radius: 5px;
 }

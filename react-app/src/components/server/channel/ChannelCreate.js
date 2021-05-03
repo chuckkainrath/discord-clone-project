@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { socket } from '../../server/ServerBar';
+import styles from '../ServerOptions.module.css';
 
 function ChannelCreate({ toggleOptions }) {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function ChannelCreate({ toggleOptions }) {
 
     return (
         <form onSubmit={submitChannel}>
-            <div>
+            <div className={styles.create_channel}>
                 <label>Channel Name: </label>
                 <input
                     type='text'
@@ -40,8 +41,8 @@ function ChannelCreate({ toggleOptions }) {
                     onChange={e => setChannelName(e.target.value)}
                 />
             </div>
-            <div>
-                <button disabled={validChannel} type='submit'>Submit</button>
+            <div className={styles.create_channel__submit}>
+                <button disabled={validChannel} type='submit'>Create Channel</button>
             </div>
         </form>
     )

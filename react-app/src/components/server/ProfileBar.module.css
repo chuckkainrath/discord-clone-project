@@ -12,21 +12,42 @@
 
 .show_invites_container__invis {
     position: absolute;
-    /* border: 1px solid yellow; */
 }
 
 .show_invites_container{
     position: absolute;
-    top: -7em;
-    left: 1.75em;
-    width: 8em;
-    height: 5em;
+    bottom: 1.2rem;
+    left: 0.75em;
+    width: 10em;
+    /* height: 5em; */
     padding: .5em;
-    background-color: white;
-    border: 1px solid black;
+    background-color: lightgrey;
+    border-radius: 5px;
     color: black;
+    font-size: 1.2rem;
+}
+
+.show_invites_container li {
+    padding: 5px 0;
+}
+
+.inv_process {
+    font-size: 1.3rem;
+}
+
+.inv_process i {
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.inv_process i:hover {
+    background-color: rgb(146, 146, 146);
 }
 
 .invites {
     color: red;
+}
+
+.invites, .no_invites {
+    font-size: 1.4rem;
 }

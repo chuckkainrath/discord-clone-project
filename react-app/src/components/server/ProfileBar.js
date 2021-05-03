@@ -40,7 +40,7 @@ function ProfileBar() {
       }
       {invites.length === 0 &&
         <div>
-          <span>
+          <span className={styles.no_invites}>
             <i className="fas fa-bell"></i>
           </span>
         </div>
