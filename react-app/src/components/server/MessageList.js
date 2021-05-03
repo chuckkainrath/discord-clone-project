@@ -20,7 +20,6 @@ function MessageList() {
             }
         })();
     }, [channelId, channels, dispatch, serverId])
-    console.log('CHANNNNANENEL', channel);
     return (
         <>
             <div

@@ -50,7 +50,6 @@ function ServerCreate({ toggleCreate }) {
         }
         else toggleValid(false)
         setErrs(errors)
-        console.log(errs)
     }, [name, desc])
 
     const cancelServer = () => {
