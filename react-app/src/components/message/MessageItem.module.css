@@ -1,23 +1,63 @@
-.edit_message_form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    border: 1px solid black;
-    color: black;
-    height: 5em;
+.message {
+  font-family: 'Mukta', sans-serif;
+  font-size: 18px;
+  color: white;
 }
 
-.message{
-    font-family: 'Mukta', sans-serif;
-    font-size: 18px;
-    color: white;
-  }
+.user {
+  font-family: 'Noto Serif', serif;
+  /* font-weight: 500; */
+  font-size: 21px;
+  color: white;
+}
 
-  .user{
-    font-family: 'Noto Serif', serif;
-    /* font-weight: 500; */
-    font-size: 21px;
-    color: white;
-  }
+.messages_container {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.message_container {
+  position: relative;
+  width: 90%;
+  margin-left: 1%;
+}
+
+.messages_container:hover {
+  background-color: #474545;
+}
+
+.popup_container {
+  background-color: lightgrey;
+  height: 10rem;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300%;
+  transform: translateX(-30%) translateY(-20%);
+}
+
+.edit_message {
+  font-size: 1.3rem;
+  font-family: 'Mukta', sans-serif;
+}
+
+.edit_message label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.edit_message textarea {
+  height: 6rem;
+  resize: none;
+  width: 99%;
+  font-family: 'Mukta', sans-serif;
+  font-size: 1.1rem;
+}
+
+.popup_container button {
+  font-size: 1.1rem;
+  position: relative;
+  margin-top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory } from 'react-router-dom'
+import styles from './LogoutButton.module.css';
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,12 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return <button
+            onClick={onLogout}
+            className={styles.logout_button}
+          >
+            <i class="fas fa-sign-out"></i>
+          </button>;
 };
 
 export default LogoutButton;

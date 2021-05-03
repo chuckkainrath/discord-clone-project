@@ -15,7 +15,7 @@ function Message() {
     const dispatch = useDispatch();
     const [chatInput, setChatInput] = useState("");
     const [messages, setMessages] = useState([]);
-    const [chatValid, toggleChatValid] = useState(true)
+    const [chatValid, toggleChatValid] = useState(false)
     const { channelId } = useChannel();
 
     const user = useSelector(state => state.session.user)
@@ -47,17 +47,25 @@ function Message() {
     }, [stateMessages, channelId])
 
     const updateChatInput = (e) => {
-        setChatInput(e.target.value)
-        if (e.target.value.length) {
-            toggleChatValid(false)
-
+        const newValue = e.target.value;
+        if (newValue.charCodeAt(newValue.length - 1)  === 10) {
+            if (chatValid) {
+                sendChat(e);
+            } else {
+                setChatInput('');
+            }
         } else {
-            toggleChatValid(true)
+            setChatInput(e.target.value)
+            if (e.target.value.trim().length) {
+                toggleChatValid(true)
+            } else {
+                toggleChatValid(false)
+            }
         }
     };
 
     const sendChat = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         socket.emit("new_message", {
             user: user.username, // Logged in user
             userId: user.id,
@@ -66,7 +74,7 @@ function Message() {
             channelId            // Channel message is in
         });
         setChatInput("")
-        toggleChatValid(true)
+        toggleChatValid(false)
     }
 
     return (user && (
@@ -85,7 +93,7 @@ function Message() {
                         onChange={updateChatInput}
                         className={styles.send_chat}
                     />
-                    <button className={styles.send_chat__button} type="submit" disabled={chatValid}>Send</button>
+                    {/* <button className={styles.send_chat__button} type="submit" disabled={chatValid}>Send</button> */}
                 </form>
             </div >
         </>
