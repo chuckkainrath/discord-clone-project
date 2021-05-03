@@ -75,17 +75,19 @@ function ChannelItem({ channel }) {
                 </MenuItem>
             </ContextMenu>
             <Popup open={displayEdit} onClose={() => setDisplayEdit(false)}>
-                <form onSubmit={submitNameChange}>
-                    <div>
-                        <label>Edit Channel Name: </label>
-                        <input
-                            type='text'
-                            value={channelName}
-                            onChange={(e) => setChannelName(e.target.value)}
-                        />
-                    </div>
-                    <button disabled={validName} type="submit">Submit Name Change</button>
-                </form>
+                <div className={styles.popup_container}>
+                    <form onSubmit={submitNameChange}>
+                        <div className={styles.channel_edit}>
+                            <label>Edit Channel Name: </label>
+                            <input
+                                type='text'
+                                value={channelName}
+                                onChange={(e) => setChannelName(e.target.value)}
+                            />
+                        </div>
+                        <button disabled={validName} type="submit">Submit Name Change</button>
+                    </form>
+                </div>
             </Popup>
         </div>
     );
