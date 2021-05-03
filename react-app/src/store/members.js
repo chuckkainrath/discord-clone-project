@@ -26,7 +26,6 @@ export const addMemberAction = (userId, username) => ({
 export const getUsersForSidebar = (serverId) => async (dispatch) => {
     const response = await fetch(`/api/servers/${serverId}/channels/members`)
     const members = await response.json();
-    console.log("!!!!!MEMBERS IN THUNK!!!!!",members)
     if (members.errors) {
         return;
     }
