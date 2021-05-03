@@ -95,7 +95,7 @@ function MessageItem({ message }) {
             }
             {!usersMessage &&
                 <div>
-                    <p>{message.username}: {message.body}</p>
+                    <p className={styles.message_container}><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
                 </div>
             }
         </>

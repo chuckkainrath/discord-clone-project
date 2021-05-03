@@ -1,3 +1,8 @@
+/*
+    This code was copied from https://github.com/vkbansal/react-contextmenu/blob/master/examples/react-contextmenu.css
+    for styling the context menus.
+*/
+
 .react-contextmenu {
     background-color: #fff;
     background-clip: padding-box;
