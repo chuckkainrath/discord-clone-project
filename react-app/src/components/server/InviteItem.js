@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { processInvite } from '../../store/invites';
 import { socket } from './ServerBar';
+import styles from './ProfileBar.module.css';
 
 function InviteItem({ invite, toggleShowInvites }) {
     const dispatch = useDispatch();
@@ -24,9 +25,8 @@ function InviteItem({ invite, toggleShowInvites }) {
     return (
         <li>
             <div>{invite.server_name}</div>
-            <div>
+            <div className={styles.inv_process}>
                 <i onClick={() => processInv(true)} class="fal fa-check"></i>
-                <span>    </span>
                 <i onClick={() => processInv(false)} class="fal fa-times"></i>
             </div>
         </li>

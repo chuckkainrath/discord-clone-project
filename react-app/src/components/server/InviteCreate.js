@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { sendInvite } from '../../store/invites'
+import styles from './ServerOptions.module.css';
 
 function InviteCreate({ toggleOptions }) {
     const [username, setUsername] = useState('');
@@ -25,7 +26,7 @@ function InviteCreate({ toggleOptions }) {
 
     return (
         <form onSubmit={submitInvite}>
-            <div>
+            <div className={styles.create_invite}>
                 <label>Username: </label>
                 <input
                     type='text'
@@ -33,7 +34,9 @@ function InviteCreate({ toggleOptions }) {
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
-            <button type='submit' disabled={validInv}>Send Invite</button>
+            <button
+                className={styles.create_invite__submit}
+                type='submit' disabled={validInv}>Send Invite</button>
         </form>
     );
 }

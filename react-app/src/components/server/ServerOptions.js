@@ -53,21 +53,21 @@ function ServerOptions() {
                         className={styles.selects}
                         onClick={() => toggleChannelCreate(!channelCreate)}
                     >
-                        +Channel
+                        Create a Channel
                     </div>
                     {channelCreate && <ChannelCreate toggleOptions={toggleOptions} />}
                     <div
                         className={styles.selects}
                         onClick={() => toggleInviteCreate(!inviteCreate)}
                     >
-                        +User
+                        Invite a User
                     </div>
                     {inviteCreate && <InviteCreate toggleOptions={toggleOptions} />}
                     <div
                         className={styles.selects}
                         onClick={deleteAServer}
                     >
-                        -Server
+                        Delete Server
                     </div>
                 </div>}
         </>

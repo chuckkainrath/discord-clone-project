@@ -24,8 +24,9 @@
 }
 
 .send_chat {
-    height: 3.5em;
+    height: 2.5em;
     width: 100%;
+    font-size: 1.4rem;
     /* overflow-wrap: break-word; */
     overflow-y: hidden;
     background-color: #c5c5c5;
@@ -34,6 +35,7 @@
     resize: none;
     transition: .2s ease-in-out;
     box-sizing: border-box;
+    margin: 10px;
 }
 
 .send_chat:focus {
@@ -46,4 +48,3 @@
     height: 3em; */
     /* display: none; */
 }
-

@@ -53,10 +53,15 @@ function ServerCreate({ toggleCreate }) {
         console.log(errs)
     }, [name, desc])
 
+    const cancelServer = () => {
+        toggleCreate(false);
+    }
+
     return (
         <div className={styles.server_create_container__invis}>
             <div className={styles.server_create_container}>
                 <form onSubmit={handleSubmit} className={styles.server_create_form}>
+                    <h1>Create a Server</h1>
                     <div className={styles.server_name}>
                         <label>Name: </label>
                         <input
@@ -75,12 +80,12 @@ function ServerCreate({ toggleCreate }) {
                             maxLength='255'
                         />
                     </div>
-                    <div>
+                    <div className={styles.server_submit}>
                         <button
-                            className={styles.server_submit}
                             type='submit'
                             disabled={valid}
-                        >Create Server</button>
+                        >Create</button>
+                        <button onClick={cancelServer}>Cancel</button>
                     </div>
                 </form>
             </div>
