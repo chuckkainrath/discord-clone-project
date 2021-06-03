@@ -118,6 +118,21 @@ def handle_edit_channel(data):
     emit("edit_channel", returnData, to=str(data['serverId']))
 
 
+@socketio.on('edit_server')
+def handle_edit_server(data):
+    server = Server.query.get(data['serverId'])
+    if server.owner_id != data['userId']:
+        return     # Can you just return in a socket route without emitting?
+    server.name = data['name']
+    db.session.add(server)
+    db.session.commit()
+    returnData = {
+        'server_id': data['serverId'],
+        'name': data['name']
+    }
+    emit("edit_server", returnData, to=str(data['serverId']))
+
+
 @socketio.on('delete_message')
 def handle_delete_message(data):
     message = Message.query.get(data['messageId'])
