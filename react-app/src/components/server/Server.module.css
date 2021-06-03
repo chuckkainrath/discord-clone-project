@@ -1,7 +1,5 @@
 .server_container {
     display: grid;
-    /* position: relative; */
-    /* z-index: 0; */
     grid-template-columns: 1fr 5fr 1fr;
 }
 
@@ -9,25 +7,19 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* background-color: #686868; */
 }
 
 .server_channel_options__top{
-    /* border: 1px solid green; */
     height: 100%;
     overflow-y: auto;
-    /* height: 90vw; */
     background-color: #3b3a3a;
 
 }
 
 .server_options {
-    /* border: 1px solid rgb(255, 255, 0); */
     height: 1.5em;
     padding: .25em;
     padding-top: .5em;
-    /* display: flex;
-    align-items: center; */
     cursor: pointer;
     font-size: 1.25em;
     background-color: #3b3a3a;
@@ -43,8 +35,10 @@
 }
 
 .instructions_container{
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .instructions {
@@ -52,12 +46,7 @@
     font-size: 3em;
     font-family: 'Righteous', cursive;
     text-align: center;
-    margin-top: 3em;
-    /* border: 1px solid gray; */
     box-shadow: 0 0 8px gray;
     border-radius: 10px;
     padding: 1em;
-    /* width: 50%; */
-    /* display: flex; */
-    /* justify-self: center; */
 }

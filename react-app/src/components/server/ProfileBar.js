@@ -5,9 +5,12 @@ import { getInvites } from '../../store/invites'
 import LogoutButton from '../auth/LogoutButton'
 import InviteItem from './InviteItem';
 import styles from './ProfileBar.module.css'
+import { useParams } from 'react-router-dom'
 
 function ProfileBar() {
   const dispatch = useDispatch()
+  const { serverId } = useParams();
+  // useParams
   const user = useSelector(state => state.session.user)
   const invitesObj = useSelector(state => state.invites.invites)
   const [invites, setInvites] = useState(Object.values(invitesObj))
@@ -47,7 +50,7 @@ function ProfileBar() {
       }
       {showInvites &&
         <div className={styles.show_invites_container__invis}>
-          <div className={styles.show_invites_container}>
+          <div className={parseInt(serverId) === 0 ? styles.show_invites_container_down : styles.show_invites_container}>
             {invites &&
               <ul>
                 {invites.map(invite => {
