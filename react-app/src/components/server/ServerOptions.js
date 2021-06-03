@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import InviteCreate from './InviteCreate';
 import { socket } from './ServerBar';
 import ChannelCreate from './channel/ChannelCreate';
+import ServerEdit from './ServerEdit';
 import styles from './ServerOptions.module.css'
 
 function ServerOptions() {
     const { serverId } = useParams();
+    const [server, setServer] = useState();
+    const [serverEdit, toggleServerEdit] = useState(false);
     const [options, toggleOptions] = useState(false)
     const [channelCreate, toggleChannelCreate] = useState(false)
     const [inviteCreate, toggleInviteCreate] = useState(false);
@@ -23,10 +26,16 @@ function ServerOptions() {
         });
     }
 
-    let serverName;
-    if (servers[serverId]) {
-        serverName = servers[serverId].name
-    }
+    useEffect(() => {
+        if (servers[serverId]) {
+            setServer(servers[serverId]);
+        }
+    }, [servers])
+
+    // let serverName;
+    // if (servers[serverId]) {
+    //     serverName = servers[serverId].name
+    // }
 
     return (
         <>
@@ -34,7 +43,7 @@ function ServerOptions() {
                 onClick={() => toggleOptions(!options)}
             >
                 <div className={styles.server_container}>
-                    {serverName}
+                    {server && server.name}
                     {!options &&
                         <span className={styles.server_cog_closed}>
                             <i class="fas fa-chevron-down"></i>
@@ -49,6 +58,17 @@ function ServerOptions() {
             </div> : null}
             {options &&
                 <div className={styles.server_options__container}>
+                    {server.owner_id === userId &&
+                        <>
+                            <div
+                                className={styles.selects}
+                                onClick={() => toggleServerEdit(!serverEdit)}
+                            >
+                                Edit Server Name
+                            </div>
+                            {serverEdit && <ServerEdit toggleOptions={toggleOptions} name={server.name} />}
+                        </>
+                    }
                     <div
                         className={styles.selects}
                         onClick={() => toggleChannelCreate(!channelCreate)}
