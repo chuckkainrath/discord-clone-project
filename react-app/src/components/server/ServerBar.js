@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteServerAction, addServerAction } from '../../store/server';
+import { deleteServerAction, addServerAction, editServerAction } from '../../store/server';
 import { deleteChannelsInServer } from '../../store/channels';
 import { removeMemberAction, addMemberAction } from '../../store/members';
 import { removeInviteAction } from '../../store/invites';
@@ -69,6 +69,10 @@ function ServerBar({ loaded }) {
                 dispatch(removeMemberAction(data.user_id))
             }
         });
+
+        socket.on('edit_server', (data) => {
+            dispatch(editServerAction(data.server_id, data.name))
+        })
     }, [servers, dispatch, redirectToServer, userId])
 
     useEffect(() => {
