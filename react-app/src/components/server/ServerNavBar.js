@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Before you ask, yes, this is completely useless
 function ServerNavBar() {
     return (
         <>

@@ -17,7 +17,7 @@
 }
 
 .send_chat_form {
-    /* height: 3em; */
+    height: 2.5em;
     /* background-color: #c5c5c5; */
     display: flex;
     align-items: center;

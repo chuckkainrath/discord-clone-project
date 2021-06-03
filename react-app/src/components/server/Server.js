@@ -37,26 +37,33 @@ function Server() {
     }
 
     return (
-        <div>
-            {Number(serverId) === 0 ? <div>Please make or join a server.</div> : <div className={styles.server_container}>
-                <div className={styles.server_channels}>
-                    <div className={styles.server_channel_options__top}>
-                        <div className={styles.server_options}>
-                            <ServerOptions />
-                        </div>
-                        <ChannelList />
-                    </div>
+        <>
+            {Number(serverId) === 0 ?
+                <>
                     <ProfileBar />
-                </div>
-                <div className={styles.server_messages}>
-                    <MessageList />
-                </div>
-                <div className={styles.server_members}>
-                    <MembersList />
-                </div>
-            </div>}
+                    <div className={styles.instructions_container}>
+                        <div className={styles.instructions}>Please make or join a server.</div>
+                    </div>
+                </>
+                : <div className={styles.server_container}>
+                    <div className={styles.server_channels}>
+                        <div className={styles.server_channel_options__top}>
+                            <div className={styles.server_options}>
+                                <ServerOptions />
+                            </div>
+                            <ChannelList />
+                        </div>
+                        <ProfileBar />
+                    </div>
+                    <div className={styles.server_messages}>
+                        <MessageList />
+                    </div>
+                    <div className={styles.server_members}>
+                        <MembersList />
+                    </div>
+                </div>}
 
-        </div>
+        </>
     )
 }
 

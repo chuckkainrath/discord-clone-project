@@ -21,7 +21,7 @@ function ProfileBar() {
   useEffect(() => {
     dispatch(getServers())
     dispatch(getInvites())
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
   }, [showInvites])
@@ -33,9 +33,9 @@ function ProfileBar() {
       </div>
       {invites.length > 0 &&
         <div onClick={() => toggleShowInvites(!showInvites)}>
-            <span className={styles.invites}>
-              <i className="fas fa-bell"></i>
-            </span>
+          <span className={styles.invites}>
+            <i className="fas fa-bell"></i>
+          </span>
         </div>
       }
       {invites.length === 0 &&
