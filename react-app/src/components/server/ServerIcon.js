@@ -6,10 +6,12 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import styles from './ServerIcon.module.css'
 
 function shortenServer(name) {
-    const splitName = name.split(' ');
+    const splitName = name.split(/[\s]+/g);
     let initals = '';
     splitName.forEach(word => {
-        initals += word[0].toUpperCase();
+        if (word[0]) {
+            initals += word[0].toUpperCase();
+        }
     });
     return initals.substring(0, 2);
 }
@@ -36,7 +38,7 @@ function ServerIcon({ server }) {
 
     return (
         <div className={styles.server_icon}>
-           {/* <div className={styles.server_name}>
+            {/* <div className={styles.server_name}>
                 {server.name}
             </div> */}
             <ContextMenuTrigger id={server.id.toString()}>

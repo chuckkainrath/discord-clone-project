@@ -27,6 +27,20 @@
     font-size: 1.2rem;
 }
 
+.show_invites_container_down {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-40%);
+    z-index: 1;
+    width: 10em;
+    padding: .5em;
+    background-color: lightgrey;
+    border-radius: 5px;
+    color: black;
+    font-size: 1.2rem;
+}
+
 .show_invites_container li {
     padding: 5px 0;
 }
