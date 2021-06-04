@@ -30,7 +30,7 @@ function ServerOptions() {
         if (servers[serverId]) {
             setServer(servers[serverId]);
         }
-    }, [servers])
+    }, [serverId])
 
     // let serverName;
     // if (servers[serverId]) {
