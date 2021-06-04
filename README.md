@@ -1,20 +1,19 @@
 ![Postacard Main Page](https://drive.google.com/uc?export=view&id=1NnYz5ibhZW-0IFqUbvCyDYLaV8Ek52SP)
-# Postacard
-Postacard is a photo website where users can upload and browse photos.  Users can create customized postcards from uploaded images.
+# Racket
+Racket is a chat application inspired by discord where users can create servers and channels as well as send messages.  Users can also invite their friends to servers so they can chat in real time.
 
 ## Features
- - Upload photos and crop them to postcard dimensions.  Photos can be either set to public or private.
- - Users can choose a photo and create a postcard from it.  Users can then save/download the postcard.  Templates can be reused.
- - Users can like/unlike photos and can view their liked photos on their profile page.
- - Users can follow/unfollow other users and can view their follows/followers on their profile page.
+ - Users can create servers and invite others to join those servers.
+ - Users can recieve invites to join servers from other users.
+ - Users can create different channels for each server for others to message in.
+ - Users can send messages in real time to channels within servers.
 
 ## Technology
 
  - ReactJS
  - Redux
- - AWS S3
- - KonvaJS
  - Flask
+ - Websockets
  - SQLAlchemy
  - PostgreSQL
 
@@ -23,7 +22,7 @@ Postacard is a photo website where users can upload and browse photos.  Users ca
 1. Clone the repo and install dependencies
 
 ```
-git clone https://github.com/chuckkainrath/postcard.git
+git clone https://github.com/chuckkainrath/discord-clone-project.git
 pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
 ```
 
