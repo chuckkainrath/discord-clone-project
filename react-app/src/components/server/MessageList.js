@@ -19,7 +19,7 @@ function MessageList() {
                 setChannel(channels[channelId])
             }
         })();
-    }, [channelId, channels, dispatch, serverId])
+    }, [channelId, channels, serverId, channel])
     return (
         <>
             <div

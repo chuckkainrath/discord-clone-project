@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { socket } from '../server/ServerBar'
+import { socket } from '../../services/socket';
 import { useChannel } from '../../context/ChannelContext';
 import {
     createMessageAction,
@@ -33,7 +33,12 @@ function Message() {
         socket.on('delete_message', (response) => {
             dispatch(deleteMessageAction(response.message_id))
         })
-    }, [dispatch])
+        return () => {
+            socket.removeAllListeners('chat');
+            socket.removeAllListeners('edit_message');
+            socket.removeAllListeners('delete_message');
+        }
+    }, [])
 
     useEffect(() => {
         const channelMsgs = []
