@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import InviteCreate from './InviteCreate';
-import { socket } from './ServerBar';
+import { socket } from '../../services/socket';
 import ChannelCreate from './channel/ChannelCreate';
 import ServerEdit from './ServerEdit';
 import styles from './ServerOptions.module.css'
@@ -31,11 +31,6 @@ function ServerOptions() {
             setServer(servers[serverId]);
         }
     }, [serverId])
-
-    // let serverName;
-    // if (servers[serverId]) {
-    //     serverName = servers[serverId].name
-    // }
 
     return (
         <>

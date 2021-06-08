@@ -5,12 +5,10 @@ import { deleteServerAction, addServerAction, editServerAction } from '../../sto
 import { deleteChannelsInServer } from '../../store/channels';
 import { removeMemberAction, addMemberAction } from '../../store/members';
 import { removeInviteAction } from '../../store/invites';
-import { io } from 'socket.io-client'
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
 import ServerIcon from './ServerIcon';
-
-export let socket;
+import { socket } from '../../services/socket';
 
 function ServerBar({ loaded }) {
     const dispatch = useDispatch();
@@ -45,14 +43,14 @@ function ServerBar({ loaded }) {
     }
 
     useEffect(() => {
-        socket = io()
+
         socket.emit("join", { serverIds })
 
         return (() => {
             socket.emit("leave", { serverIds })
             socket.disconnect()
         })
-    }, []); // Ignore this error
+    }, []);
 
     useEffect(() => {
         socket.on('delete_server', (data) => {
@@ -73,7 +71,12 @@ function ServerBar({ loaded }) {
         socket.on('edit_server', (data) => {
             dispatch(editServerAction(data.server_id, data.name))
         })
-    }, [servers, dispatch, redirectToServer, userId])
+        return () => {
+            socket.removeAllListeners('delete_server');
+            socket.removeAllListeners('leave_server');
+            socket.removeAllListeners('edit_server');
+        };
+    }, [servers, redirectToServer, userId])
 
     useEffect(() => {
         socket.on('join_server', (data) => {
@@ -86,7 +89,10 @@ function ServerBar({ loaded }) {
                 dispatch(addMemberAction(data.userId, data.username))
             }
         })
-    }, [serverId, dispatch, history, userId])
+        return () => {
+            socket.removeAllListeners('join_server');
+        }
+    }, [serverId, history, userId])
 
     return loaded && (
         <div className={styles.server_icon__container_invisible}>
