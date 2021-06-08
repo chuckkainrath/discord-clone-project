@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { getChannels } from '../../store/channels'
 import { useChannel } from '../../context/ChannelContext';
-import { socket } from '../server/ServerBar';
+import { socket } from '../../services/socket';
 import {
     createChannelAction,
     deleteChannelAction,
@@ -42,7 +42,7 @@ function ChannelList() {
             }
         }
         fetchData()
-    }, [serverId, dispatch])
+    }, [serverId])
 
     useEffect(() => {
         const filteredChannels = filterChannels(Object.values(channels), serverId)
@@ -54,17 +54,22 @@ function ChannelList() {
             setChannelId(channel_obj.id);
         })
         socket.on("delete_channel", (channel) => {
+            changeChannelContext(channel.channel_id);
             dispatch(deleteChannelAction(channel.channel_id));
             dispatch(deleteMessagesInChannel(channel.channel_id));
-            changeChannelContext(channel.channel_id);
         });
         socket.on("edit_channel", (channel) => {
             dispatch(editChannelAction(channel.channel_id, channel.name));
         })
-    }, [channels, serverId, dispatch])
+        return () => {
+            socket.removeAllListeners('channel');
+            socket.removeAllListeners('delete_channel');
+            socket.removeAllListeners('edit_channel');
+        }
+    }, [channels, serverId, channelId])
 
     const changeChannelContext = (rmChanId) => {
-        if (channelId == rmChanId) {
+        if (channelId === undefined || channelId == rmChanId) {
             const allChannels = Object.values(channels);
             let genChatId;
             allChannels.forEach(channel => {

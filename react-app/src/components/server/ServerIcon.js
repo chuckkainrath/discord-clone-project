@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import { socket } from './ServerBar';
+import { socket } from '../../services/socket';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import styles from './ServerIcon.module.css'
 

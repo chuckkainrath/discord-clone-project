@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { processInvite } from '../../store/invites';
-import { socket } from './ServerBar';
+import { socket } from '../../services/socket';
 import styles from './ProfileBar.module.css';
 
 function InviteItem({ invite, toggleShowInvites }) {

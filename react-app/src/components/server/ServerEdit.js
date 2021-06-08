@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 // import { sendInvite } from '../../store/invites'
-import { socket } from '../server/ServerBar';
+import { socket } from '../../services/socket';
 import styles from './ServerOptions.module.css';
 
 function ServerEdit({ toggleOptions, name }) {

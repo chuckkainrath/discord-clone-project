@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { createServer } from '../../store/server'
 import { useChannel } from '../../context/ChannelContext';
-import { socket } from './ServerBar'
+import { socket } from '../../services/socket';
 import styles from './ServerCreate.module.css'
 
 function ServerCreate({ toggleCreate }) {
