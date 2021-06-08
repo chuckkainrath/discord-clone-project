@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { socket } from '../../server/ServerBar';
+import { socket } from '../../../services/socket';
 import styles from '../ServerOptions.module.css';
 
 function ChannelCreate({ toggleOptions }) {
-    const dispatch = useDispatch();
-
     const [validChannel, toggleValidChannel] = useState(true)
     const [channelName, setChannelName] = useState('')
     const { serverId } = useParams();
