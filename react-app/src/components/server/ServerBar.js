@@ -43,8 +43,6 @@ function ServerBar({ loaded }) {
     }
 
     useEffect(() => {
-        console.log('here???"L"');
-        console.log(serverIds);
         socket.emit("join", { serverIds })
 
         return (() => {
