@@ -18,6 +18,8 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
+# SocketIO does not like sending datetime objects so you
+# have to parse it into a specific format.
 class DateTimeEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
@@ -212,6 +214,7 @@ def on_join(data):
     servers = data['serverIds']
     for server in servers:
         join_room(server)
+        print('JOINININING', server)
     # send(username + ' has entered the room.', to=channel)
 
 
@@ -221,4 +224,5 @@ def on_leave(data):
     servers = data['serverIds']
     for server in servers:
         leave_room(server)
+        print('LEAVVINININg', server)
     # send(username + ' has left the room.', to=room)

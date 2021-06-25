@@ -18,13 +18,13 @@ function ServerBar({ loaded }) {
     const [create, toggleCreate] = useState(false)
 
     const { serverId } = useParams();
-    const serversArr = [];
-    const serverIds = [];
+    const [serversArr, setServersArr] = useState([]);
+    const [serverIds, setServersIds] = useState([]);
 
-    for (const key in servers) {
-        serversArr.push(servers[key])
-        serverIds.push(key)
-    }
+    useEffect(() => {
+        setServersArr(Object.values(servers));
+        setServersIds(Object.keys(servers));
+    }, [servers])
 
     const redirectToServer = (rmServId) => {
         if (parseInt(serverId) === parseInt(rmServId)) {
@@ -43,14 +43,15 @@ function ServerBar({ loaded }) {
     }
 
     useEffect(() => {
-
+        console.log('here???"L"');
+        console.log(serverIds);
         socket.emit("join", { serverIds })
 
         return (() => {
             socket.emit("leave", { serverIds })
-            socket.disconnect()
+            // socket.disconnect()
         })
-    }, []);
+    }, [serverIds]);
 
     useEffect(() => {
         socket.on('delete_server', (data) => {
@@ -71,6 +72,10 @@ function ServerBar({ loaded }) {
         socket.on('edit_server', (data) => {
             dispatch(editServerAction(data.server_id, data.name))
         })
+
+        // This unmounts the component when the component gets un-rendered or when
+        // the useEffect gets re-run due to a change in one of the items in the
+        // dependecy array.
         return () => {
             socket.removeAllListeners('delete_server');
             socket.removeAllListeners('leave_server');
