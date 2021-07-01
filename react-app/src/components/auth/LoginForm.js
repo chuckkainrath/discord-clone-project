@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import { login } from "../../store/session";
 import { getServers } from '../../store/server'
-import background from './login-background.jpg'
 import './LoginForm.css'
 
 const LoginForm = () => {
@@ -58,7 +57,7 @@ const LoginForm = () => {
 
   return (
     <div className="login-container">
-      <img className="background-image" src={background} />
+      {/* <img className="background-image" src={background} /> */}
       <div className="form-container">
         <form className="login-form" onSubmit={onLogin}>
           <div className="errors">
