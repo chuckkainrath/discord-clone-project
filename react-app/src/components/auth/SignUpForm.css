@@ -47,10 +47,9 @@ form h1 {
   border-radius: 16px;
 }
 
-.field-container{
+.field-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   font-family: 'Righteous', cursive;
@@ -62,6 +61,12 @@ form h1 {
 
 }
 
+.field-container .signup-button {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+/*
 .signup-button{
   display: block;
   box-sizing: border-box;
@@ -76,4 +81,4 @@ form h1 {
   background-color: #17252a;
   font-family: 'Righteous', cursive;
   cursor: pointer;
-}
+} */
