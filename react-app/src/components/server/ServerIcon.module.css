@@ -1,9 +1,10 @@
 .server_icon {
     font-size: 1.5em;
     position:relative;
-    padding: 10px;
     margin: 5px;
-    width: 30px;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
     text-align: center;
     border: 1px solid black;
     border-radius: 50%;
@@ -18,20 +19,3 @@
     border-radius: 30%;
     cursor: pointer;
 }
-
-/* .server_name {
-    display: none;
-    position: relative;
-}
-
-.server_icon:hover .server_name {
-    display: block;
-    position: fixed;
-    margin-bottom: 50px;
-    z-index: 100000000;
-    left: 70px;
-    font-size: 1.2rem;
-    padding: 5px;
-    background-color: #4b4949;
-    border-radius: 5px;
-} */
