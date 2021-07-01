@@ -20,6 +20,7 @@ const LogoutButton = () => {
   };
 
   return <button
+            title='Logout'
             onClick={onLogout}
             className={styles.logout_button}
           >

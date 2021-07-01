@@ -36,14 +36,14 @@ function ProfileBar() {
       </div>
       {invites.length > 0 &&
         <div onClick={() => toggleShowInvites(!showInvites)}>
-          <span className={styles.invites}>
+          <span title='Invites' className={styles.invites}>
             <i className="fas fa-bell"></i>
           </span>
         </div>
       }
       {invites.length === 0 &&
         <div>
-          <span className={styles.no_invites}>
+          <span title='No Invites' className={styles.no_invites}>
             <i className="fas fa-bell"></i>
           </span>
         </div>
