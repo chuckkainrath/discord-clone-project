@@ -18,6 +18,17 @@ function ServerOptions() {
 
     const servers = useSelector(state => state.servers.servers);
 
+    useEffect(() => {
+        let optionsDiv = document.getElementById('server-options');
+        if (optionsDiv) {
+            let clickOutside = function(e) {
+                if (!optionsDiv.contains(e.target)) toggleOptions(false);
+            }
+            document.addEventListener('click', clickOutside);
+            return () => document.removeEventListener('click', clickOutside);
+        }
+    }, [options]);
+
     const deleteAServer = async () => {
         toggleOptions(false);
         socket.emit('delete_server', {
@@ -52,7 +63,7 @@ function ServerOptions() {
                 </div>
             </div> : null}
             {options &&
-                <div className={styles.server_options__container}>
+                <div id='server-options' className={styles.server_options__container}>
                     {server.owner_id === userId &&
                         <>
                             <div
