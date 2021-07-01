@@ -27,3 +27,7 @@
     border-radius: 30%;
     cursor: pointer;
 }
+
+.server_create:hover {
+    background-color: #3E3D3D;
+}
