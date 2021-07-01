@@ -9,7 +9,9 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const servers = useSelector(state => state.servers.servers);
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
+  const [emailErr, setEmailErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +19,15 @@ const LoginForm = () => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data.errors) {
-      setErrors(data.errors);
+      data.errors.forEach(err => {
+        let errArr = err.split(':');
+        if (errArr[0].trim() === 'email') {
+          setEmailErr(errArr[1].trim());
+        }
+        if (errArr[0].trim() === 'password') {
+          setPasswordErr(errArr[1].trim());
+        }
+      })
     }
     let servs = await dispatch(getServers());
     if (servs && servs.length > 0) {
@@ -30,7 +40,15 @@ const LoginForm = () => {
     e.preventDefault();
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data.errors) {
-      setErrors(data.errors);
+      data.errors.forEach(err => {
+        let errArr = err.split(':');
+        if (errArr[0].trim() === 'email') {
+          setEmailErr(errArr[1].trim());
+        }
+        if (errArr[0].trim() === 'password') {
+          setPasswordErr(errArr[1].trim());
+        }
+      })
     }
     let servs = await dispatch(getServers());
     if (servs && servs.length > 0) {
@@ -60,11 +78,11 @@ const LoginForm = () => {
       {/* <img className="background-image" src={background} /> */}
       <div className="form-container">
         <form className="login-form" onSubmit={onLogin}>
-          <div className="errors">
+          {/* <div className="errors">
             {errors.map((error) => (
               <div>{error}</div>
             ))}
-          </div>
+          </div> */}
           <div className="field-container">
             <label className="form-label" htmlFor="email">Email</label>
             <input className="form-input"
@@ -73,6 +91,7 @@ const LoginForm = () => {
               value={email}
               onChange={updateEmail}
             />
+            {emailErr && <p className='error'>{emailErr}</p>}
           </div>
           <div className="field-container">
             <label className="form-label" htmlFor="password">Password</label>
@@ -82,6 +101,7 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
             />
+            {passwordErr && <p className='error'>{passwordErr}</p>}
             <button className="li-button" type="submit">Login</button>
             <button className="demo-button" type="submit" onClick={DemoLogin}>Demo User</button>
           </div>
