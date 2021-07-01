@@ -18,4 +18,5 @@
 .server_icon:hover {
     border-radius: 30%;
     cursor: pointer;
+    background-color: #3E3D3D;
 }
