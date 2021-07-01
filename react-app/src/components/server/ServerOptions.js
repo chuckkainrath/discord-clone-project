@@ -22,7 +22,10 @@ function ServerOptions() {
         let optionsDiv = document.getElementById('server-options');
         if (optionsDiv) {
             let clickOutside = function(e) {
-                if (!optionsDiv.contains(e.target)) toggleOptions(false);
+                if (!optionsDiv.contains(e.target)) {
+                    toggleOptions(false);
+                    document.removeEventListener('click', clickOutside);
+                }
             }
             document.addEventListener('click', clickOutside);
             return () => document.removeEventListener('click', clickOutside);
