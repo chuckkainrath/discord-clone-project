@@ -20,3 +20,14 @@
     cursor: pointer;
     background-color: #3E3D3D;
 }
+
+.server_icon:hover .server_icon_img {
+    border-radius: 30%;
+}
+
+.server_icon_img {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    display: block;
+}

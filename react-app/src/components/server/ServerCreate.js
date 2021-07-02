@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { createServer } from '../../store/server'
 import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../../services/socket';
+import AvatarInput from '../auth/AvatarInput';
 import styles from './ServerCreate.module.css'
 
 function ServerCreate({ toggleCreate }) {
@@ -12,6 +13,8 @@ function ServerCreate({ toggleCreate }) {
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [valid, toggleValid] = useState(true)
+    const [picture, setPicture] = useState(null);
+    const [choosingPicture, setChoosingPicture] = useState(false);
     const [errs, setErrs] = useState([])
 
     function nameChange(newName) {
@@ -28,14 +31,14 @@ function ServerCreate({ toggleCreate }) {
         if (trimmedStr.length === 0) {
             toggleValid(true);
         } else {
-            const serverId = await dispatch(createServer(trimmedStr, desc));
-            socket.emit("join", { serverIds: [serverId.toString()] })
+            const serverId = await dispatch(createServer(trimmedStr, desc, picture));
+            if (serverId) socket.emit("join", { serverIds: [serverId.toString()] })
             setName('')
             setDesc('')
             setErrs([])
             toggleValid(true)
             toggleCreate(false)
-            history.push(`/servers/${serverId}`);
+            if (serverId) history.push(`/servers/${serverId}`);
         }
     }
 
@@ -56,6 +59,11 @@ function ServerCreate({ toggleCreate }) {
         toggleCreate(false);
     }
 
+    const selectPhoto = e => {
+        e.preventDefault();
+        setChoosingPicture(true);
+      }
+
     return (
         <div className={styles.server_create_container__invis}>
             <div className={styles.server_create_container}>
@@ -70,6 +78,24 @@ function ServerCreate({ toggleCreate }) {
                             maxLength='50'
                         />
                     </div>
+                    {!picture &&
+                        <div className={styles.no_photo}>
+                            <label>Server Icon (Optional)</label>
+                            <button onClick={selectPhoto}>Choose a Photo</button>
+                        </div>
+                    }
+                    {picture &&
+                        <div className={styles.photo}>
+                            <div>Server Icon (Optional)</div>
+                            <div className={styles.photo_cont}>
+                                <img
+                                    className={styles.profile_image}
+                                    src={URL.createObjectURL(picture)}
+                                />
+                                <button onClick={() => setPicture()}>Delete Photo</button>
+                            </div>
+                        </div>
+                    }
                     <div className={styles.server_desc}>
                         <label>Description: </label>
                         <textarea
@@ -88,6 +114,12 @@ function ServerCreate({ toggleCreate }) {
                     </div>
                 </form>
             </div>
+            <AvatarInput
+                picTitle='Server Icon (Optional)'
+                setPicture={setPicture}
+                setChoosingPicture={setChoosingPicture}
+                choosingPicture={choosingPicture}
+            />
         </div>
     )
 }

@@ -87,7 +87,8 @@ function Message() {
             userId: user.id,
             msg: chatInput,      // User's message
             serverId,            // Server message is in
-            channelId            // Channel message is in
+            channelId,           // Channel message is in
+            profImgUrl: user.profile_img_url
         });
         setChatInput("")
         toggleChatValid(false)

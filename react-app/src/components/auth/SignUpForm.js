@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import AvatarInput from './AvatarInput';
-import background from './login-background.jpg'
-
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -20,7 +18,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      await dispatch(signUp(username, email, password));
+      await dispatch(signUp(username, email, password, picture));
     }
   };
 
@@ -52,7 +50,7 @@ const SignUpForm = () => {
   return (
     <div className='signup-container'>
       <div className="form-container">
-        <form classname='signup-form' onSubmit={onSignUp}>
+        <form className='signup-form' onSubmit={onSignUp}>
           <h1>Sign Up</h1>
           <div className='field-container'>
             <label className='form-label'>User Name</label>
@@ -75,15 +73,18 @@ const SignUpForm = () => {
             ></input>
           </div>
           {!picture &&
-            <div>
+            <div className={'form-label'}>
               <label>Profile Picture (Optional)</label>
-              <button onClick={selectPhoto}>Choose a Photo</button>
+              <button
+                className={'photo-button'}
+                onClick={selectPhoto}>Choose a Photo</button>
             </div>
           }
           {picture &&
-            <div>
+            <div className={'photo'}>
               <div>Profile Picture (Optional)</div>
               <img
+                className={'profile-image'}
                 src={URL.createObjectURL(picture)}
               />
               <button onClick={() => setPicture()}>Delete Photo</button>
@@ -117,6 +118,7 @@ const SignUpForm = () => {
         </form>
       </div>
       <AvatarInput
+        picTitle='Profile Picture (Optional)'
         setPicture={setPicture}
         setChoosingPicture={setChoosingPicture}
         choosingPicture={choosingPicture} />

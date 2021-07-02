@@ -2,9 +2,9 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import AvatarEditor from 'react-avatar-editor';
 import styles from './AvatarInput.module.css';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
-function AvatarInput({setPicture, setChoosingPicture, choosingPicture}) {
+function AvatarInput({setPicture, setChoosingPicture, choosingPicture, picTitle}) {
     const [imageUrl, setImageUrl] = useState();
     const [width, setWidth] = useState();
     const [height, setHeight] = useState();
@@ -57,8 +57,8 @@ function AvatarInput({setPicture, setChoosingPicture, choosingPicture}) {
             centered
         >
             <Modal.Header className={styles.header__block}>
-                <label>Profile Picture (Optional)</label>
-                <Button className={styles.cancel__picture} onClick={cancelImage}>Cancel</Button>
+                <label>{picTitle}</label>
+                <button className={styles.cancel__picture} onClick={cancelImage}>Cancel</button>
             </Modal.Header>
             {!imageUrl &&
                 <div className={styles.picture__input} {...getRootProps()}>
@@ -95,7 +95,7 @@ function AvatarInput({setPicture, setChoosingPicture, choosingPicture}) {
                             onChange={(e) => setScale(parseFloat(e.target.value))}
                         />
                     </div>
-                    <Button className={styles.submit__btn} onClick={saveImage}>Save Profile Picture</Button>
+                    <button className={styles.submit__btn} onClick={saveImage}>Save Profile Picture</button>
                 </div>
             }
         </Modal>
