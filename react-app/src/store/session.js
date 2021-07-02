@@ -59,17 +59,23 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (username, email, password, picture) => async (dispatch) => {
+    const signupForm = new FormData();
+    signupForm.append('username', username);
+    signupForm.append('email', email);
+    signupForm.append('password', password);
+    if (picture) {
+        const picType = picture.type;
+        const ext = picType.split('/')[1];
+        const pictureFile = new File([picture], `profile-pic.${ext}`);
+        signupForm.append('profile_img', pictureFile);
+      }
     const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            username,
-            email,
-            password,
-        }),
+        body: signupForm
     });
     const data = await response.json();
     dispatch(setUser(data));
