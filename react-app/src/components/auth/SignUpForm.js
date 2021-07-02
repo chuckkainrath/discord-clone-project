@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import AvatarInput from './AvatarInput';
+import background from './login-background.jpg'
+
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -11,6 +14,8 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [picture, setPicture] = useState(null);
+  const [choosingPicture, setChoosingPicture] = useState(false);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -34,6 +39,11 @@ const SignUpForm = () => {
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
+
+  const selectPhoto = e => {
+    e.preventDefault();
+    setChoosingPicture(true);
+  }
 
   if (user) {
     return <Redirect to="/servers/0" />;
@@ -64,6 +74,21 @@ const SignUpForm = () => {
               value={email}
             ></input>
           </div>
+          {!picture &&
+            <div>
+              <label>Profile Picture (Optional)</label>
+              <button onClick={selectPhoto}>Choose a Photo</button>
+            </div>
+          }
+          {picture &&
+            <div>
+              <div>Profile Picture (Optional)</div>
+              <img
+                src={URL.createObjectURL(picture)}
+              />
+              <button onClick={() => setPicture()}>Delete Photo</button>
+            </div>
+          }
           <div className='field-container'>
             <label className='form-label'>Password</label>
             <input
@@ -91,6 +116,10 @@ const SignUpForm = () => {
           <div className='field-container nav-text'> Already have an account? <NavLink className='signup-button' to='/login'>Login Here</NavLink></div>
         </form>
       </div>
+      <AvatarInput
+        setPicture={setPicture}
+        setChoosingPicture={setChoosingPicture}
+        choosingPicture={choosingPicture} />
     </div>
   );
 };
