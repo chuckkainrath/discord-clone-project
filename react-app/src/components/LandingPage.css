@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 8vh 70vh 22vh;
+    background-color: #506974;
 }
 
 .landing-content {
