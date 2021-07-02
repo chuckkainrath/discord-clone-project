@@ -26,7 +26,6 @@ function Message() {
     useEffect(() => {
         socket.on("chat", (chat) => {
             const chat_obj = JSON.parse(chat);
-            console.log(chat_obj);
             dispatch(createMessageAction(chat_obj));
         })
         socket.on('edit_message', (response) => {
