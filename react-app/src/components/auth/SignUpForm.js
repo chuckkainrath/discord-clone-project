@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import AvatarInput from './AvatarInput';
-import background from './login-background.jpg'
-
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -84,6 +82,7 @@ const SignUpForm = () => {
             <div>
               <div>Profile Picture (Optional)</div>
               <img
+                className={'profile-image'}
                 src={URL.createObjectURL(picture)}
               />
               <button onClick={() => setPicture()}>Delete Photo</button>
