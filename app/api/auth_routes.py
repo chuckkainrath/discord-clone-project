@@ -31,6 +31,8 @@ def authenticate():
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
+    db.session.execute('ALTER TABLE servers ADD server_img_url VARCHAR;')
+
     """
     Logs a user in
     """
