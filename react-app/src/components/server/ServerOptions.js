@@ -64,12 +64,12 @@ function ServerOptions() {
                     {server && server.name}
                     {!options &&
                         <span className={styles.server_cog_closed}>
-                            <i class="fas fa-chevron-down"></i>
+                            <i className="fas fa-chevron-down"></i>
                         </span>
                     }
                     {options &&
                         <span className={styles.server_cog_open}>
-                            <i class="far fa-times"></i>
+                            <i className="far fa-times"></i>
                         </span>
                     }
                 </div>
