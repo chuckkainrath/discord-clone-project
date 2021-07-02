@@ -42,15 +42,15 @@ export const getServers = () => async (dispatch) => {
     return data.servers;
 }
 
-export const createServer = (name, description) => async (dispatch) => {
+export const createServer = (name, description, picture) => async (dispatch) => {
     const serverCreateForm = new FormData();
     serverCreateForm.append('name', name);
     serverCreateForm.append('description', description);
     if (picture) {
         const picType = picture.type;
         const ext = picType.split('/')[1];
-        const pictureFile = new File([picture], `profile-pic.${ext}`);
-        serverCreateForm.append('profile_img', pictureFile);
+        const pictureFile = new File([picture], `server-icon.${ext}`);
+        serverCreateForm.append('server-icon', pictureFile);
     }
     const response = await fetch('/api/servers/', {
         method: 'POST',

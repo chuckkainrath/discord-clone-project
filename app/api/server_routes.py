@@ -20,7 +20,6 @@ def get_servers():
 @server_routes.route('/', methods=['POST'])
 @login_required
 def create_server():
-
     server_img_url = ''
     server_img = request.files.get('server_img', '')
     if server_img and valid_file_type(server_img.filename):
