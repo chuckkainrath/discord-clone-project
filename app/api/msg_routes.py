@@ -17,6 +17,7 @@ def get_messages(server_id, channel_id):
         msg = message.to_dict()
         usr = user.to_dict()
         msg['username'] = usr['username']
+        msg['profile_img_url'] = usr['profile_img_url']
         messages.append(msg)
     # messages = [message.to_dict() for message in raw_messages]
     return {'messages': messages}

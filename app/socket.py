@@ -214,7 +214,6 @@ def on_join(data):
     servers = data['serverIds']
     for server in servers:
         join_room(server)
-        print('JOINININING', server)
     # send(username + ' has entered the room.', to=channel)
 
 
@@ -224,5 +223,4 @@ def on_leave(data):
     servers = data['serverIds']
     for server in servers:
         leave_room(server)
-        print('LEAVVINININg', server)
     # send(username + ' has left the room.', to=room)
