@@ -26,6 +26,7 @@ function Message() {
     useEffect(() => {
         socket.on("chat", (chat) => {
             const chat_obj = JSON.parse(chat);
+            console.log(chat_obj);
             dispatch(createMessageAction(chat_obj));
         })
         socket.on('edit_message', (response) => {
@@ -87,7 +88,8 @@ function Message() {
             userId: user.id,
             msg: chatInput,      // User's message
             serverId,            // Server message is in
-            channelId            // Channel message is in
+            channelId,           // Channel message is in
+            profImgUrl: user.profile_img_url
         });
         setChatInput("")
         toggleChatValid(false)

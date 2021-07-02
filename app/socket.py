@@ -23,7 +23,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 class DateTimeEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
-            return obj.isoformat()
+            return obj.ctime() + ' UTC'
 
 
 @socketio.on('new_channel')
@@ -50,6 +50,7 @@ def handle_chat(data):
     db.session.commit()
     message_dict = message.to_dict()
     message_dict['username'] = data['user']
+    message_dict['profile_img_url'] = data['profImgUrl']
     message_json = json.dumps(message_dict, cls=DateTimeEncoder)
     emit("chat", message_json, to=str(data['serverId']))  # broadcast=True,
     # emit("chat", message_json)
