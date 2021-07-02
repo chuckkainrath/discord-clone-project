@@ -1,44 +1,33 @@
-.background-image {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-size: 100% auto;
-}
-
 .signup-container{
-  margin-top: 10%;
-  position: relative;
   color: white;
+  height: 100vh;
+  background-image: url('/images/login-background.jpg');
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup-form {
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
+}
+
+form h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-family: 'Righteous', cursive;
 }
 
 .form-container {
-  position: absolute;
+  position: static;
+  height: fit-content;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 2px 2px black;
+  border-radius: 5px;
   text-align: center;
-  align-items: center;
   display: flex;
-  height: 350px;
-  width: 400px;
-  top: 20%;
-  left: 35%;
   justify-content: center;
-  align-items: center;
-
   padding: 15px;
-  border-radius: 50%;
 }
 
 .form-label{
@@ -51,23 +40,19 @@
 .form-input{
   display: flex;
   height: 30px;
+  width: 20vw;
+  font-size: 1.4rem;;
   margin-bottom: 10px;
   margin-left: 3px;
   border-radius: 16px;
 }
 
-.field-container{
+.field-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   font-family: 'Righteous', cursive;
-}
-.nav{
-  font-family: 'Mukta', sans-serif;
-  text-decoration: underline;
-  color: #dfe0e2;
 }
 
 .field-container{
@@ -76,28 +61,24 @@
 
 }
 
-.signup-button{
-  display: block;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    margin: 4px 24px;
-    /* height: 56px;
-    width: 294px; */
-    border-radius: 16px;
-    text-align: center;
-    align-items: center;
-    line-height: 24px;
-    font-weight: 500;
-    text-decoration: none;
-    padding: 6px 15px;
-    font-size: 20px;
-    color: #dfe0e2;
-    background-color: #17252a;
-    font-family: 'Righteous', cursive;
-    cursor: pointer;
+.field-container .signup-button {
+  margin: 5px 0;
+  cursor: pointer;
 }
 
-.nav-text{
-  margin-top: 55px;
-  font-size: 22px;
-}
+/*
+.signup-button{
+  display: block;
+  box-sizing: border-box;
+  margin: 4px 0;
+  border-radius: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 15px;
+  font-size: 20px;
+  color: #dfe0e2;
+  background-color: #17252a;
+  font-family: 'Righteous', cursive;
+  cursor: pointer;
+} */

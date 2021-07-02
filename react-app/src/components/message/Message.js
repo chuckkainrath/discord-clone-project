@@ -16,6 +16,7 @@ function Message() {
     const [chatInput, setChatInput] = useState("");
     const [messages, setMessages] = useState([]);
     const [chatValid, toggleChatValid] = useState(false)
+    const [ scrolled, setScrolled ] = useState(false);
     const { channelId } = useChannel();
 
     const user = useSelector(state => state.session.user)
@@ -38,7 +39,17 @@ function Message() {
             socket.removeAllListeners('edit_message');
             socket.removeAllListeners('delete_message');
         }
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        let messagesDiv = document.getElementById('messages-container');
+        let scrollFunc = () => setScrolled(true);
+        if (messagesDiv) {
+            messagesDiv.addEventListener('scroll', scrollFunc);
+            if (!scrolled) messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return messagesDiv.removeEventListener('scroll', scrollFunc);
+        }
+    }, [messages]);
 
     useEffect(() => {
         const channelMsgs = []
@@ -84,7 +95,7 @@ function Message() {
 
     return (user && (
         <>
-            <div className={styles.message_sender_container}>
+            <div id='messages-container' className={styles.message_sender_container}>
                 <div className={styles.message_sender}>
                     {messages.map((message, ind) => (
                         <MessageItem key={ind} message={message} />
