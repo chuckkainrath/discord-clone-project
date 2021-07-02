@@ -6,7 +6,7 @@ S3_USER_BUCKET = environ.get('S3_USER_BUCKET')
 S3_ID = environ.get('S3_ID')
 
 S3_BUCKETS = {
-    'user': S3_USER_BUCKET,
+    'profile': S3_USER_BUCKET,
 }
 
 URL_SCHEME = 'https://'

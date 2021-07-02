@@ -72,12 +72,12 @@ export const signUp = (username, email, password, picture) => async (dispatch) =
       }
     const response = await fetch("/api/auth/signup", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
         body: signupForm
     });
     const data = await response.json();
+    if (data.errors) {
+        console.log(data.errors);
+    }
     dispatch(setUser(data));
 }
 

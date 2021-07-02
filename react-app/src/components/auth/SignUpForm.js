@@ -50,7 +50,7 @@ const SignUpForm = () => {
   return (
     <div className='signup-container'>
       <div className="form-container">
-        <form classname='signup-form' onSubmit={onSignUp}>
+        <form className='signup-form' onSubmit={onSignUp}>
           <h1>Sign Up</h1>
           <div className='field-container'>
             <label className='form-label'>User Name</label>
