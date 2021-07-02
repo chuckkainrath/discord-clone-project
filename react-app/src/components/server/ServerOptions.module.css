@@ -10,6 +10,10 @@
     width: 12em;
 }
 
+.server_options__hidden {
+    display: none;
+}
+
 .selects {
     cursor: pointer;
     margin: 5px 0;

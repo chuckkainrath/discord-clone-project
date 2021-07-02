@@ -1,11 +1,10 @@
 .message_sender_container {
     display: flex;
-    height: 90vh;
+    height: 88vh;
+    margin-bottom: 2vh;
     flex-direction: column;
-    /* justify-content: flex-end; */
     overflow-y: auto;
     color: white;
-    /* background-color: red; */
 }
 
 .message_sender {
@@ -18,7 +17,6 @@
 
 .send_chat_form {
     height: 2.5em;
-    /* background-color: #c5c5c5; */
     display: flex;
     align-items: center;
 }

@@ -1,42 +1,33 @@
 .server_icon__container_invisible {
-    position: relative;
-    left: 0;
-    height: 0em;
     width: fit-content;
-    /* border: 1px solid yellow; */
-}
-
-.server_icon__container {
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    overflow-y: auto;
-    overflow-x: hidden;
+    flex-flow: column nowrap;
     background-color: #383737;
-    width: 60px;
-    margin: 0 auto;
-
+    width: 100%;
+    justify-content: top;
+    align-items: center;
 }
 
-.server_icon, .server_create {
+.server_create {
     font-size: 1.5em;
-    padding: 10px;
-    margin: 5px;
-    width: 30px;
+    line-height: 50px;
+    margin-top: 5px;
+    width: 55px;
+    height: 55px;
     text-align: center;
     border: 1px solid black;
     border-radius: 50%;
     background-color: #4b4949;
     color: white;
-}
-
-.server_create{ 
     font-weight: bold;
     cursor: pointer;
-    margin: 5px auto
 }
 
-.server__above_context {
-    border: 1px solid black;
-    font-size: 3em;
+.server_create:hover {
+    border-radius: 30%;
+    cursor: pointer;
+}
+
+.server_create:hover {
+    background-color: #3E3D3D;
 }

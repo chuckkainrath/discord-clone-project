@@ -5,6 +5,7 @@ import { deleteServerAction, addServerAction, editServerAction } from '../../sto
 import { deleteChannelsInServer } from '../../store/channels';
 import { removeMemberAction, addMemberAction } from '../../store/members';
 import { removeInviteAction } from '../../store/invites';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ServerCreate from './ServerCreate'
 import styles from './ServerBar.module.css';
 import ServerIcon from './ServerIcon';
@@ -97,9 +98,11 @@ function ServerBar({ loaded }) {
         }
     }, [serverId, history, userId])
 
+    const createTooltip = props => <Tooltip id='create-server-tooltip' {...props}>Create a Server</Tooltip>
+
     return loaded && (
         <div className={styles.server_icon__container_invisible}>
-            <div className={styles.server_icon__container}>
+            <>
                 {serversArr.map(server => {
                     return (
                         <ServerIcon
@@ -108,13 +111,19 @@ function ServerBar({ loaded }) {
                         />
                     )
                 })}
-            </div>
-            <div
-                className={styles.server_create}
-                onClick={() => toggleCreate(!create)}
-            >
-                +
-            </div>
+                <OverlayTrigger
+                    placement='right'
+                    delay={{ show: 250, hide: 250 }}
+                    overlay={createTooltip}
+                >
+                    <div
+                        className={styles.server_create}
+                        onClick={() => toggleCreate(!create)}
+                    >
+                        +
+                    </div>
+                </OverlayTrigger>
+            </>
             {create && <ServerCreate toggleCreate={toggleCreate} />}
         </div>
     )
