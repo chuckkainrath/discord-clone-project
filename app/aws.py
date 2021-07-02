@@ -33,7 +33,6 @@ def upload_photo_to_s3(photo, bucket):
                 'ContentType': photo.content_type,
             })
     except Exception as e:
-        # Do error handling
         pass
     return {'photo_url': f'{URL_SCHEME}{S3_BUCKETS[bucket]}{URL_DOMAIN}{photo.filename}'}
 
