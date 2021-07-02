@@ -81,13 +81,6 @@
     margin-right: 10px;
 }
 
-.no_photo button {
-    display: inline-block;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 div.photo_cont {
     display: flex;
     justify-content: center;

@@ -6,7 +6,6 @@
 
 .user {
   font-family: 'Noto Serif', serif;
-  /* font-weight: 500; */
   font-size: 1.4rem;
   color: white;
 }
@@ -29,7 +28,6 @@
 
 .popup_container {
   background-color: lightgrey;
-  height: 10rem;
   padding: 20px;
   border-radius: 5px;
   width: 300%;
