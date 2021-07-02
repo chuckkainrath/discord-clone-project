@@ -22,7 +22,7 @@ s3_client = boto3.client(
 
 def upload_photo_to_s3(photo, bucket):
     try:
-        temp = s3_client.upload_fileobj(
+        s3_client.upload_fileobj(
             photo,
             S3_BUCKETS[bucket],
             photo.filename,
