@@ -4,6 +4,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import AvatarInput from './AvatarInput';
 import background from './login-background.jpg'
+
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -50,9 +51,9 @@ const SignUpForm = () => {
 
   return (
     <div className='signup-container'>
-      <img className="background-image" src={background} alt='background' />
       <div className="form-container">
         <form classname='signup-form' onSubmit={onSignUp}>
+          <h1>Sign Up</h1>
           <div className='field-container'>
             <label className='form-label'>User Name</label>
             <input
