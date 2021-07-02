@@ -4,7 +4,7 @@ import AvatarEditor from 'react-avatar-editor';
 import styles from './AvatarInput.module.css';
 import { Modal, Button } from 'react-bootstrap';
 
-function AvatarInput({setPicture, setChoosingPicture, choosingPicture}) {
+function AvatarInput({setPicture, setChoosingPicture, choosingPicture, picTitle}) {
     const [imageUrl, setImageUrl] = useState();
     const [width, setWidth] = useState();
     const [height, setHeight] = useState();
@@ -57,7 +57,7 @@ function AvatarInput({setPicture, setChoosingPicture, choosingPicture}) {
             centered
         >
             <Modal.Header className={styles.header__block}>
-                <label>Profile Picture (Optional)</label>
+                <label>{picTitle}</label>
                 <Button className={styles.cancel__picture} onClick={cancelImage}>Cancel</Button>
             </Modal.Header>
             {!imageUrl &&

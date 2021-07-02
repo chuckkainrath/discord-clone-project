@@ -116,6 +116,7 @@ const SignUpForm = () => {
         </form>
       </div>
       <AvatarInput
+        picTitle='Profile Picture (Optional)'
         setPicture={setPicture}
         setChoosingPicture={setChoosingPicture}
         choosingPicture={choosingPicture} />

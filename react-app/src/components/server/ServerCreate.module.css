@@ -1,9 +1,9 @@
 .server_create_container__invis{
     position: fixed;
-    top: 40%;
+    top: 25%;
     left: 47%;
     transform: translateX(-50%) translateY(-50%);
-    z-index: 100000;
+    z-index: 1000;
     width: 30%;
     font-family: 'Mukta', sans-serif;
 }
@@ -18,7 +18,7 @@
     top: -3.5em;
     background-color: lightgrey;
     border-radius: 5px;
-    z-index: 2;
+    /* z-index: 1001; */
     padding: 10px;
 }
 
@@ -64,10 +64,47 @@
     margin-bottom: 20px;
 }
 
-.server_name, .server_desc {
+.server_name, .server_desc, .no_photo, .photo {
     position: relative;
     width: 70%;
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 20px;
+}
+
+.photo, .no_photo {
+    font-size: 1.4rem;
+}
+
+.no_photo label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.no_photo button {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div.photo_cont {
+    display: flex;
+    justify-content: center;
+}
+
+.photo img {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.photo button {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.profile_image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

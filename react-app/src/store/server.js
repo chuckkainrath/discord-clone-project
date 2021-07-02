@@ -43,12 +43,18 @@ export const getServers = () => async (dispatch) => {
 }
 
 export const createServer = (name, description) => async (dispatch) => {
+    const serverCreateForm = new FormData();
+    serverCreateForm.append('name', name);
+    serverCreateForm.append('description', description);
+    if (picture) {
+        const picType = picture.type;
+        const ext = picType.split('/')[1];
+        const pictureFile = new File([picture], `profile-pic.${ext}`);
+        serverCreateForm.append('profile_img', pictureFile);
+    }
     const response = await fetch('/api/servers/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, description })
+        body: serverCreateForm
     })
 
 
