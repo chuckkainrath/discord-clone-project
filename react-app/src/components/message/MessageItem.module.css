@@ -82,3 +82,15 @@
   margin-top: -3px;
   margin-bottom: 0;
 }
+
+.date {
+  display: inline-block;
+  margin-left: 20px;
+  color: rgb(185, 185, 185);
+}
+
+.user__container {
+  display: flex;
+  align-items: center;
+  font-family: 'Mukta', sans-serif;
+}
