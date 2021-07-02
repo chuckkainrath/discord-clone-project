@@ -32,13 +32,13 @@ function ServerCreate({ toggleCreate }) {
             toggleValid(true);
         } else {
             const serverId = await dispatch(createServer(trimmedStr, desc, picture));
-            socket.emit("join", { serverIds: [serverId.toString()] })
+            if (serverId) socket.emit("join", { serverIds: [serverId.toString()] })
             setName('')
             setDesc('')
             setErrs([])
             toggleValid(true)
             toggleCreate(false)
-            history.push(`/servers/${serverId}`);
+            if (serverId) history.push(`/servers/${serverId}`);
         }
     }
 
