@@ -8,6 +8,7 @@ import Server from "./components/server/Server"
 import ServerBar from "./components/server/ServerBar"
 import { authenticate } from "./store/session";
 import { getServers } from "./store/server";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const dispatch = useDispatch()

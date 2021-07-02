@@ -1,0 +1,68 @@
+.modal {
+    background-color: red;
+}
+
+.avatar_image {
+    width: 400px;
+    height: auto;
+}
+
+.cancel__picture {
+    font-family: 'KoHo';
+    font-size: 1.2rem;
+    display: block;
+    position: absolute;
+    top: 21px;
+    right: 50px;
+}
+
+.picture__input {
+    height: 25vh;
+    cursor: pointer;
+}
+
+.picture__container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.picture__container input {
+    margin-left: 5px;
+    margin-top: 20px;
+}
+
+.submit__btn {
+    font-family: 'KoHo';
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.modal__profile_img {
+    font-family: 'KoHo';
+    font-size: 1.4rem;
+}
+
+.header__block button {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.input__text {
+    text-align: center;
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.scale__slider * {
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 575px) {
+    .scale__slider {
+        font-size: 1rem;
+    }
+}
