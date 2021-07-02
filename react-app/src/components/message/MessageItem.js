@@ -68,7 +68,7 @@ function MessageItem({ message }) {
     const [displayEdit, setDisplayEdit] = useState(false);
     const [messageBody, setMessageBody] = useState(message.body);
     const [validMessage, setValidMessage] = useState(true);
-    const [messageDate, setMessageDate] = useState(formatDate(message.created_at));
+    const [messageDate, _] = useState(formatDate(message.created_at));
     const { serverId } = useParams();
 
     const usersMessage = message.user_id === userId;
