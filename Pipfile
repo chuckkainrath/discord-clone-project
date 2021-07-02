@@ -29,6 +29,8 @@ PyJWT = "==1.7.1"
 eventlet = "*"
 Flask-SocketIO = "*"
 Flask-JWT-Extended = "==3.24.1"
+boto3 = "*"
+uuid = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
