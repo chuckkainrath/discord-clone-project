@@ -89,3 +89,22 @@ form h1 {
   font-family: 'Righteous', cursive;
   cursor: pointer;
 } */
+
+.photo-button {
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  margin: 4px 0;
+  border-radius: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 15px;
+  font-size: 20px;
+  color: #dfe0e2;
+  background-color: #17252a;
+  font-family: 'Righteous', cursive;
+  cursor: pointer;
+}
