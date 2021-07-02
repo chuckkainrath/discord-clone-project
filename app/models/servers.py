@@ -9,6 +9,7 @@ class Server(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(500), nullable=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    server_img_url = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
@@ -20,6 +21,7 @@ class Server(db.Model):
             'name': self.name,
             'description': self.description,
             'owner_id': self.owner_id,
+            'server_img_url': self.server_img_url,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
