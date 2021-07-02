@@ -199,7 +199,8 @@ def handle_join_server(data):
         'id': server_dict['id'],
         'name': server_dict['name'],
         'owner_id': server_dict['owner_id'],
-        'description': server_dict['description']
+        'description': server_dict['description'],
+        'server_img_url': server_dict['server_img_url']
     }
     returnData = {
         'server': slim_server,
