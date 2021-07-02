@@ -3,15 +3,72 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { socket } from '../../services/socket';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import blankProfileImg from '../images/blank-profile-img.png';
 import Popup from 'reactjs-popup';
 import styles from './MessageItem.module.css'
 
+const formatDay = (month, day, year) => {
+    let date = '';
+    month++;
+    if (month < 10) date += '0' + month + '/';
+    else date += month + '/';
+    if (day < 10) date += '0' + day + '/';
+    else date += day + '/';
+    date += year;
+    return date;
+}
+
+const formatCurrDay = (hour, minute) => {
+    let date = '';
+    let suffix;
+    if (hour === 0) {
+        date += '12:';
+        suffix = ' AM';
+    } else if (hour < 12) {
+        date += hour + ':';
+        suffix = ' AM';
+    } else if (hour === 12) {
+        date += hour + ':';
+        suffix = ' PM';
+    } else {
+        date += (hour - 12) + ':';
+        suffix = ' PM';
+    }
+    if (minute === 0) date += '00';
+    else if (minute < 10) date += '0' + minute;
+    else date += minute;
+    return date + suffix;
+}
+
+const formatDate = date => {
+    let currentTime = new Date();
+    let postedTime = new Date(date);
+    let dateStr;
+    let currYear = currentTime.getFullYear();
+    let postYear = postedTime.getFullYear();
+    let currMonth = currentTime.getMonth();
+    let postMonth = postedTime.getMonth();
+    let currDay = currentTime.getDate();
+    let postDay = postedTime.getDate();
+    if (currYear === postYear && currMonth === postMonth) {
+        if (currDay === postDay) {
+            dateStr = 'Today at ';
+        } else if (currDay === postDay + 1) {
+            dateStr = 'Yesterday at ';
+        } else {
+            return formatDay(postMonth, postDay, postYear);
+        }
+        return dateStr + formatCurrDay(postedTime.getHours(), postedTime.getMinutes());
+    }
+    return formatDay(postMonth, postDay, postYear);
+}
 
 function MessageItem({ message }) {
     const userId = useSelector(store => store.session.user.id);
     const [displayEdit, setDisplayEdit] = useState(false);
     const [messageBody, setMessageBody] = useState(message.body);
     const [validMessage, setValidMessage] = useState(true);
+    const [messageDate, setMessageDate] = useState(formatDate(message.created_at));
     const { serverId } = useParams();
 
     const usersMessage = message.user_id === userId;
@@ -56,8 +113,17 @@ function MessageItem({ message }) {
             {usersMessage &&
                 <div className={styles.messages_container}>
                     <ContextMenuTrigger id={message.id.toString()}>
-                        <div>
-                            <p className={styles.message_container}><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
+                        <div className={styles.message__wrapper}>
+                            <div className={styles.img__container}>
+                                <img className={styles.profile__image} src={blankProfileImg} />
+                            </div>
+                            <div className={styles.message__container}>
+                                <p className={styles.user__container}>
+                                    <span className={styles.user}>{message.username}</span>
+                                    <span className={styles.date}>{messageDate}</span>
+                                </p>
+                                <p className={styles.msg__container}><span className={styles.message}>{message.body}</span></p>
+                            </div>
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenu
