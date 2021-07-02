@@ -73,13 +73,15 @@ const SignUpForm = () => {
             ></input>
           </div>
           {!picture &&
-            <div>
+            <div className={'form-label'}>
               <label>Profile Picture (Optional)</label>
-              <button onClick={selectPhoto}>Choose a Photo</button>
+              <button
+                className={'photo-button'}
+                onClick={selectPhoto}>Choose a Photo</button>
             </div>
           }
           {picture &&
-            <div>
+            <div className={'photo'}>
               <div>Profile Picture (Optional)</div>
               <img
                 className={'profile-image'}
