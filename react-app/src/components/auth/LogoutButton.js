@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory } from 'react-router-dom'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styles from './LogoutButton.module.css';
 
 const LogoutButton = () => {
@@ -19,12 +20,23 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <button
-            onClick={onLogout}
-            className={styles.logout_button}
-          >
-            <i class="fas fa-sign-out"></i>
-          </button>;
+  const logoutTooltip = props => <Tooltip id='logout-tooltip' {...props}>Logout</Tooltip>
+
+  return (
+    <OverlayTrigger
+      placement='top'
+      delay={{ show: 250, hide: 250 }}
+      overlay={logoutTooltip}
+    >
+      <button
+        title='Logout'
+        onClick={onLogout}
+        className={styles.logout_button}
+      >
+        <i class="fas fa-sign-out"></i>
+      </button>
+    </OverlayTrigger>
+  )
 };
 
 export default LogoutButton;

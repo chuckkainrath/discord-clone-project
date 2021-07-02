@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import InviteCreate from './InviteCreate';
@@ -15,8 +15,30 @@ function ServerOptions() {
     const [channelCreate, toggleChannelCreate] = useState(false)
     const [inviteCreate, toggleInviteCreate] = useState(false);
     const userId = useSelector(state => state.session.user.id)
-
     const servers = useSelector(state => state.servers.servers);
+
+    // useEffect(() => {
+    //     let clickOutside = function(e) {
+    //         let servOptions = document.getElementById('server-options');
+    //         let servCont = document.getElementById('server-container');
+    //         if (options && servOptions && !servOptions.contains(e.target)) {
+    //             toggleOptions(false);
+    //             console.log('hiding menu');
+    //         }
+    //         else if (servCont && servCont.contains(e.target)) {
+    //             toggleOptions(!options);
+    //         }
+    //     }
+    //     if (options) {
+    //         console.log('eveeveeventlasdf');
+    //         document.addEventListener('click', clickOutside);
+    //     } else {
+    //         console.log('OPTIONS FALSE');
+    //     }
+    //     return () => {
+    //         document.removeEventListener('click', clickOutside);
+    //     }
+    // }, [options]);
 
     const deleteAServer = async () => {
         toggleOptions(false);
@@ -35,6 +57,7 @@ function ServerOptions() {
     return (
         <>
             {servers[serverId] ? <div
+                id='server-container'
                 onClick={() => toggleOptions(!options)}
             >
                 <div className={styles.server_container}>
@@ -52,7 +75,7 @@ function ServerOptions() {
                 </div>
             </div> : null}
             {options &&
-                <div className={styles.server_options__container}>
+                <div id='server-options' className={styles.server_options__container}>
                     {server.owner_id === userId &&
                         <>
                             <div

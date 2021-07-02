@@ -64,4 +64,5 @@
 
 .invites, .no_invites {
     font-size: 1.4rem;
+    cursor: pointer;
 }
