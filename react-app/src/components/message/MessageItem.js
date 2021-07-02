@@ -115,7 +115,9 @@ function MessageItem({ message }) {
                     <ContextMenuTrigger id={message.id.toString()}>
                         <div className={styles.message__wrapper}>
                             <div className={styles.img__container}>
-                                <img className={styles.profile__image} src={blankProfileImg} />
+                                <img
+                                    className={styles.profile__image}
+                                    src={message.profile_img_url ? message.profile_img_url : blankProfileImg} />
                             </div>
                             <div className={styles.message__container}>
                                 <p className={styles.user__container}>

@@ -48,7 +48,10 @@ function ServerIcon({ server }) {
             <div className={styles.server_icon}>
                 <ContextMenuTrigger id={server.id.toString()}>
                     <div onClick={() => changeServer(server.id)}>
-                        {shortenServer(server.name)}
+                        {server.server_img_url &&
+                            <img className={styles.server_icon_img} src={server.server_img_url} />
+                        }
+                        {!server.server_img_url && shortenServer(server.name)}
                     </div>
                 </ContextMenuTrigger>
                 <ContextMenu id={server.id.toString()}>

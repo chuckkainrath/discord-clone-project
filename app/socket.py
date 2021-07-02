@@ -23,7 +23,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 class DateTimeEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
-            return obj.isoformat()
+            return obj.ctime() + ' UTC'
 
 
 @socketio.on('new_channel')
@@ -50,6 +50,7 @@ def handle_chat(data):
     db.session.commit()
     message_dict = message.to_dict()
     message_dict['username'] = data['user']
+    message_dict['profile_img_url'] = data['profImgUrl']
     message_json = json.dumps(message_dict, cls=DateTimeEncoder)
     emit("chat", message_json, to=str(data['serverId']))  # broadcast=True,
     # emit("chat", message_json)
@@ -198,7 +199,8 @@ def handle_join_server(data):
         'id': server_dict['id'],
         'name': server_dict['name'],
         'owner_id': server_dict['owner_id'],
-        'description': server_dict['description']
+        'description': server_dict['description'],
+        'server_img_url': server_dict['server_img_url']
     }
     returnData = {
         'server': slim_server,
@@ -214,7 +216,6 @@ def on_join(data):
     servers = data['serverIds']
     for server in servers:
         join_room(server)
-        print('JOINININING', server)
     # send(username + ' has entered the room.', to=channel)
 
 
@@ -224,5 +225,4 @@ def on_leave(data):
     servers = data['serverIds']
     for server in servers:
         leave_room(server)
-        print('LEAVVINININg', server)
     # send(username + ' has left the room.', to=room)
