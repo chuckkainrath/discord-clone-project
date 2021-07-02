@@ -3,10 +3,12 @@ from os import environ
 import uuid
 
 S3_USER_BUCKET = environ.get('S3_USER_BUCKET')
+S3_SERVER_BUCKET = environ.get('S3_SERVER_BUCKET')
 S3_ID = environ.get('S3_ID')
 
 S3_BUCKETS = {
     'profile': S3_USER_BUCKET,
+    'server': S3_SERVER_BUCKET
 }
 
 URL_SCHEME = 'https://'
