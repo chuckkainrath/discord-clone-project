@@ -75,10 +75,10 @@
   display: grid;
   grid-template-columns: 80px 1fr;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .user__container {
-  margin-top: -3px;
   margin-bottom: 0;
 }
 
@@ -92,4 +92,8 @@
   display: flex;
   align-items: center;
   font-family: 'Mukta', sans-serif;
+}
+
+.msg__container {
+  margin-top: 5px;
 }
