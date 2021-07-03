@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { createServer } from '../../store/server'
@@ -7,7 +7,7 @@ import { socket } from '../../services/socket';
 import AvatarInput from '../auth/AvatarInput';
 import styles from './ServerCreate.module.css'
 
-function ServerCreate({ toggleCreate }) {
+function ServerCreate({ createRef, toggleCreate }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [name, setName] = useState('')
@@ -65,7 +65,7 @@ function ServerCreate({ toggleCreate }) {
       }
 
     return (
-        <div className={styles.server_create_container__invis}>
+        <div ref={createRef} className={styles.server_create_container__invis}>
             <div className={styles.server_create_container}>
                 <form onSubmit={handleSubmit} className={styles.server_create_form}>
                     <h1>Create a Server</h1>

@@ -2,7 +2,6 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { socket } from '../../services/socket';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styles from './ServerIcon.module.css'
 
@@ -40,30 +39,20 @@ function ServerIcon({ server }) {
     const serverTooltip = props => <Tooltip id='server-name-tooltip' {...props}>{server.name}</Tooltip>
 
     return (
-        <OverlayTrigger
-            placement='right'
-            delay={{ show: 250, hide: 250}}
-            overlay={serverTooltip}
-        >
-            <div className={styles.server_icon}>
-                <ContextMenuTrigger id={server.id.toString()}>
-                    <div onClick={() => changeServer(server.id)}>
-                        {server.server_img_url &&
-                            <img className={styles.server_icon_img} src={server.server_img_url} />
-                        }
-                        {!server.server_img_url && shortenServer(server.name)}
-                    </div>
-                </ContextMenuTrigger>
-                <ContextMenu id={server.id.toString()}>
-                    <MenuItem
-                        data={{ action: 'leave' }}
-                        onClick={leaveServer}
-                    >
-                        Leave Server
-                    </MenuItem>
-                </ContextMenu>
-            </div>
-        </OverlayTrigger>
+        <div className={styles.server_icon}>
+            <OverlayTrigger
+                placement='right'
+                delay={{ show: 250, hide: 250}}
+                overlay={serverTooltip}
+            >
+                <div onClick={() => changeServer(server.id)}>
+                    {server.server_img_url &&
+                        <img className={styles.server_icon_img} src={server.server_img_url} />
+                    }
+                    {!server.server_img_url && shortenServer(server.name)}
+                </div>
+            </OverlayTrigger>
+        </div>
     )
 }
 

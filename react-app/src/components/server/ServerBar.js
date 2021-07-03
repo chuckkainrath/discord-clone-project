@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteServerAction, addServerAction, editServerAction } from '../../store/server';
@@ -17,6 +17,8 @@ function ServerBar({ loaded }) {
     const servers = useSelector(state => state.servers.servers);
     const userId = useSelector(state => state.session.user.id);
     const [create, toggleCreate] = useState(false)
+    const createRef = useRef(null);
+    const createBtnRef = useRef(null);
 
     const { serverId } = useParams();
     const [serversArr, setServersArr] = useState([]);
@@ -42,6 +44,19 @@ function ServerBar({ loaded }) {
             }
         }
     }
+
+    useEffect(() => {
+        const clickOutside = async function(e) {
+            if (createBtnRef.current && !createBtnRef.current.contains(e.target) &&
+                create && createRef.current && !createRef.current.contains(e.target)) {
+                toggleCreate(false);
+            }
+        }
+        document.addEventListener('click', clickOutside);
+        return () => {
+            document.removeEventListener('click', clickOutside);
+        }
+    }, [createRef, createBtnRef, create]);
 
     useEffect(() => {
         socket.emit("join", { serverIds })
@@ -117,6 +132,7 @@ function ServerBar({ loaded }) {
                     overlay={createTooltip}
                 >
                     <div
+                        ref={createBtnRef}
                         className={styles.server_create}
                         onClick={() => toggleCreate(!create)}
                     >
@@ -124,7 +140,7 @@ function ServerBar({ loaded }) {
                     </div>
                 </OverlayTrigger>
             </>
-            {create && <ServerCreate toggleCreate={toggleCreate} />}
+            {create && <ServerCreate createRef={createRef} toggleCreate={toggleCreate} />}
         </div>
     )
 }

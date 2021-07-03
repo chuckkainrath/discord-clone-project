@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { sendInvite } from '../../store/invites'
 import styles from './ServerOptions.module.css';
 
-function InviteCreate({ toggleOptions }) {
+function InviteCreate({ toggleOptions, toggleInviteCreate }) {
     const [username, setUsername] = useState('');
     const [validInv, setValidInv] = useState(true);
     const { serverId } = useParams();
@@ -22,6 +22,7 @@ function InviteCreate({ toggleOptions }) {
         setUsername('');
         setValidInv(true);
         toggleOptions(false);
+        toggleInviteCreate(false);
     }
 
     return (
