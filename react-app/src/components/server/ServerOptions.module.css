@@ -77,3 +77,33 @@
     margin-left: 5px;
     margin-top: 5px;
 }
+
+.leave_server__container {
+    background-color: lightgray;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 1px rgb(87, 87, 87);
+}
+
+.leave_server__container button,
+.leave_server__container h1,
+.leave_server__container p {
+    font-family: 'Mukta', sans-serif !important;
+}
+
+.leave_server__container h1 {
+    font-size: 2rem;
+}
+
+.leave_server__container p {
+    font-size: 1.3rem;
+}
+
+.leave_btn__container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.leave_btn__container button {
+    margin-right: 10px;
+}
