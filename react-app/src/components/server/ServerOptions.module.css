@@ -1,7 +1,8 @@
 .server_options__container{
     /* display: none; */
     z-index: 10;
-    background-color: lightgray;
+    background-color: rgb(211, 211, 211);
+    box-shadow: 0 0 1px 1px rgb(87, 87, 87);
     border-radius: 5px;
     color: black;
     position: absolute;
