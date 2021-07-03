@@ -1,5 +1,6 @@
 .server_options__container{
     /* display: none; */
+    z-index: 10;
     background-color: lightgray;
     border-radius: 5px;
     color: black;
