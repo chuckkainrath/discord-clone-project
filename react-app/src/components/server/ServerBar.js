@@ -47,7 +47,6 @@ function ServerBar({ loaded }) {
 
     useEffect(() => {
         const clickOutside = async function(e) {
-            console.log(create);
             if (createBtnRef.current && !createBtnRef.current.contains(e.target) &&
                 create && createRef.current && !createRef.current.contains(e.target)) {
                 toggleCreate(false);

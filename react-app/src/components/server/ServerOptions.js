@@ -14,31 +14,26 @@ function ServerOptions() {
     const [options, toggleOptions] = useState(false)
     const [channelCreate, toggleChannelCreate] = useState(false)
     const [inviteCreate, toggleInviteCreate] = useState(false);
+    const optionsRef = useRef(null);
+    const optionsBtnRef = useRef(null);
     const userId = useSelector(state => state.session.user.id)
     const servers = useSelector(state => state.servers.servers);
 
-    // useEffect(() => {
-    //     let clickOutside = function(e) {
-    //         let servOptions = document.getElementById('server-options');
-    //         let servCont = document.getElementById('server-container');
-    //         if (options && servOptions && !servOptions.contains(e.target)) {
-    //             toggleOptions(false);
-    //             console.log('hiding menu');
-    //         }
-    //         else if (servCont && servCont.contains(e.target)) {
-    //             toggleOptions(!options);
-    //         }
-    //     }
-    //     if (options) {
-    //         console.log('eveeveeventlasdf');
-    //         document.addEventListener('click', clickOutside);
-    //     } else {
-    //         console.log('OPTIONS FALSE');
-    //     }
-    //     return () => {
-    //         document.removeEventListener('click', clickOutside);
-    //     }
-    // }, [options]);
+    useEffect(() => {
+        const clickOutside = async function(e) {
+            if (optionsBtnRef.current && !optionsBtnRef.current.contains(e.target) &&
+                options && optionsRef.current && !optionsRef.current.contains(e.target)) {
+                toggleOptions(false);
+                toggleChannelCreate(false);
+                toggleInviteCreate(false);
+                toggleServerEdit(false);
+            }
+        }
+        document.addEventListener('click', clickOutside);
+        return () => {
+            document.removeEventListener('click', clickOutside);
+        }
+    }, [optionsRef, optionsBtnRef, options]);
 
     const deleteAServer = async () => {
         toggleOptions(false);
@@ -66,7 +61,7 @@ function ServerOptions() {
     return (
         <>
             {servers[serverId] ? <div
-                id='server-container'
+                ref={optionsBtnRef}
                 onClick={toggleAllOptions}
             >
                 <div className={styles.server_container}>
@@ -84,7 +79,7 @@ function ServerOptions() {
                 </div>
             </div> : null}
             {options &&
-                <div id='server-options' className={styles.server_options__container}>
+                <div ref={optionsRef} className={styles.server_options__container}>
                     {server.owner_id === userId &&
                         <>
                             <div
