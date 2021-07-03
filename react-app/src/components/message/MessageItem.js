@@ -162,8 +162,19 @@ function MessageItem({ message }) {
                 </div>
             }
             {!usersMessage &&
-                <div className={styles.messages_container}>
-                    <p className={styles.message_container}><span className={styles.user}>{message.username}: </span> <span className={styles.message}>{message.body}</span></p>
+                <div className={styles.message__wrapper}>
+                    <div className={styles.img__container}>
+                        <img
+                            className={styles.profile__image}
+                            src={message.profile_img_url ? message.profile_img_url : blankProfileImg} />
+                    </div>
+                    <div className={styles.message__container}>
+                        <p className={styles.user__container}>
+                            <span className={styles.user}>{message.username}</span>
+                            <span className={styles.date}>{messageDate}</span>
+                        </p>
+                        <p className={styles.msg__container}><span className={styles.message}>{message.body}</span></p>
+                    </div>
                 </div>
             }
         </>
