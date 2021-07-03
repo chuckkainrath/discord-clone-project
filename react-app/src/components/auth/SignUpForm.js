@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import AvatarInput from './AvatarInput';
+import backgroundImg from './login-background.jpg';
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -48,7 +49,9 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='signup-container'>
+    <div className='signup-container'
+         style={{ backgroundImage: `url(${backgroundImg})`}}
+    >
       <div className="form-container">
         <form className='signup-form' onSubmit={onSignUp}>
           <h1>Sign Up</h1>
