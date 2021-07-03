@@ -54,11 +54,20 @@ function ServerOptions() {
         }
     }, [serverId])
 
+    const toggleAllOptions = () => {
+        if (options) {
+            toggleChannelCreate(false);
+            toggleServerEdit(false);
+            toggleInviteCreate(false);
+        }
+        toggleOptions(!options);
+    }
+
     return (
         <>
             {servers[serverId] ? <div
                 id='server-container'
-                onClick={() => toggleOptions(!options)}
+                onClick={toggleAllOptions}
             >
                 <div className={styles.server_container}>
                     {server && server.name}
@@ -84,7 +93,7 @@ function ServerOptions() {
                             >
                                 Edit Server Name
                             </div>
-                            {serverEdit && <ServerEdit toggleOptions={toggleOptions} name={server.name} />}
+                            {serverEdit && <ServerEdit toggleServerEdit={toggleServerEdit} toggleOptions={toggleOptions} name={server.name} />}
                         </>
                     }
                     <div
@@ -93,14 +102,14 @@ function ServerOptions() {
                     >
                         Create a Channel
                     </div>
-                    {channelCreate && <ChannelCreate toggleOptions={toggleOptions} />}
+                    {channelCreate && <ChannelCreate toggleChannelCreate={toggleChannelCreate} toggleOptions={toggleOptions} />}
                     <div
                         className={styles.selects}
                         onClick={() => toggleInviteCreate(!inviteCreate)}
                     >
                         Invite a User
                     </div>
-                    {inviteCreate && <InviteCreate toggleOptions={toggleOptions} />}
+                    {inviteCreate && <InviteCreate toggleInviteCreate={toggleInviteCreate} toggleOptions={toggleOptions} />}
                     <div
                         className={styles.selects}
                         onClick={deleteAServer}

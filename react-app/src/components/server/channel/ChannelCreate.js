@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { socket } from '../../../services/socket';
 import styles from '../ServerOptions.module.css';
 
-function ChannelCreate({ toggleOptions }) {
+function ChannelCreate({ toggleOptions, toggleChannelCreate }) {
     const [validChannel, toggleValidChannel] = useState(true)
     const [channelName, setChannelName] = useState('')
     const { serverId } = useParams();
@@ -26,6 +26,7 @@ function ChannelCreate({ toggleOptions }) {
         });
         toggleOptions(false)
         toggleValidChannel(true)
+        toggleChannelCreate(false);
         setChannelName('')
     }
 

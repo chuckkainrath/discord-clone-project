@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { socket } from '../../services/socket';
 import styles from './ServerOptions.module.css';
 
-function ServerEdit({ toggleOptions, name }) {
+function ServerEdit({ toggleOptions, toggleServerEdit, name }) {
     const [serverName, setServerName] = useState(name);
     const [validName, setValidName] = useState(true);
     const userId = useSelector(state => state.session.user.id);
@@ -30,6 +30,7 @@ function ServerEdit({ toggleOptions, name }) {
         setServerName('');
         setValidName(true);
         toggleOptions(false);
+        toggleServerEdit(false);
     }
 
     return (
