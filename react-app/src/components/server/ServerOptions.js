@@ -58,6 +58,24 @@ function ServerOptions() {
         toggleOptions(!options);
     }
 
+    const toggleServerFunc = () => {
+        toggleServerEdit(!serverEdit);
+        toggleInviteCreate(false);
+        toggleChannelCreate(false);
+    }
+
+    const toggleChannelFunc = () => {
+        toggleChannelCreate(!channelCreate);
+        toggleInviteCreate(false);
+        toggleServerEdit(false);
+    }
+
+    const toggleInviteFunc = () => {
+        toggleChannelCreate(false);
+        toggleInviteCreate(!inviteCreate);
+        toggleServerEdit(false);
+    }
+
     return (
         <>
             {servers[serverId] ? <div
@@ -84,7 +102,7 @@ function ServerOptions() {
                         <>
                             <div
                                 className={styles.selects}
-                                onClick={() => toggleServerEdit(!serverEdit)}
+                                onClick={toggleServerFunc}
                             >
                                 Edit Server Name
                             </div>
@@ -93,14 +111,14 @@ function ServerOptions() {
                     }
                     <div
                         className={styles.selects}
-                        onClick={() => toggleChannelCreate(!channelCreate)}
+                        onClick={toggleChannelFunc}
                     >
                         Create a Channel
                     </div>
                     {channelCreate && <ChannelCreate toggleChannelCreate={toggleChannelCreate} toggleOptions={toggleOptions} />}
                     <div
                         className={styles.selects}
-                        onClick={() => toggleInviteCreate(!inviteCreate)}
+                        onClick={toggleInviteFunc}
                     >
                         Invite a User
                     </div>
