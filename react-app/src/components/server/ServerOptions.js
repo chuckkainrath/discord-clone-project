@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import InviteCreate from './InviteCreate';
 import { socket } from '../../services/socket';
+import { Modal } from 'react-bootstrap';
 import ChannelCreate from './channel/ChannelCreate';
 import ServerEdit from './ServerEdit';
 import styles from './ServerOptions.module.css'
@@ -14,6 +15,7 @@ function ServerOptions() {
     const [options, toggleOptions] = useState(false)
     const [channelCreate, toggleChannelCreate] = useState(false)
     const [inviteCreate, toggleInviteCreate] = useState(false);
+    const [leaveServer, showLeaveServer] = useState(false);
     const optionsRef = useRef(null);
     const optionsBtnRef = useRef(null);
     const userId = useSelector(state => state.session.user.id)
@@ -76,6 +78,25 @@ function ServerOptions() {
         toggleServerEdit(false);
     }
 
+    const leaveServerAction = () => {
+        // emit leave server
+        toggleAllOptions();
+        if (server.owner_id !== userId) {
+            socket.emit('leave_server', {
+                serverId: server.id,
+                userId
+            });
+
+        } else {
+            // Alert user somehow
+        }
+    }
+
+    const leaveServerStart = () => {
+        showLeaveServer(true);
+        toggleAllOptions();
+    }
+
     return (
         <>
             {servers[serverId] ? <div
@@ -123,13 +144,36 @@ function ServerOptions() {
                         Invite a User
                     </div>
                     {inviteCreate && <InviteCreate toggleInviteCreate={toggleInviteCreate} toggleOptions={toggleOptions} />}
-                    <div
-                        className={styles.selects}
-                        onClick={deleteAServer}
-                    >
-                        Delete Server
-                    </div>
+                    {(servers[serverId] && servers[serverId].owner_id === userId) ?
+                        (<div
+                            className={styles.selects}
+                            onClick={deleteAServer}
+                        >
+                            Delete Server
+                        </div>)
+                        :
+                        (<div
+                            className={styles.selects}
+                            onClick={leaveServerStart}
+                        >
+                            Leave Server
+                        </div>)
+                    }
                 </div>}
+            <Modal
+                show={leaveServer}
+                onHide={() => showLeaveServer(false)}
+                centered
+            >
+                <div className={styles.leave_server__container}>
+                    <h1>Leave Server</h1>
+                    <p>Do you want to leave the server?</p>
+                    <div className={styles.leave_btn__container}>
+                        <button onClick={leaveServerAction}>Leave</button>
+                        <button onClick={() => showLeaveServer(false)}>Cancel</button>
+                    </div>
+                </div>
+            </Modal>
         </>
     )
 }
