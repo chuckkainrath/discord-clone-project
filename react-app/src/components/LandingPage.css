@@ -6,7 +6,7 @@
 }
 
 .landing-content {
-    background-image: url('/images/landing.jpg');
+    /* background-image: url('/images/landing.jpg'); */
     background-size: 100% 100%;
     margin-top: 10px;
     display: flex;
