@@ -7,6 +7,7 @@ import Malik from './FooterRef/malik.jpg'
 import Tyler from './FooterRef/thumbnail.jpg'
 import linkedIn from './FooterRef/LI-In-Bug.png'
 import github from './FooterRef/GitHub-Mark-64px.png'
+import landingBackground from './auth/landing.jpg';
 
 function LandingPage() {
   const [showBryan, setShowBryan] = useState(false)
@@ -39,7 +40,8 @@ function LandingPage() {
   return (
     <div className="landing">
       <h1 className="landing-title">Racket</h1>
-      <div className="landing-content">
+      <div className="landing-content"
+           style={{ backgroundImage: `url(${landingBackground})` }}>
         <div className="text-container">
           <h1 className="landing-textheader">Your place to talk</h1>
           <div className="landing-textbody">
