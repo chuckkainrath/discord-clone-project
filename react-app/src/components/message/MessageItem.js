@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { socket } from '../../services/socket';
@@ -70,6 +70,7 @@ function MessageItem({ message }) {
     const [validMessage, setValidMessage] = useState(true);
     const [messageDate, _] = useState(formatDate(message.created_at));
     const { serverId } = useParams();
+    const contextRef = useRef(null);
 
     const usersMessage = message.user_id === userId;
 
@@ -108,11 +109,15 @@ function MessageItem({ message }) {
         }
     }, [messageBody, message.body]);
 
+    const iconClick = e => {
+        if (contextRef) contextRef.current.handleContextClick(e);
+    }
+
     return (
         <>
             {usersMessage &&
                 <div className={styles.messages_container}>
-                    <ContextMenuTrigger id={message.id.toString()}>
+                    <ContextMenuTrigger ref={contextRef} id={message.id.toString()}>
                         <div className={styles.message__wrapper}>
                             <div className={styles.img__container}>
                                 <img
@@ -126,6 +131,10 @@ function MessageItem({ message }) {
                                 </p>
                                 <p className={styles.msg__container}><span className={styles.message}>{message.body}</span></p>
                             </div>
+                            <i
+                                onClick={iconClick}
+                                class="fas fa-cog">
+                             </i>
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenu
