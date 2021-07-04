@@ -78,8 +78,11 @@ form h1 {
   margin-left: 5px;
 }
 
-/*
-.signup-button{
+.signup-button:hover{
+  background-color: #0f191d;
+}
+
+/* .signup-button{
   display: block;
   box-sizing: border-box;
   margin: 4px 0;
@@ -112,4 +115,32 @@ form h1 {
   background-color: #17252a;
   font-family: 'Righteous', cursive;
   cursor: pointer;
+}
+
+.photo-button:hover {
+  background-color: #0f191d;
+}
+
+.photo-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.other-options {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 5%;
+  font-family: 'Righteous', cursive;
+
+}
+
+.redirect:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.redirect {
+  font-family: 'Righteous', cursive;
+  text-decoration: none;
 }

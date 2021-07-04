@@ -66,3 +66,11 @@
     font-size: 1.4rem;
     cursor: pointer;
 }
+
+.no_invites:hover {
+    color: lightgray;
+}
+
+.invites:hover {
+    color: rgb(187, 0, 0);
+}
