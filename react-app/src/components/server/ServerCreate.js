@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { createServer } from '../../store/server'
-import { useChannel } from '../../context/ChannelContext';
+// import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../../services/socket';
 import AvatarInput from '../auth/AvatarInput';
 import styles from './ServerCreate.module.css'
@@ -65,54 +65,56 @@ function ServerCreate({ createRef, toggleCreate }) {
       }
 
     return (
-        <div ref={createRef} className={styles.server_create_container__invis}>
-            <div className={styles.server_create_container}>
-                <form onSubmit={handleSubmit} className={styles.server_create_form}>
-                    <h1>Create a Server</h1>
-                    <div className={styles.server_name}>
-                        <label>Name: </label>
-                        <input
-                            value={name}
-                            onChange={e => nameChange(e.target.value)}
-                            type='text'
-                            maxLength='50'
-                        />
-                    </div>
-                    {!picture &&
-                        <div className={styles.no_photo}>
-                            <label>Server Icon (Optional)</label>
-                            <button onClick={selectPhoto}>Choose a Photo</button>
+        <>
+            <div ref={createRef} className={styles.server_create_container__invis}>
+                <div className={styles.server_create_container}>
+                    <form onSubmit={handleSubmit} className={styles.server_create_form}>
+                        <h1>Create a Server</h1>
+                        <div className={styles.server_name}>
+                            <label>Name: </label>
+                            <input
+                                value={name}
+                                onChange={e => nameChange(e.target.value)}
+                                type='text'
+                                maxLength='50'
+                            />
                         </div>
-                    }
-                    {picture &&
-                        <div className={styles.photo}>
-                            <div>Server Icon (Optional)</div>
-                            <div className={styles.photo_cont}>
-                                <img
-                                    className={styles.profile_image}
-                                    src={URL.createObjectURL(picture)}
-                                />
-                                <button onClick={() => setPicture()}>Delete Photo</button>
+                        {!picture &&
+                            <div className={styles.no_photo}>
+                                <label>Server Icon (Optional)</label>
+                                <button onClick={selectPhoto}>Choose a Photo</button>
                             </div>
+                        }
+                        {picture &&
+                            <div className={styles.photo}>
+                                <div>Server Icon (Optional)</div>
+                                <div className={styles.photo_cont}>
+                                    <img
+                                        className={styles.profile_image}
+                                        src={URL.createObjectURL(picture)}
+                                    />
+                                    <button onClick={() => setPicture()}>Delete Photo</button>
+                                </div>
+                            </div>
+                        }
+                        <div className={styles.server_desc}>
+                            <label>Description: </label>
+                            <textarea
+                                value={desc}
+                                onChange={e => descChange(e.target.value)}
+                                type='text'
+                                maxLength='255'
+                            />
                         </div>
-                    }
-                    <div className={styles.server_desc}>
-                        <label>Description: </label>
-                        <textarea
-                            value={desc}
-                            onChange={e => descChange(e.target.value)}
-                            type='text'
-                            maxLength='255'
-                        />
-                    </div>
-                    <div className={styles.server_submit}>
-                        <button
-                            type='submit'
-                            disabled={valid}
-                        >Create</button>
-                        <button onClick={cancelServer}>Cancel</button>
-                    </div>
-                </form>
+                        <div className={styles.server_submit}>
+                            <button
+                                type='submit'
+                                disabled={valid}
+                            >Create</button>
+                            <button onClick={cancelServer}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <AvatarInput
                 picTitle='Server Icon (Optional)'
@@ -120,7 +122,7 @@ function ServerCreate({ createRef, toggleCreate }) {
                 setChoosingPicture={setChoosingPicture}
                 choosingPicture={choosingPicture}
             />
-        </div>
+        </>
     )
 }
 
