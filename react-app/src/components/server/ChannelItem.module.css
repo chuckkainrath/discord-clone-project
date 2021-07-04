@@ -1,8 +1,6 @@
 .channel_name_container {
     position: relative;
     color: white;
-    margin-top: 14px;
-    padding: .2em;
     cursor: pointer;
     font-family: 'Noto Serif', serif;
     /* font-weight: 600; */
@@ -11,6 +9,11 @@
 
 .channel_name_container:hover {
     background-color: #353636;
+}
+
+.channel_name {
+    padding: 5px 10px;
+    margin-top: 10px;
 }
 
 .channel_name::before {
