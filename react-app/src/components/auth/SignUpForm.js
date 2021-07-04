@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { useHistory, Redirect } from 'react-router-dom';
+import { signUp, login } from '../../store/session';
+import { getServers } from '../../store/server'
 import AvatarInput from './AvatarInput';
 import backgroundImg from './login-background.jpg';
 import './SignUpForm.css'
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector(state => state.session.user);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -43,6 +45,19 @@ const SignUpForm = () => {
     e.preventDefault();
     setChoosingPicture(true);
   }
+
+  const signInAsDemo = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data.errors) {
+      return;
+    }
+    let servs = await dispatch(getServers());
+    if (servs && servs.length > 0) {
+      return <Redirect to={`/servers/${servs[0].id}`} />
+    }
+    return <Redirect to="/servers/0" />;
+  };
 
   if (user) {
     return <Redirect to="/servers/0" />;
@@ -119,7 +134,12 @@ const SignUpForm = () => {
           <div className='field-container'>
             <button className='signup-button' type="submit">Sign Up</button>
           </div>
-          <div className='field-container nav-text'> Already have an account? <NavLink className='signup-button' to='/login'>Login Here</NavLink></div>
+          <div className='other-options'>
+            <div>Have an account?
+              <a tabIndex='0' className='redirect' onClick={() => history.push('/login')}> Login </a>
+            </div>
+            <div>Or login as a <a tabIndex='0' className='redirect' onClick={signInAsDemo}>DemoUser</a></div>
+          </div>
         </form>
       </div>
       <AvatarInput

@@ -92,6 +92,10 @@
     cursor: pointer;
 }
 
+.li-button:hover {
+    background-color: #0f191d;
+}
+
 .demo-button {
     display: block;
     margin-bottom: 10px;
@@ -116,3 +120,22 @@
 .error {
     color: red;
 }
+
+
+.other-options {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 5%;
+    font-family: 'Righteous', cursive;
+
+  }
+
+  .redirect:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .redirect {
+    font-family: 'Righteous', cursive;
+    text-decoration: none;
+  }
