@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useChannel } from '../../context/ChannelContext';
 import { socket } from '../../services/socket';
@@ -12,6 +12,7 @@ function ChannelItem({ channel }) {
     const [displayEdit, setDisplayEdit] = useState(false);
     const [channelName, setChannelName] = useState(channel.name)
     const [validName, setValidName] = useState(true)
+    const contextRef = useRef(null);
 
     const handleEditClick = (e, data) => {
         if (channel.name !== 'General') {
@@ -48,14 +49,24 @@ function ChannelItem({ channel }) {
         setValidName(true);
     }
 
+    const iconClick = e => {
+        if (contextRef) contextRef.current.handleContextClick(e);
+    }
+
     return (
         <div className={styles.channel_name_container}>
-            <ContextMenuTrigger id={channel.id.toString()}>
+            <ContextMenuTrigger
+                ref={contextRef}
+                id={channel.id.toString()}>
                 <div
                     className={styles.channel_name}
                     onClick={() => setChannelId(channel.id)}
                 >
                     {channel.name}
+                    <i
+                        onClick={iconClick}
+                        class="fas fa-cog">
+                    </i>
                 </div>
             </ContextMenuTrigger>
             <ContextMenu
