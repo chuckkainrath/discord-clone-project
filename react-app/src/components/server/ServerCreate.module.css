@@ -1,21 +1,22 @@
-.server_create_container__invis{
+.server_create_container__invis {
     position: fixed;
-    top: 25%;
-    left: 47%;
-    transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
     z-index: 1000;
-    width: 30%;
+    width: 100vw;
+    height: 100vh;
     font-family: 'Mukta', sans-serif;
 }
 
 .server_create_container {
-    height: 5em;
+    width: 500px;
+    margin-bottom: 50px;
 }
 
 .server_create_form {
-    position: relative;
-    left: 4.5em;
-    top: -3.5em;
     background-color: lightgrey;
     border-radius: 5px;
     /* z-index: 1001; */
