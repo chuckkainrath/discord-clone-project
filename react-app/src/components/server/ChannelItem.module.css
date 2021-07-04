@@ -1,6 +1,7 @@
 .channel_name_container {
+    position: relative;
     color: white;
-    margin-top: .4em;
+    margin-top: 14px;
     padding: .2em;
     cursor: pointer;
     font-family: 'Noto Serif', serif;
@@ -14,6 +15,20 @@
 
 .channel_name::before {
     content: "#  "
+}
+
+.channel_name i {
+    display: none;
+}
+
+.channel_name:hover i {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: -5px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    background-color: rgb(44, 44, 44);
 }
 
 .popup_container {
