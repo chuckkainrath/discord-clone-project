@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, NavLink } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 import { getServers } from '../../store/server'
 import backgroundImg from './login-background.jpg';
@@ -8,6 +8,7 @@ import './LoginForm.css'
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector(state => state.session.user);
   const servers = useSelector(state => state.servers.servers);
   // const [errors, setErrors] = useState([]);
@@ -106,9 +107,13 @@ const LoginForm = () => {
             />
             {passwordErr && <p className='error'>{passwordErr}</p>}
             <button className="li-button" type="submit">Login</button>
-            <button className="demo-button" type="submit" onClick={DemoLogin}>Demo User</button>
           </div>
-          <div className='field-container nav-text'> Need an account? <NavLink className='signup-button' to='/sign-up'>Sign Up Here</NavLink></div>
+          <div className='other-options'>
+            <div>Don't have an account?
+              <a tabIndex='0' className='redirect' onClick={() => history.push('/sign-up')}> Sign Up </a>
+            </div>
+            <div>Or login as a <a tabIndex='0' className='redirect' onClick={DemoLogin}>DemoUser</a></div>
+          </div>
         </form>
       </div>
     </div>
