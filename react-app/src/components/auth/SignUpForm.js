@@ -84,13 +84,15 @@ const SignUpForm = () => {
             </div>
           }
           {picture &&
-            <div className={'photo'}>
+            <div className={'photo form-label'}>
               <div>Profile Picture (Optional)</div>
-              <img
-                className={'profile-image'}
-                src={URL.createObjectURL(picture)}
-              />
-              <button onClick={() => setPicture()}>Delete Photo</button>
+              <div className='photo-cont'>
+                <img
+                  className={'profile-image'}
+                  src={URL.createObjectURL(picture)}
+                />
+                <button className='signup-button' onClick={() => setPicture()}>Delete Photo</button>
+              </div>
             </div>
           }
           <div className='field-container'>

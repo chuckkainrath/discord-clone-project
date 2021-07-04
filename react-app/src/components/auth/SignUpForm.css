@@ -113,3 +113,9 @@ form h1 {
   font-family: 'Righteous', cursive;
   cursor: pointer;
 }
+
+.photo-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
