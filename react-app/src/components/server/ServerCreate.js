@@ -7,14 +7,14 @@ import { socket } from '../../services/socket';
 import AvatarInput from '../auth/AvatarInput';
 import styles from './ServerCreate.module.css'
 
-function ServerCreate({ createRef, toggleCreate }) {
+function ServerCreate({ createRef, toggleCreate, choosingPicture, setChoosingPicture }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [valid, toggleValid] = useState(true)
     const [picture, setPicture] = useState(null);
-    const [choosingPicture, setChoosingPicture] = useState(false);
+    // const [choosingPicture, setChoosingPicture] = useState(false);
     const [errs, setErrs] = useState([])
 
     function nameChange(newName) {

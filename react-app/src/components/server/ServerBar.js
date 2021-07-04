@@ -19,6 +19,7 @@ function ServerBar({ loaded }) {
     const [create, toggleCreate] = useState(false)
     const createRef = useRef(null);
     const createBtnRef = useRef(null);
+    const [choosingPicture, setChoosingPicture] = useState(false);
 
     const { serverId } = useParams();
     const [serversArr, setServersArr] = useState([]);
@@ -46,9 +47,10 @@ function ServerBar({ loaded }) {
     }
 
     useEffect(() => {
-        const clickOutside = async function(e) {
+        const clickOutside = function(e) {
             if (createBtnRef.current && !createBtnRef.current.contains(e.target) &&
-                create && createRef.current && !createRef.current.contains(e.target)) {
+                create && createRef.current && !createRef.current.contains(e.target) &&
+                !choosingPicture) {
                 toggleCreate(false);
             }
         }
@@ -56,7 +58,7 @@ function ServerBar({ loaded }) {
         return () => {
             document.removeEventListener('click', clickOutside);
         }
-    }, [createRef, createBtnRef, create]);
+    }, [createRef, createBtnRef, create, choosingPicture]);
 
     useEffect(() => {
         socket.emit("join", { serverIds })
@@ -140,7 +142,8 @@ function ServerBar({ loaded }) {
                     </div>
                 </OverlayTrigger>
             </>
-            {create && <ServerCreate createRef={createRef} toggleCreate={toggleCreate} />}
+            {create && <ServerCreate createRef={createRef} toggleCreate={toggleCreate}
+                                     choosingPicture={choosingPicture} setChoosingPicture={setChoosingPicture} />}
         </div>
     )
 }
