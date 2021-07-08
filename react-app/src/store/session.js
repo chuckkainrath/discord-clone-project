@@ -76,7 +76,11 @@ export const signUp = (username, email, password, picture) => async (dispatch) =
     });
     const data = await response.json();
     if (data.errors) {
+<<<<<<< HEAD
         return
+=======
+        console.log(data.errors);
+>>>>>>> b92c4dd026525dbdfca4e57edf22cff49dde80b7
     }
     dispatch(setUser(data));
 }
