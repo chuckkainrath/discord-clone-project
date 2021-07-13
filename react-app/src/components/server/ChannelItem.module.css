@@ -65,3 +65,13 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+.modal__close button {
+    display: block;
+    float: right;
+    margin: 0 10px 10px 0;
+}
+
+.modal__message {
+    font-size: 1.4rem;
+}
