@@ -106,7 +106,7 @@ function ServerOptions() {
                 <div className={styles.server_container}>
                     {server && server.name}
                     {!options &&
-                        <span className={styles.server_cog_closed}>
+                        <span onClick={toggleAllOptions} className={styles.server_cog_closed}>
                             <i className="fas fa-chevron-down"></i>
                         </span>
                     }
