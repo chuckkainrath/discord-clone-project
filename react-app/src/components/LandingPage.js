@@ -7,15 +7,14 @@ import Malik from './FooterRef/malik.jpg'
 import Tyler from './FooterRef/thumbnail.jpg'
 import linkedIn from './FooterRef/LI-In-Bug.png'
 import github from './FooterRef/GitHub-Mark-64px.png'
-import landingBackground from './auth/landing.jpg';
+import landingBackground from './auth/communication-background.png';
 
 function LandingPage() {
 
   return (
-    <div className="landing">
+    <div className="landing"  style={{ backgroundImage: `url(${landingBackground})` }}>
       <h1 className="landing-title">Racket</h1>
-      <div className="landing-content"
-           style={{ backgroundImage: `url(${landingBackground})` }}>
+      <div className="landing-content">
         <div className="text-container">
           <h1 className="landing-textheader">Your place to talk</h1>
           <div className="landing-textbody">
@@ -33,7 +32,7 @@ function LandingPage() {
         </div>
       </div>
       <footer className='footer'>
-        <p className='footer__text'>Dev Team</p>
+        {/* <p className='footer__text'>Dev Team</p> */}
         <div className='footer__container'>
           <div className='ind__container'>
             <img className='footer__pic' src={Bryan} alt='Bryan'></img>
