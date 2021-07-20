@@ -1,3 +1,10 @@
+.ind__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .landing {
     display: grid;
     grid-template-columns: 1fr;
@@ -63,8 +70,7 @@
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    justify-content: space-between;
-    justify-content: space-around;
+    column-gap: 5vw;
 }
 
 .footer__text{
