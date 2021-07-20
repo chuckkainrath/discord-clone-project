@@ -8,10 +8,12 @@
 .landing {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 5vh 82vh 13vh;
+    grid-template-rows: 5vh 95vh 13vh;
     /* background-color: rgb(78,77,77); */
-    background-color: rgb(71, 71, 71);
-    background-size: contain;
+    background-color: rgb(0, 0, 0);
+    background-size: 125vw;
+    background-position-x: -12.5vw;
+    background-position-y: -5vw;
     background-repeat:no-repeat;
 }
 
@@ -47,8 +49,9 @@
 .text-container {
     box-shadow: 0 0 2px 2px rgb(49, 49, 49);
     border-radius: 5px;
-    background-color: rgba(69, 68, 68, 0.5);
+    background-color: rgba(69, 68, 68, 0.75);
     padding: 20px;
+    top: -5%;
     width: 28vw;
     display: flex;
     flex-direction: column;
@@ -113,6 +116,7 @@
     position: relative;
     margin: .5em auto;
     font-size: 20px;
+    line-height: 30px;
     color: #ffffff;
     text-align: center;
     font-family: 'Mukta', sans-serif;
@@ -148,4 +152,47 @@
     color: #dfe0e2;
     background-color: #17252a;
     font-family: 'Righteous', cursive;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .landing {
+        background-size: cover;
+    }
+
+    .landing-title {
+        font-size: 5rem;
+    }
+
+    .text-container {
+        width: 70vw;
+        top: -30%;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    .landing-description {
+        font-size: 1.7rem;
+        line-height: 2rem;
+    }
+
+    .footer__pic {
+        height: 70px;
+        width: 70px;
+    }
+
+    .footer__container {
+        column-gap: 0;
+        justify-content: space-evenly;
+    }
+
+    .login-button, .signup-button {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .linkedIn, .github {
+        height: 40px;
+        width: 40px;
+    }
 }
