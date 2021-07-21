@@ -23,8 +23,10 @@
 
 .send_chat {
     height: 2.5em;
+    min-height: fit-content;
     width: 100%;
     font-size: 1.4rem;
+    font-family: 'Mukta';
     /* overflow-wrap: break-word; */
     overflow-y: hidden;
     background-color: #c5c5c5;
