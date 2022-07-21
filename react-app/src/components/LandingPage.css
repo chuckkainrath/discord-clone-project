@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(196 174 174);
+    padding: 5px;
+    border-radius: 5px;
 }
 
 
