@@ -1,4 +1,5 @@
-![Postacard Main Page](https://drive.google.com/uc?export=view&id=1NnYz5ibhZW-0IFqUbvCyDYLaV8Ek52SP)
+![Racket App Main Page](https://drive.google.com/uc?export=view&id=18Rs0NeL8sJnrKOKTbHWllMYLik2cuM8X)
+
 # Racket
 Racket is a chat application inspired by discord where users can create servers and channels as well as send messages.  Users can also invite their friends to servers so they can chat in real time.
 
